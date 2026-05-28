@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="theme-color" content="#C42020"/>
 <title>VM 2026 – Spelschema & TV-guide</title>
-<link rel="manifest" id="manifest-link"/>
+<link rel="manifest" href="manifest.json"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
@@ -374,7 +374,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
     <div class="schema-title">VM 2026 &nbsp;·&nbsp; Spelschema &amp; TV-guide</div>
     <button class="schema-rules" onclick="showView('grupper',document.getElementById('bnav-grupper'))">Hur går man vidare från grupperna? <span>Läs reglerna →</span></button>
   </div>
-  <a class="sim-bar" href="https://vm2026sim.onrender.com/" target="_blank" rel="noopener">
+  <a class="sim-bar" href="https://vm2026sim.henrikb.se" target="_blank" rel="noopener">
     <div class="sim-bar-left">
       <span class="sim-bar-icon">⚽</span>
       <div class="sim-bar-text">
@@ -1113,58 +1113,37 @@ function toggleTheme() {
 /* ─────────────────────────────────────────────── */
 /* PWA                                             */
 /* ─────────────────────────────────────────────── */
-const manifest = {
-  name:'VM 2026 – Spelschema', short_name:'VM 2026',
-  start_url:'./', display:'standalone',
-  background_color:'#EDEEF2', theme_color:'#C42020',
-  icons:[{src:'icon.png',sizes:'192x192',type:'image/png'}]
-};
-const mBlob = new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
-document.getElementById('manifest-link').href = URL.createObjectURL(mBlob);
 
 const pwaBtn = document.getElementById('pwaBtn');
 let deferredPrompt = null;
 
-// Already installed = running as standalone app
+const isIos        = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-  || window.navigator.standalone === true;
+                  || window.navigator.standalone === true;
 
-const isIos  = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-// Grab install prompt if available (Chrome/Android)
+// Android/Chrome: webbläsaren avgör när knappen syns
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
+  pwaBtn.classList.add('show');
 });
 
-// Show button for everyone who hasn't installed, after 3s
-if (!isStandalone) {
-  setTimeout(() => {
-    pwaBtn.classList.add('show');
-  }, 3000);
+// iPhone/Safari: beforeinstallprompt finns inte – visa knapp direkt om ej installerad
+if (isIos && !isStandalone) {
+  pwaBtn.classList.add('show');
 }
 
-// Dismiss if dismissed before (localStorage)
-if (localStorage.getItem('pwa-dismissed') === '1') {
-  pwaBtn.classList.remove('show');
-}
-
+// Klick på knappen
 pwaBtn.addEventListener('click', async e => {
   if (e.target.classList.contains('pwa-x') || e.target.closest('.pwa-x')) return;
-
   if (deferredPrompt) {
-    // Native Chrome/Android install
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     deferredPrompt = null;
     pwaBtn.classList.remove('show');
   } else {
-    // Show manual instructions
-    const txt = isIos
-      ? 'I Safari: tryck på dela-knappen (⬆) längst ner och välj "Lägg till på hemskärmen".'
-      : 'I Chrome: tryck på menyn (⋮) uppe till höger och välj "Lägg till på hemskärmen" eller "Installera app".';
-    document.getElementById('pwaModalText').textContent = txt;
+    document.getElementById('pwaModalText').textContent =
+      'Tryck på dela-knappen (⬆) i Safari och välj "Lägg till på hemskärmen".';
     document.getElementById('pwaModal').classList.add('open');
   }
 });
@@ -1172,7 +1151,6 @@ pwaBtn.addEventListener('click', async e => {
 function hidePwa(e) {
   e.stopPropagation();
   pwaBtn.classList.remove('show');
-  localStorage.setItem('pwa-dismissed', '1');
 }
 
 function closePwaModal(e) {
