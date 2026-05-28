@@ -11,34 +11,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg:      #EDEEF2;
-  --surface: #FFFFFF;
-  --surf2:   #E3E5ED;
-  --border:  #C6CAD8;
-  --text:    #08091A;
-  --t2:      #48587A;
-  --t3:      #88929E;
-  --red:     #C42020;
-  --blue:    #1A4B96;
-  --green:   #145C34;
-  --gold:    #A87800;
+  --bg:       #E7E3D8;
+  --surface:  #FBFAF6;
+  --surf2:    #F1F5F3;
+  --border:   #C7CED8;
+  --text:     #06122B;
+  --t2:       #6F7890;
+  --t3:       #A8B0C0;
+  --red:      #8F2F2F;
+  --blue:     #1F2F4F;
+  --green:    #17382F;
+  --purple:   #352E52;
+  --gold:     #A87800;
   --ease:    cubic-bezier(.22,1,.36,1);
   --sport:   'Oswald',sans-serif;
   --body:    'Inter',sans-serif;
   --mono:    'DM Mono',monospace;
 }
 [data-theme="dark"] {
-  --bg:      #09091A;
-  --surface: #111428;
-  --surf2:   #181C30;
-  --border:  #222540;
-  --text:    #E6E2D6;
-  --t2:      #8088A0;
-  --t3:      #34384E;
+  --bg:       #0E0F18;
+  --surface:  #141620;
+  --surf2:    #1A1C2A;
+  --border:   #262840;
+  --text:     #E4E0D2;
+  --t2:       #828AA0;
+  --t3:       #383C52;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{font-size:16px;-webkit-text-size-adjust:100%;}
-body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100svh;transition:background .2s,color .2s;-webkit-font-smoothing:antialiased;padding-bottom:64px;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100svh;transition:background .2s,color .2s;-webkit-font-smoothing:antialiased;}
 
 /* FLAGS */
 .fi{display:block;flex-shrink:0;object-fit:cover;border-radius:2px;box-shadow:0 0 0 1px rgba(0,0,0,.13);}
@@ -94,16 +95,30 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .feed-outer{padding:0;}
 .feed-content{max-width:560px;margin:0 auto;padding:0 0 40px;}
 
-/* DAY SEPARATOR — dark newspaper band */
-.day-sep{background:var(--text);color:var(--bg);display:flex;align-items:center;justify-content:space-between;padding:7px 16px;margin-top:12px;transition:background .2s,color .2s;}
+/* DAY SEPARATOR — alternating thematic colors */
+.day-sep{display:flex;align-items:center;justify-content:space-between;padding:7px 16px;margin-top:10px;transition:background .2s,color .2s;}
 .day-sep:first-child{margin-top:0;}
 .day-sep-d{font-family:var(--sport);font-size:.84rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;}
 .day-sep-c{font-family:var(--body);font-size:.58rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;opacity:.5;}
-
-/* MATCH CARD */
-.match-card{background:var(--surface);border-bottom:2px solid var(--border);padding:12px 16px 10px;transition:background .1s;position:relative;}
-.match-card:active{background:var(--surf2);}
-.match-card.played{background:var(--surf2);opacity:.7;}
+.day-sep.dc-0{background:#1F2F4F;color:#C8D4E8;}
+.day-sep.dc-1{background:#17382F;color:#B8D4C8;}
+.day-sep.dc-2{background:#8F2F2F;color:#E8C8C8;}
+.day-sep.dc-3{background:#352E52;color:#C8C0DC;}
+[data-theme="dark"] .day-sep.dc-0{background:#151E30;color:#8090B0;}
+[data-theme="dark"] .day-sep.dc-1{background:#102218;color:#709080;}
+[data-theme="dark"] .day-sep.dc-2{background:#2E1212;color:#A07070;}
+[data-theme="dark"] .day-sep.dc-3{background:#1E1A30;color:#8878A8;}
+.match-card{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 16px 10px;transition:background .1s;position:relative;}
+.match-card.dc-0{background:#FBFAF6;}
+.match-card.dc-1{background:#F6FAF8;}
+.match-card.dc-2{background:#FAF6F6;}
+.match-card.dc-3{background:#F8F6FB;}
+[data-theme="dark"] .match-card.dc-0{background:#141620;}
+[data-theme="dark"] .match-card.dc-1{background:#121A16;}
+[data-theme="dark"] .match-card.dc-2{background:#181212;}
+[data-theme="dark"] .match-card.dc-3{background:#141218;}
+.match-card:active{filter:brightness(.96);}
+.match-card.played{opacity:.65;}
 .match-card.is-next{border-left:4px solid var(--red);padding-left:12px;}
 .mc-row1{display:grid;grid-template-columns:1fr 62px 1fr;align-items:center;gap:4px;min-height:36px;}
 .mc-team{display:flex;align-items:center;gap:8px;min-width:0;}
@@ -167,11 +182,11 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .foot-l,.foot-r{font-family:var(--body);font-size:.58rem;font-weight:300;font-style:italic;color:var(--t3);}
 
 /* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--surface);border-top:2px solid var(--border);display:flex;transition:background .2s;padding-bottom:env(safe-area-inset-bottom);}
-.bnav-btn{flex:1;background:none;border:none;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-family:var(--sport);font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);transition:color .15s;}
-.bnav-btn .bni{font-size:1rem;line-height:1;}
-.bnav-btn:hover{color:var(--t2);}
-.bnav-btn.active{color:var(--red);}
+.top-nav{display:flex;border-bottom:2px solid var(--border);background:var(--bg);transition:background .2s;}
+.tnav-btn{flex:1;background:none;border:none;min-height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:var(--sport);font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);transition:color .15s;border-bottom:2px solid transparent;margin-bottom:-2px;}
+.tnav-btn .bni{font-size:.85rem;line-height:1;}
+.tnav-btn:hover{color:var(--t2);}
+.tnav-btn.active{color:var(--red);border-bottom-color:var(--red);}
 
 /* GROUPS */
 .groups-inner{max-width:560px;margin:0 auto;padding:0 0 20px;}
@@ -284,18 +299,18 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
   <div class="hdr-inner">
     <div class="h-brand">
       <div class="h-logo"><span class="vm">VM</span><span class="yr">2026</span></div>
-      <div class="h-tag">
-        Spelschema &amp; TV-guide
-        <span class="hfl" id="h-flags"></span>
-        <span style="color:var(--border)">·</span>
-        <button class="rules-hdr" onclick="showView('grupper',document.getElementById('bnav-grupper'))">Hur går man vidare? →</button>
-      </div>
     </div>
     <div class="h-right">
-      <button class="h-btn" onclick="toggleTheme()">◐</button>
+      <button class="h-btn" onclick="toggleTheme()" title="Byt tema">◐</button>
     </div>
   </div>
   <div class="tribar"><span class="tri-g"></span><span class="tri-w"></span><span class="tri-r"></span></div>
+  <div class="top-nav">
+    <button class="tnav-btn active" id="bnav-schema"  onclick="showView('schema',this)"><span class="bni">📋</span>Schema</button>
+    <button class="tnav-btn" id="bnav-grupper" onclick="showView('grupper',this)"><span class="bni">⊞</span>Grupper</button>
+    <button class="tnav-btn" id="bnav-slutspel" onclick="showView('slutspel',this)"><span class="bni">🏆</span>Slutspel</button>
+    <button class="tnav-btn" id="bnav-om" onclick="showView('om',this)"><span class="bni">ℹ︎</span>Om</button>
+  </div>
 </div>
 
 <!-- SCHEMA -->
@@ -398,14 +413,6 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
     </div>
   </div>
 </div>
-
-<!-- BOTTOM NAV -->
-<nav class="bnav">
-  <button class="bnav-btn active" id="bnav-schema"  onclick="showView('schema',this)"><span class="bni">📋</span>Schema</button>
-  <button class="bnav-btn" id="bnav-grupper" onclick="showView('grupper',this)"><span class="bni">⊞</span>Grupper</button>
-  <button class="bnav-btn" id="bnav-slutspel" onclick="showView('slutspel',this)"><span class="bni">🏆</span>Slutspel</button>
-  <button class="bnav-btn" id="bnav-om" onclick="showView('om',this)"><span class="bni">ℹ︎</span>Om</button>
-</nav>
 
 <!-- PWA -->
 <div class="pwa-btn" id="pwaBtn">
@@ -721,15 +728,14 @@ let activeRound   = 0;
 /* ─────────────────────────────────────────────── */
 /* HEADER FLAGS                                    */
 /* ─────────────────────────────────────────────── */
-document.getElementById('h-flags').innerHTML =
-  fi('USA',13,9)+fi('Kanada',13,9)+fi('Mexiko',13,9);
+
 
 /* ─────────────────────────────────────────────── */
 /* BOTTOM NAV                                      */
 /* ─────────────────────────────────────────────── */
 function showView(id, btn) {
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tnav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('view-'+id).classList.add('active');
   btn.classList.add('active');
   window.scrollTo(0,0);
@@ -786,7 +792,7 @@ function selDay(d) {
       if (roundIdx >= 0) {
         activeRound = roundIdx;
         document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-        document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tnav-btn').forEach(b=>b.classList.remove('active'));
         document.getElementById('view-slutspel').classList.add('active');
         document.getElementById('bnav-slutspel').classList.add('active');
         renderPlayoffTabs();
@@ -805,24 +811,39 @@ function selDay(d) {
 /* ─────────────────────────────────────────────── */
 /* MATCH CARD HTML                                 */
 /* ─────────────────────────────────────────────── */
+// Day index for alternating colors – computed once
+const _dayIdx = {};
+function getDayCls(d) {
+  if (Object.keys(_dayIdx).length === 0) {
+    const all = [...new Set([
+      ...M.map(m=>m.d),
+      ...PLAYOFF_ROUNDS.flatMap(r=>r.matches.map(m=>m.d))
+    ])].sort();
+    all.forEach((day,i) => { _dayIdx[day] = i; });
+  }
+  return 'dc-' + (_dayIdx[d] % 4);
+}
+
 function cardHtml(m, played) {
-  const sc = played && m.score ? `${m.score[0]} – ${m.score[1]}` : '–  –';
-  const scCls = played && m.score ? '' : ' pend';
+  const dc  = getDayCls(m.d);
+  const sc  = played && m.score ? `${m.score[0]} – ${m.score[1]}` : '–  –';
+  const scC = played && m.score ? '' : ' pend';
   return `
-  <div class="match-card${played?' played':''}">
+  <div class="match-card ${dc}${played?' played':''}">
     <div class="mc-row1">
-      <div class="mc-team">${fi(m.h,20,14)}<div class="mc-ti"><span class="mc-tn">${m.h}</span></div></div>
-      <div class="mc-mid"><div class="mc-sc${scCls}">${sc}</div><div class="mc-tm">${m.t}</div></div>
-      <div class="mc-team away">${fi(m.a,20,14)}<div class="mc-ti"><span class="mc-tn">${m.a}</span></div></div>
+      <div class="mc-team">${fi(m.h,22,15)}<div class="mc-ti"><span class="mc-tn">${m.h}</span></div></div>
+      <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
+      <div class="mc-team away">${fi(m.a,22,15)}<div class="mc-ti"><span class="mc-tn">${m.a}</span></div></div>
     </div>
-    <div class="mc-row2">Grupp ${m.g} · Omg. ${m.round} · ${m.venue||'–'}</div>
+    <div class="mc-row2"><strong>Grupp ${m.g} · Omg. ${m.round}</strong> · ${m.venue||'–'}</div>
     <div class="mc-row3">${chLogo(m.tv,15)}</div>
   </div>`;
 }
 
 function daySep(d, count) {
-  const c = count ? `<span class="day-sep-count">${count} matcher</span>` : '';
-  return `<div class="day-sep"><span class="day-sep-date">${fmtFull(d)}</span>${c}</div>`;
+  const dc = getDayCls(d);
+  const c  = count ? `<span class="day-sep-c">${count} matcher</span>` : '';
+  return `<div class="day-sep ${dc}"><span class="day-sep-d">${fmtFull(d)}</span>${c}</div>`;
 }
 
 /* ─────────────────────────────────────────────── */
@@ -1045,56 +1066,71 @@ document.getElementById('manifest-link').href = URL.createObjectURL(mBlob);
 const pwaBtn = document.getElementById('pwaBtn');
 let deferredPrompt = null;
 
-// Check if already installed (standalone mode)
-const isInstalled = window.matchMedia('(display-mode: standalone)').matches
+// Already installed = running as standalone app
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches
   || window.navigator.standalone === true;
 
-// iOS detection
-const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-const isInStandaloneMode = window.navigator.standalone;
+const isIos  = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-function showPwaBtn() {
-  if (isInstalled || isInStandaloneMode) return;
-  pwaBtn.classList.add('show');
-}
-
-// Android/Chrome: capture install prompt
+// Grab install prompt if available (Chrome/Android)
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
-  setTimeout(showPwaBtn, 2500);
 });
 
-// iOS: show after delay with manual instructions
-if (isIos && !isInStandaloneMode) {
-  setTimeout(showPwaBtn, 2500);
+// Show button for everyone who hasn't installed, after 3s
+if (!isStandalone) {
+  setTimeout(() => {
+    pwaBtn.classList.add('show');
+  }, 3000);
+}
+
+// Dismiss if dismissed before (localStorage)
+if (localStorage.getItem('pwa-dismissed') === '1') {
+  pwaBtn.classList.remove('show');
 }
 
 pwaBtn.addEventListener('click', async e => {
-  if (e.target.classList.contains('pwa-close')) return;
+  if (e.target.classList.contains('pwa-x') || e.target.closest('.pwa-x')) return;
+
   if (deferredPrompt) {
+    // Native Chrome/Android install
     deferredPrompt.prompt();
-    const {outcome} = await deferredPrompt.userChoice;
+    const { outcome } = await deferredPrompt.userChoice;
     deferredPrompt = null;
-    if (outcome === 'accepted') pwaBtn.classList.remove('show');
+    pwaBtn.classList.remove('show');
   } else {
-    document.getElementById('pwaModalText').textContent = isIos
-      ? 'Tryck på dela-knappen (⬆) i Safari och välj "Lägg till på hemskärmen" för att installera appen.'
-      : 'Öppna sidan i Chrome, tryck på menyn (⋮) och välj "Lägg till på hemskärmen".';
+    // Show manual instructions
+    const txt = isIos
+      ? 'I Safari: tryck på dela-knappen (⬆) längst ner och välj "Lägg till på hemskärmen".'
+      : 'I Chrome: tryck på menyn (⋮) uppe till höger och välj "Lägg till på hemskärmen" eller "Installera app".';
+    document.getElementById('pwaModalText').textContent = txt;
     document.getElementById('pwaModal').classList.add('open');
   }
 });
 
-function hidePwa(e) { e.stopPropagation(); pwaBtn.classList.remove('show'); }
+function hidePwa(e) {
+  e.stopPropagation();
+  pwaBtn.classList.remove('show');
+  localStorage.setItem('pwa-dismissed', '1');
+}
+
 function closePwaModal(e) {
-  if (!e || e.target===document.getElementById('pwaModal') || e.target.classList.contains('pwa-modal-close'))
+  if (!e || e.target === document.getElementById('pwaModal')
+         || e.target.classList.contains('pwa-mc'))
     document.getElementById('pwaModal').classList.remove('open');
 }
 
-window.addEventListener('appinstalled', () => { pwaBtn.classList.remove('show'); deferredPrompt=null; });
+window.addEventListener('appinstalled', () => {
+  pwaBtn.classList.remove('show');
+  deferredPrompt = null;
+});
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(()=>{}); });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
 }
 
 /* ─────────────────────────────────────────────── */
