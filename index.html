@@ -103,7 +103,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .day-sep.dc-0{background:#1F2F4F;color:#C8D4E8;}
 .day-sep.dc-1{background:#17382F;color:#B8D4C8;}
 .day-sep.dc-2{background:#8F2F2F;color:#E8C8C8;}
-.day-sep.dc-3{background:#352E52;color:#C8C0DC;}
+.day-sep.dc-3{background:#2A2830;color:#C8C0DC;}
 [data-theme="dark"] .day-sep.dc-0{background:#151E30;color:#8090B0;}
 [data-theme="dark"] .day-sep.dc-1{background:#102218;color:#709080;}
 [data-theme="dark"] .day-sep.dc-2{background:#2E1212;color:#A07070;}
@@ -291,6 +291,59 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 
 @keyframes up{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
 @keyframes pwaIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* SIM BAR */
+.sim-bar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  background:#2A2830;
+  padding:11px 18px;
+  text-decoration:none;
+  max-width:560px;
+  margin:0 auto;
+  transition:background .15s;
+  border:1px solid #A87800; border-bottom:2px solid #A87800;
+}
+.sim-bar:hover { background:#333040; }
+.sim-bar-left {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.sim-bar-icon {
+  font-size:1.1rem;
+  flex-shrink:0;
+  opacity:.85;
+}
+.sim-bar-text {}
+.sim-bar-title {
+  font-family:var(--sport);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#E8E0CC;
+  line-height:1;
+}
+.sim-bar-sub {
+  font-family:var(--body);
+  font-size:.62rem;
+  font-weight:300;
+  color:#A89060;
+  margin-top:2px;
+  line-height:1;
+}
+.sim-bar-arrow {
+  font-family:var(--sport);
+  font-size:.9rem;
+  color:#A89060;
+  flex-shrink:0;
+}
+[data-theme="dark"] .sim-bar { background:#1E1C20; }
+[data-theme="dark"] .sim-bar:hover { background:#28262C; }
 </style>
 </head>
 <body>
@@ -321,6 +374,16 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
     <div class="schema-title">VM 2026 &nbsp;·&nbsp; Spelschema &amp; TV-guide</div>
     <button class="schema-rules" onclick="showView('grupper',document.getElementById('bnav-grupper'))">Hur går man vidare från grupperna? <span>Läs reglerna →</span></button>
   </div>
+  <a class="sim-bar" href="https://vm2026sim.henrikb.se" target="_blank" rel="noopener">
+    <div class="sim-bar-left">
+      <span class="sim-bar-icon">⚽</span>
+      <div class="sim-bar-text">
+        <div class="sim-bar-title">Simulera VM 2026</div>
+        <div class="sim-bar-sub">Simulera VM här!</div>
+      </div>
+    </div>
+    <span class="sim-bar-arrow">→</span>
+  </a>
   <div class="feed-outer">
     <div class="feed-content" id="feed-content"></div>
     <div class="w"><div class="feed-footer"><span class="foot-l">Inofficiell</span><span class="foot-r">VM 2026 · 48 lag · 104 matcher</span></div></div>
@@ -947,11 +1010,7 @@ function renderFeed() {
     }
   }
 
-  // Simulator promo
-  h += `<a class="sim-promo" href="https://vm2026sim.henrikb.se" target="_blank" rel="noopener">
-    <div><div class="sim-title">Simulera VM 2026</div><div class="sim-sub">Kör din egen turnering – vem vinner?</div></div>
-    <div class="sim-arrow">→</div>
-  </a>`;
+
 
   el.innerHTML = h;
 }
