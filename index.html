@@ -344,7 +344,50 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 }
 [data-theme="dark"] .sim-bar { background:#F0ECE0; }
 [data-theme="dark"] .sim-bar:hover { background:#253860; }
+
+/* SHARE BUTTON */
+.share-btn {
+  position:fixed;
+  bottom:18px; right:16px;
+  z-index:200;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:8px 14px 8px 10px;
+  display:flex; align-items:center; gap:6px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  cursor:pointer;
+  font-family:var(--sport);
+  font-size:.62rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--t2);
+  transition:border-color .15s, color .15s;
+}
+[data-theme="dark"] .share-btn { box-shadow:0 2px 10px rgba(0,0,0,.4); }
+.share-btn:hover { border-color:var(--t2); color:var(--text); }
+.share-btn svg { display:block; flex-shrink:0; }
+
+.share-toast {
+  position:fixed;
+  bottom:72px; right:16px;
+  z-index:201;
+  background:var(--text);
+  color:var(--bg);
+  padding:7px 14px;
+  font-family:var(--sport);
+  font-size:.62rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  border-radius:2px;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .2s, transform .2s;
+  pointer-events:none;
+}
+.share-toast.show {
+  opacity:1; transform:translateY(0);
+}
 </style>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d243837c-4f1f-4c02-82f3-a48b8b6660d3"></script>
 </head>
 <body>
 
@@ -379,7 +422,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
       <span class="sim-bar-icon">⚽</span>
       <div class="sim-bar-text">
         <div class="sim-bar-title">Simulera VM 2026</div>
-        <div class="sim-bar-sub">Simulera VM här!</div>
+        <div class="sim-bar-sub">Vem vinner? Hur långt går Sverige? Kör turneringen och se resultaten</div>
       </div>
     </div>
     <span class="sim-bar-arrow">→</span>
@@ -1179,6 +1222,33 @@ renderGroups();
 renderPlayoffTabs();
 renderPlayoffRound();
 
+/* SHARE */
+function shareUrl() {
+  const url = window.location.href;
+  if (navigator.share) {
+    navigator.share({ title: 'VM 2026 – Spelschema & TV-guide', url });
+  } else {
+    navigator.clipboard.writeText(url).then(() => {
+      const t = document.getElementById('shareToast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    });
+  }
+}
+
 </script>
+
+<button class="share-btn" onclick="shareUrl()" title="Dela sidan">
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+    <circle cx="11" cy="2.5" r="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <circle cx="11" cy="11.5" r="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <circle cx="3"  cy="7"   r="1.5" stroke="currentColor" stroke-width="1.3"/>
+    <line x1="4.3" y1="6.2"  x2="9.8" y2="3.2"  stroke="currentColor" stroke-width="1.3"/>
+    <line x1="4.3" y1="7.8"  x2="9.8" y2="10.8" stroke="currentColor" stroke-width="1.3"/>
+  </svg>
+  Dela
+</button>
+<div class="share-toast" id="shareToast">Länk kopierad!</div>
+
 </body>
 </html>
