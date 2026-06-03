@@ -1,1252 +1,2105 @@
 [
-{
-"id": 1,
-"category": "Historik",
-"tone": "historik",
-"text": "Uruguay blev världsmästare på hemmaplan 1930. Alberto Suppici ledde laget till titeln i det första VM:et.",
-"tags": ["Uruguay", "1930", "Alberto Suppici", "värdland"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 2,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Vittorio Pozzo tränade Italien till VM-guld både 1934 och 1938. I rådatans lista är han den enda tränaren som står som vinnande coach i två raka turneringar.",
-"tags": ["Vittorio Pozzo", "Italien", "1934", "1938", "tränare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 3,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Just Fontaine gjorde 13 mål för Frankrike i VM 1958. Det är den högsta noteringen för en skyttekung i listan.",
-"tags": ["Just Fontaine", "Frankrike", "1958", "målrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 4,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "Sándor Kocsis gjorde 11 mål för Ungern i VM 1954. Det är en av de mest extrema målnoteringarna i turneringens historia.",
-"tags": ["Sándor Kocsis", "Ungern", "1954", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 5,
-"category": "Lagrekord",
-"tone": "klassiker",
-"text": "Brasilien vann VM 1958 i Sverige. Vicente Feola var tränaren bakom guldet.",
-"tags": ["Brasilien", "Sverige", "1958", "Vicente Feola"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 6,
-"category": "Lagrekord",
-"tone": "klassiker",
-"text": "Brasilien försvarade sin VM-titel 1962 i Chile. Aymoré Moreira stod som vinnande coach.",
-"tags": ["Brasilien", "Chile", "1962", "Aymoré Moreira"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 7,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "VM 1962 fick en ovanligt delad skytteligavinnare. Sex spelare slutade på 4 mål.",
-"tags": ["1962", "Chile", "skytteliga", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 8,
-"category": "Historik",
-"tone": "historik",
-"text": "England vann VM på hemmaplan 1966. Alf Ramsey var tränaren och Eusébio blev turneringens bäste målskytt med 9 mål.",
-"tags": ["England", "1966", "Alf Ramsey", "Eusébio"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 9,
-"category": "Målrekord",
-"tone": "klassiker",
-"text": "Gerd Müller gjorde 10 mål för Västtyskland i VM 1970. Samma turnering vanns av Brasilien med Mário Zagallo som tränare.",
-"tags": ["Gerd Müller", "Västtyskland", "1970", "Brasilien"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 10,
-"category": "Finaler",
-"tone": "historik",
-"text": "Västtyskland vann VM 1974 på hemmaplan. Helmut Schön ledde laget till titeln.",
-"tags": ["Västtyskland", "1974", "Helmut Schön", "värdland"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 11,
-"category": "Spelare",
-"tone": "klassiker",
-"text": "Mario Kempes var både bäste målskytt och utsedd till bästa spelare i VM 1978. Argentina vann dessutom turneringen på hemmaplan.",
-"tags": ["Mario Kempes", "Argentina", "1978", "bästa spelare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 12,
-"category": "Spelare",
-"tone": "klassiker",
-"text": "Paolo Rossi gjorde 6 mål i VM 1982 och utsågs även till turneringens bästa spelare. Italien vann hela mästerskapet.",
-"tags": ["Paolo Rossi", "Italien", "1982", "bästa spelare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 13,
-"category": "Spelare",
-"tone": "klassiker",
-"text": "Diego Maradona utsågs till bästa spelare i VM 1986. Argentina vann turneringen med Carlos Bilardo som tränare.",
-"tags": ["Diego Maradona", "Argentina", "1986", "Carlos Bilardo"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 14,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "Gary Lineker blev skyttekung i VM 1986 med 6 mål. Trots det var det Argentina som gick hela vägen och vann turneringen.",
-"tags": ["Gary Lineker", "England", "1986", "Argentina"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 15,
-"category": "Spelare",
-"tone": "kuriosa",
-"text": "Salvatore Schillaci gjorde 6 mål i VM 1990 och utsågs också till turneringens bästa spelare. Västtyskland vann mästerskapet.",
-"tags": ["Salvatore Schillaci", "Italien", "1990", "Västtyskland"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 16,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "VM 1994 fick två skytteligavinnare. Hristo Stoichkov och Oleg Salenko gjorde båda 6 mål.",
-"tags": ["Hristo Stoichkov", "Oleg Salenko", "1994", "skytteliga"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 17,
-"category": "Spelare",
-"tone": "klassiker",
-"text": "Romário utsågs till bästa spelare i VM 1994. Brasilien vann turneringen med Carlos Alberto Parreira som tränare.",
-"tags": ["Romário", "Brasilien", "1994", "Carlos Alberto Parreira"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 18,
-"category": "Finaler",
-"tone": "historik",
-"text": "Frankrike vann VM 1998 på hemmaplan. Aimé Jacquet var tränaren bakom titeln.",
-"tags": ["Frankrike", "1998", "Aimé Jacquet", "värdland"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 19,
-"category": "Spelare",
-"tone": "kuriosa",
-"text": "Oliver Kahn utsågs till bästa spelare i VM 2002. Samma turnering vann Brasilien, medan Ronaldo blev bäste målskytt med 8 mål.",
-"tags": ["Oliver Kahn", "Tyskland", "2002", "Ronaldo", "Brasilien"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 20,
-"category": "Spelare",
-"tone": "klassiker",
-"text": "Lionel Messi utsågs till bästa spelare i VM 2014 och igen 2022. I den senare turneringen vann Argentina guldet.",
-"tags": ["Lionel Messi", "Argentina", "2014", "2022"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 21,
-"category": "Lagrekord",
-"tone": "rekord",
-"text": "Brasilien toppar den totala VM-tabellen efter 2022. Laget står på 247 poäng efter 22 deltaganden och 114 spelade matcher.",
-"tags": ["Brasilien", "2022", "total tabell", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 22,
-"category": "Lagrekord",
-"tone": "rekord",
-"text": "Brasilien har spelat flest VM-turneringar i tabellen. Efter VM 2022 står landet på 22 deltaganden.",
-"tags": ["Brasilien", "2022", "deltaganden", "lagrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 23,
-"category": "Lagrekord",
-"tone": "rekord",
-"text": "Brasilien har vunnit flest matcher i VM:s totala tabell. Efter VM 2022 står laget på 76 segrar.",
-"tags": ["Brasilien", "2022", "segrar", "lagrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 24,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Brasilien har gjort flest mål i VM:s totala tabell. Efter VM 2022 står laget på 237 gjorda mål.",
-"tags": ["Brasilien", "2022", "mål", "lagrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 25,
-"category": "Lagrekord",
-"tone": "rekord",
-"text": "Tyskland ligger tvåa i den totala VM-tabellen efter 2022. Laget står på 225 poäng efter 20 deltaganden.",
-"tags": ["Tyskland", "2022", "total tabell", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 26,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "Tyskland har gjort 232 mål i VM:s totala tabell. Det är näst flest i listan efter Brasilien.",
-"tags": ["Tyskland", "Brasilien", "2022", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 27,
-"category": "Lagrekord",
-"tone": "historik",
-"text": "Argentina ligger trea i den totala VM-tabellen efter 2022. Laget står på 158 poäng efter 18 deltaganden.",
-"tags": ["Argentina", "2022", "total tabell", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 28,
-"category": "Lagrekord",
-"tone": "nördigt",
-"text": "Italien har 156 poäng i den totala VM-tabellen efter 2022. Det är bara två poäng bakom Argentina.",
-"tags": ["Italien", "Argentina", "2022", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 29,
-"category": "Lagrekord",
-"tone": "nördigt",
-"text": "Frankrike, Argentina och Italien står alla på +51 i målskillnad efter VM 2022. Trots samma målskillnad skiljer det 27 poäng mellan Frankrike och Argentina.",
-"tags": ["Frankrike", "Argentina", "Italien", "2022", "målskillnad"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 30,
-"category": "Sverige",
-"tone": "historik",
-"text": "Sverige ligger på elfte plats i den totala VM-tabellen efter 2022. Sverige står på 70 poäng efter 12 deltaganden.",
-"tags": ["Sverige", "2022", "total tabell", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 31,
-"category": "Sverige",
-"tone": "nördigt",
-"text": "Sverige har nästan perfekt balans i VM:s totala tabell. Efter 51 matcher står Sverige på 19 vinster, 13 oavgjorda och 19 förluster.",
-"tags": ["Sverige", "2022", "vinster", "förluster", "oavgjort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 32,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "Ungern har gjort 87 mål på bara 32 VM-matcher. Det är fler mål än flera lag ovanför dem i den totala tabellen.",
-"tags": ["Ungern", "mål", "VM-matcher", "lagrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 33,
-"category": "Lagrekord",
-"tone": "kuriosa",
-"text": "Nederländerna ligger åtta i den totala VM-tabellen efter 2022. Laget har bara 11 deltaganden men ändå 104 poäng.",
-"tags": ["Nederländerna", "2022", "poäng", "deltaganden"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 34,
-"category": "Lagrekord",
-"tone": "kuriosa",
-"text": "Kroatien ligger på plats 19 i den totala VM-tabellen efter 2022. Landet har 47 poäng trots bara 6 deltaganden.",
-"tags": ["Kroatien", "2022", "poäng", "deltaganden"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 35,
-"category": "Lagrekord",
-"tone": "nördigt",
-"text": "Mexiko har spelat 60 VM-matcher efter 2022. Trots 17 deltaganden har laget negativ målskillnad: −39.",
-"tags": ["Mexiko", "2022", "målskillnad", "deltaganden"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 36,
-"category": "Kuriosa",
-"tone": "kuriosa",
-"text": "Serbien står på exakt 0 i målskillnad i den totala VM-tabellen. Efter 49 matcher är målskillnaden 71–71.",
-"tags": ["Serbien", "målskillnad", "71–71", "kuriosa"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 37,
-"category": "Kuriosa",
-"tone": "kuriosa",
-"text": "Irland har också exakt 0 i målskillnad i VM:s totala tabell. Efter 13 matcher står målskillnaden på 10–10.",
-"tags": ["Irland", "målskillnad", "10–10", "kuriosa"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 38,
-"category": "Lagrekord",
-"tone": "kuriosa",
-"text": "Turkiet har bara deltagit i 2 VM-turneringar men står ändå på 16 poäng. Laget har 5 segrar på 10 matcher.",
-"tags": ["Turkiet", "deltaganden", "segrar", "poäng"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 39,
-"category": "Lagrekord",
-"tone": "kuriosa",
-"text": "Qatar står på 0 poäng i den totala VM-tabellen efter sitt första deltagande. Laget spelade 3 matcher och förlorade alla.",
-"tags": ["Qatar", "2022", "poäng", "förluster"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 40,
-"category": "Världsmästerskap",
-"tone": "historik",
-"text": "Kap Verde, Curaçao, Jordanien och Uzbekistan står som nya VM-lag utan spelade matcher i den här tabellen. Alla fyra står på 0 deltaganden, 0 matcher och 0 poäng.",
-"tags": ["Kap Verde", "Curaçao", "Jordanien", "Uzbekistan", "nya lag"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 41,
-"category": "Medaljer",
-"tone": "rekord",
-"text": "Brasilien har flest VM-guld i medaljtabellen. Landet står på 5 guld, 2 silver och 2 brons.",
-"tags": ["Brasilien", "medaljtabell", "guld", "rekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 42,
-"category": "Medaljer",
-"tone": "nördigt",
-"text": "Tyskland har flest medaljer totalt i VM-historien. Medaljtabellen ger dem 12 medaljer: 4 guld, 4 silver och 4 brons.",
-"tags": ["Tyskland", "medaljtabell", "12 medaljer", "VM-historia"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 43,
-"category": "Medaljer",
-"tone": "historik",
-"text": "Italien står på 4 VM-guld i medaljtabellen. Totalt har Italien 7 medaljer: 4 guld, 2 silver och 1 brons.",
-"tags": ["Italien", "medaljtabell", "4 guld", "7 medaljer"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 44,
-"category": "Medaljer",
-"tone": "klassiker",
-"text": "Argentina har 3 VM-guld och 3 silver i medaljtabellen. Däremot står landet på 0 brons.",
-"tags": ["Argentina", "medaljtabell", "3 guld", "silver"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 45,
-"category": "Medaljer",
-"tone": "historik",
-"text": "Frankrike har en ovanligt jämn medaljrad i tabellen. Landet står på 2 guld, 2 silver och 2 brons.",
-"tags": ["Frankrike", "medaljtabell", "2 guld", "2 silver", "2 brons"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 46,
-"category": "Medaljer",
-"tone": "kuriosa",
-"text": "Uruguay har 2 VM-guld och inga andra medaljer i tabellen. När Uruguay väl står på pallen i den här sammanställningen är det alltså högst upp.",
-"tags": ["Uruguay", "medaljtabell", "2 guld", "kuriosa"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 47,
-"category": "Sverige",
-"tone": "historik",
-"text": "Sverige står på 3 VM-medaljer i medaljtabellen. Det handlar om 1 silver och 2 brons.",
-"tags": ["Sverige", "medaljtabell", "silver", "brons"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 48,
-"category": "Medaljer",
-"tone": "nördigt",
-"text": "Kroatien och Sverige har exakt samma medaljrad i tabellen. Båda står på 0 guld, 1 silver och 2 brons.",
-"tags": ["Kroatien", "Sverige", "medaljtabell", "silver", "brons"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 49,
-"category": "Medaljer",
-"tone": "kuriosa",
-"text": "Nederländerna har 4 VM-medaljer men inget guld i tabellen. Landet står på 3 silver och 1 brons.",
-"tags": ["Nederländerna", "medaljtabell", "silver", "inget guld"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 50,
-"category": "Medaljer",
-"tone": "kuriosa",
-"text": "England och Spanien har identiska medaljrader i tabellen. Båda står på 1 guld, 0 silver och 0 brons.",
-"tags": ["England", "Spanien", "medaljtabell", "guld"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 51,
-"category": "Titlar",
-"tone": "rekord",
-"text": "Brasilien har flest VM-titlar med 5 guld. Gulden kom 1958, 1962, 1970, 1994 och 2002.",
-"tags": ["Brasilien", "VM-titlar", "1958", "1962", "1970", "1994", "2002"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 52,
-"category": "Titlar",
-"tone": "rekord",
-"text": "Italien vann två raka VM-titlar 1934–1938. Det är en av noteringarna för flest raka titlar.",
-"tags": ["Italien", "1934", "1938", "raka titlar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 53,
-"category": "Titlar",
-"tone": "rekord",
-"text": "Brasilien vann två raka VM-titlar 1958–1962. Det placerar Brasilien bredvid Italien i noteringen för flest raka titlar.",
-"tags": ["Brasilien", "1958", "1962", "raka titlar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 54,
-"category": "Titlar",
-"tone": "historik",
-"text": "Italien hade ett 44 år långt glapp mellan VM-titlarna 1938 och 1982. Det motsvarar nio turneringar mellan gulden.",
-"tags": ["Italien", "1938", "1982", "44 år", "titlar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 55,
-"category": "Lagrekord",
-"tone": "kuriosa",
-"text": "Flera regerande mästare har åkt ut redan i gruppspelet. I listan nämns Italien 1950, Brasilien 1966, Frankrike 2002, Italien 2010, Spanien 2014 och Tyskland 2018.",
-"tags": ["regerande mästare", "gruppspel", "Italien", "Brasilien", "Frankrike", "Spanien", "Tyskland"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 56,
-"category": "Värdländer",
-"tone": "historik",
-"text": "Sex länder står med som VM-vinnare på hemmaplan: Uruguay, Italien, England, Västtyskland, Argentina och Frankrike.",
-"tags": ["värdland", "Uruguay", "Italien", "England", "Argentina", "Frankrike"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 57,
-"category": "Lagrekord",
-"tone": "rekord",
-"text": "Brasilien har flest VM-framträdanden med 23. Enligt rådatans lista har Brasilien varit med i varje turnering från 1930 till 2026.",
-"tags": ["Brasilien", "23 framträdanden", "1930", "2026", "lagrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 58,
-"category": "Finaler",
-"tone": "rekord",
-"text": "Tyskland har flest finalframträdanden med 8. Listan räknar både Västtyskland och Tyskland i samma notering.",
-"tags": ["Tyskland", "Västtyskland", "finaler", "8 finaler"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 59,
-"category": "Finaler",
-"tone": "rekord",
-"text": "Tyskland har slutat tvåa flest gånger i VM. Landet står på 4 finalförluster i listan.",
-"tags": ["Tyskland", "finaler", "silver", "4 gånger"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 60,
-"category": "Kuriosa",
-"tone": "kuriosa",
-"text": "Wales hade 64 år mellan två VM-framträdanden. Glappet sträckte sig från 1958 till 2022.",
-"tags": ["Wales", "1958", "2022", "64 år", "VM-framträdanden"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 61,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Den målrikaste VM-matchen i listan spelades 26 June 1954 i Lausanne. Österrike slog Schweiz med 7–5 i en match med 12 mål.",
-"tags": ["Österrike", "Schweiz", "1954", "12 mål", "Lausanne"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 62,
-"category": "Målrekord",
-"tone": "klassiker",
-"text": "Brasilien och Polen bjöd på 11 mål den 5 June 1938 i Strasbourg. Brasilien vann matchen med 6–5.",
-"tags": ["Brasilien", "Polen", "1938", "11 mål", "Strasbourg"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 63,
-"category": "Målrekord",
-"tone": "klassiker",
-"text": "Ungern slog Västtyskland med 8–3 den 20 June 1954. Matchen spelades på St. Jakob Stadium i Basel och innehöll 11 mål.",
-"tags": ["Ungern", "Västtyskland", "1954", "11 mål", "Basel"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 64,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Ungern besegrade El Salvador med 10–1 den 15 June 1982. Det är en av matcherna i listan med 11 mål totalt.",
-"tags": ["Ungern", "El Salvador", "1982", "10–1", "11 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 65,
-"category": "Målrekord",
-"tone": "historik",
-"text": "Frankrike slog Paraguay med 7–3 den 8 June 1958. Matchen spelades på Idrottsparken i Norrköping och innehöll 10 mål.",
-"tags": ["Frankrike", "Paraguay", "1958", "Norrköping", "10 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 66,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Brasilien har gjort flest VM-mål totalt. Efter perioden 1930–2022 står Brasilien på 237 mål.",
-"tags": ["Brasilien", "1930", "2022", "237 mål", "målrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 67,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Ungern gjorde 27 mål i VM 1954. Det är flest mål av ett lag i en och samma turnering enligt rådatans lista.",
-"tags": ["Ungern", "1954", "27 mål", "målrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 68,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "VM 2022 hade flest mål totalt i en turnering. Turneringen landade på 172 gjorda mål.",
-"tags": ["2022", "172 mål", "turnering", "målrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 69,
-"category": "Målrekord",
-"tone": "historik",
-"text": "VM 1930 och VM 1934 står för de lägsta målnoteringarna i rådatans turneringslista. Båda turneringarna hade 70 gjorda mål.",
-"tags": ["1930", "1934", "70 mål", "turnering"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 70,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "VM 1954 hade det högsta målsnittet i rådatans lista. Turneringen landade på 5.38 mål per match.",
-"tags": ["1954", "5.38 mål per match", "målsnitt", "turnering"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 71,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "VM 1990 hade det lägsta målsnittet i rådatans lista. Turneringen landade på 2.21 mål per match.",
-"tags": ["1990", "2.21 mål per match", "målsnitt", "turnering"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 72,
-"category": "Målrekord",
-"tone": "klassiker",
-"text": "Ungern var turneringens målgladaste lag 1954 med 27 mål. Det är samma notering som anges som flest mål av ett lag i en VM-turnering.",
-"tags": ["Ungern", "1954", "27 mål", "målrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 73,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "Sverige var det målgladaste laget i VM 1994. Sverige gjorde 15 mål i turneringen.",
-"tags": ["Sverige", "1994", "15 mål", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 74,
-"category": "Målrekord",
-"tone": "historik",
-"text": "Frankrike toppade målskyttet bland lagen både 1958 och 1998. Båda gångerna står Frankrike med 23 respektive 15 mål i rådatans lista.",
-"tags": ["Frankrike", "1958", "1998", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 75,
-"category": "Målrekord",
-"tone": "nördigt",
-"text": "Tyskland toppade målskyttet bland lagen tre VM i rad enligt listan: 2006, 2010 och 2014. Målsiffrorna var 14, 16 och 18.",
-"tags": ["Tyskland", "2006", "2010", "2014", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 76,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "VM 1978 hade två lag i topp för flest gjorda mål. Argentina och Nederländerna står båda noterade med 15 mål.",
-"tags": ["Argentina", "Nederländerna", "1978", "15 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 77,
-"category": "Målrekord",
-"tone": "historik",
-"text": "Brasilien var turneringens målgladaste lag 1950 med 22 mål. Samma lag toppade även målskyttet 1962, 1970 och 2002.",
-"tags": ["Brasilien", "1950", "1962", "1970", "2002"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 78,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "Belgien toppade målskyttet bland lagen i VM 2018. Laget gjorde 16 mål i turneringen.",
-"tags": ["Belgien", "2018", "16 mål", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 79,
-"category": "Målrekord",
-"tone": "klassiker",
-"text": "Frankrike gjorde flest mål av alla lag i VM 2022. Laget står med 16 mål i rådatans lista.",
-"tags": ["Frankrike", "2022", "16 mål", "mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 80,
-"category": "Kuriosa",
-"tone": "nördigt",
-"text": "Färre än hälften av alla VM-turneringar har vunnits av laget som gjort flest mål. Det är en liten påminnelse om att målglädje inte alltid räcker hela vägen.",
-"tags": ["mål", "turnering", "vinnare", "kuriosa"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 81,
-"category": "Matchrekord",
-"tone": "rekord",
-"text": "Ungern slog El Salvador med 10–1 den 15 June 1982. Det är den största segermarginalen i rådatans lista.",
-"tags": ["Ungern", "El Salvador", "1982", "10–1", "segermarginal"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 82,
-"category": "Matchrekord",
-"tone": "rekord",
-"text": "Ungern vann med 9–0 mot Sydkorea den 17 June 1954. Matchen spelades på Hardturm Stadium i Zürich.",
-"tags": ["Ungern", "Sydkorea", "1954", "9–0", "Zürich"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 83,
-"category": "Matchrekord",
-"tone": "historik",
-"text": "Jugoslavien besegrade Zaire med 9–0 den 18 June 1974. Matchen spelades på Parkstadion i Gelsenkirchen.",
-"tags": ["Jugoslavien", "Zaire", "1974", "9–0", "Gelsenkirchen"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 84,
-"category": "Sverige",
-"tone": "rekord",
-"text": "Sverige slog Kuba med 8–0 den 12 June 1938. Det är en av de största segrarna i VM:s rådata.",
-"tags": ["Sverige", "Kuba", "1938", "8–0", "segermarginal"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 85,
-"category": "Matchrekord",
-"tone": "klassiker",
-"text": "Uruguay besegrade Bolivia med 8–0 den 2 July 1950. Matchen spelades på Estádio Independência i Belo Horizonte.",
-"tags": ["Uruguay", "Bolivia", "1950", "8–0", "Belo Horizonte"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 86,
-"category": "Matchrekord",
-"tone": "rekord",
-"text": "Tyskland slog Saudiarabien med 8–0 den 1 June 2002. Matchen spelades på Sapporo Dome i Sapporo.",
-"tags": ["Tyskland", "Saudiarabien", "2002", "8–0", "Sapporo"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 87,
-"category": "Finaler",
-"tone": "klassiker",
-"text": "Brasilien slog Sverige med 5–2 i VM-finalen den 29 June 1958. Finalen spelades på Råsunda Stadium i Solna.",
-"tags": ["Brasilien", "Sverige", "1958", "final", "Råsunda"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 88,
-"category": "Finaler",
-"tone": "rekord",
-"text": "Brasiliens 5–2 mot Sverige 1958 är listad som en av de största finalsegrarna i VM. Matchen spelades i Solna.",
-"tags": ["Brasilien", "Sverige", "1958", "5–2", "final"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 89,
-"category": "Finaler",
-"tone": "klassiker",
-"text": "Brasilien slog Italien med 4–1 i VM-finalen den 21 June 1970. Finalen spelades på Estadio Azteca i Mexico City.",
-"tags": ["Brasilien", "Italien", "1970", "4–1", "Estadio Azteca"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 90,
-"category": "Finaler",
-"tone": "historik",
-"text": "Frankrike vann VM-finalen 1998 med 3–0 mot Brasilien. Matchen spelades på Stade de France i Saint-Denis.",
-"tags": ["Frankrike", "Brasilien", "1998", "3–0", "Stade de France"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 91,
-"category": "Matchrekord",
-"tone": "nördigt",
-"text": "Ungern finns med två gånger bland de största VM-segrarna i rådatans lista. Det handlar om 10–1 mot El Salvador och 9–0 mot Sydkorea.",
-"tags": ["Ungern", "El Salvador", "Sydkorea", "10–1", "9–0"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 92,
-"category": "Finaler",
-"tone": "nördigt",
-"text": "Brasilien finns med två gånger i listan över de största finalsegrarna. De vann med 5–2 mot Sverige 1958 och 4–1 mot Italien 1970.",
-"tags": ["Brasilien", "Sverige", "Italien", "1958", "1970"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 93,
-"category": "Disciplin",
-"tone": "rekord",
-"text": "VM 2006 hade flest röda kort i en turnering. Totalt delades 28 röda kort ut på 64 matcher.",
-"tags": ["2006", "röda kort", "28 röda kort", "64 matcher"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 94,
-"category": "Disciplin",
-"tone": "rekord",
-"text": "Brasilien har flest röda kort genom tiderna som lag. Rådatans lista anger 11 röda kort på 97 matcher.",
-"tags": ["Brasilien", "röda kort", "11 röda kort", "97 matcher"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 95,
-"category": "Disciplin",
-"tone": "kuriosa",
-"text": "Portugal och Nederländerna drog på sig 4 röda kort tillsammans i en match 2006. Båda lagen fick 2 röda kort var.",
-"tags": ["Portugal", "Nederländerna", "2006", "röda kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 96,
-"category": "Finaler",
-"tone": "historik",
-"text": "VM-finalen 1990 mellan Argentina och Västtyskland hade 2 röda kort. Det är flest röda kort i en finalmatch enligt rådatans lista.",
-"tags": ["Argentina", "Västtyskland", "1990", "final", "röda kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 97,
-"category": "Disciplin",
-"tone": "rekord",
-"text": "VM 2006 var också turneringen med flest gula kort. Totalt delades 345 gula kort ut på 64 matcher.",
-"tags": ["2006", "gula kort", "345 gula kort", "64 matcher"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 98,
-"category": "Disciplin",
-"tone": "rekord",
-"text": "Argentina fick 10 gula kort mot Nederländerna i VM 2022. Det är flest gula kort för ett lag i en match enligt rådatans lista.",
-"tags": ["Argentina", "Nederländerna", "2022", "10 gula kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 99,
-"category": "Disciplin",
-"tone": "nördigt",
-"text": "Nederländerna och Argentina samlade ihop 18 gula kort i samma match 2022. Fördelningen var 8 för Nederländerna och 10 för Argentina.",
-"tags": ["Nederländerna", "Argentina", "2022", "18 gula kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 100,
-"category": "Finaler",
-"tone": "kuriosa",
-"text": "VM-finalen 2010 mellan Nederländerna och Spanien innehöll 14 gula kort. Nederländerna fick 9 och Spanien fick 5.",
-"tags": ["Nederländerna", "Spanien", "2010", "final", "14 gula kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 101,
-"category": "Spelare",
-"tone": "rekord",
-"text": "Pelé vann VM tre gånger med Brasilien: 1958, 1962 och 1970. Ingen annan spelare står noterad för fler VM-titlar.",
-"tags": ["Pelé", "Brasilien", "1958", "1962", "1970"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 102,
-"category": "Spelare",
-"tone": "historik",
-"text": "Cafu spelade tre VM-finaler för Brasilien mellan 1994 och 2002. Det är flest finalframträdanden för en spelare.",
-"tags": ["Cafu", "Brasilien", "1994", "2002", "finaler"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 103,
-"category": "Spelare",
-"tone": "rekord",
-"text": "Lionel Messi har spelat flest VM-matcher av alla spelare. Han står noterad för 26 matcher med Argentina.",
-"tags": ["Lionel Messi", "Argentina", "26 matcher", "spelare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 104,
-"category": "Spelare",
-"tone": "nördigt",
-"text": "Sex spelare har deltagit i fem VM-turneringar: Antonio Carbajal, Lothar Matthäus, Rafael Márquez, Cristiano Ronaldo, Lionel Messi och Andrés Guardado.",
-"tags": ["Antonio Carbajal", "Lothar Matthäus", "Rafael Márquez", "Cristiano Ronaldo", "Lionel Messi", "Andrés Guardado"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 105,
-"category": "Spelare",
-"tone": "rekord",
-"text": "Norman Whiteside är den yngsta spelaren i VM-historien. Han var 17 år och 41 dagar när Nordirland mötte Jugoslavien den 17 June 1982.",
-"tags": ["Norman Whiteside", "Nordirland", "Jugoslavien", "1982"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 106,
-"category": "Spelare",
-"tone": "rekord",
-"text": "Essam El-Hadary är den äldsta spelaren i VM-historien. Han var 45 år och 161 dagar när Egypten mötte Saudiarabien den 25 June 2018.",
-"tags": ["Essam El-Hadary", "Egypten", "Saudiarabien", "2018"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 107,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Miroslav Klose är VM:s meste målskytt genom tiderna. Han gjorde 16 mål för Tyskland mellan 2002 och 2014.",
-"tags": ["Miroslav Klose", "Tyskland", "16 mål", "2002", "2014"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 108,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Just Fontaine gjorde 13 mål för Frankrike i VM 1958. Det är flest mål av en spelare i en och samma VM-turnering.",
-"tags": ["Just Fontaine", "Frankrike", "1958", "13 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 109,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Oleg Salenko gjorde 5 mål i en och samma VM-match. Det skedde för Ryssland mot Kamerun den 28 June 1994.",
-"tags": ["Oleg Salenko", "Ryssland", "Kamerun", "1994", "5 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 110,
-"category": "Finaler",
-"tone": "klassiker",
-"text": "Geoff Hurst och Kylian Mbappé delar rekordet för flest mål i en VM-final. Båda gjorde 3 mål i varsin finalmatch.",
-"tags": ["Geoff Hurst", "Kylian Mbappé", "final", "3 mål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 111,
-"category": "Finaler",
-"tone": "rekord",
-"text": "Kylian Mbappé har gjort flest mål i VM-finaler totalt. Han står på 4 finalmål för Frankrike mellan 2018 och 2022.",
-"tags": ["Kylian Mbappé", "Frankrike", "2018", "2022", "finalmål"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 112,
-"category": "Sverige",
-"tone": "historik",
-"text": "Nils Liedholm är den äldsta målskytten i en VM-final. Han var 35 år och 264 dagar när Sverige mötte Brasilien den 29 June 1958.",
-"tags": ["Nils Liedholm", "Sverige", "Brasilien", "1958", "final"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 113,
-"category": "Målrekord",
-"tone": "kuriosa",
-"text": "Lucien Laurent gjorde VM-historiens första mål. Målet kom för Frankrike mot Mexiko den 13 July 1930.",
-"tags": ["Lucien Laurent", "Frankrike", "Mexiko", "1930"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 114,
-"category": "Sverige",
-"tone": "kuriosa",
-"text": "Marcus Allbäck gjorde VM-historiens 2,000:e mål. Det kom för Sverige mot England den 20 June 2006.",
-"tags": ["Marcus Allbäck", "Sverige", "England", "2006"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 115,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Hakan Şükür gjorde VM:s snabbaste mål. Målet kom efter 11 sekunder för Turkiet mot Sydkorea 2002.",
-"tags": ["Hakan Şükür", "Turkiet", "Sydkorea", "2002"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 116,
-"category": "Målrekord",
-"tone": "rekord",
-"text": "Cristiano Ronaldo är den enda spelaren som gjort mål i fem olika VM-turneringar. Noteringen gäller Portugal 2006–2022.",
-"tags": ["Cristiano Ronaldo", "Portugal", "2006", "2022", "5 turneringar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 117,
-"category": "Målvakter",
-"tone": "rekord",
-"text": "Peter Shilton och Fabien Barthez delar rekordet för flest hållna nollor i VM. Båda står noterade för 10.",
-"tags": ["Peter Shilton", "Fabien Barthez", "England", "Frankrike", "hållna nollor"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 118,
-"category": "Målvakter",
-"tone": "rekord",
-"text": "Walter Zenga höll nollan i 517 minuter för Italien i VM 1990. Det är den längsta sviten utan insläppt mål.",
-"tags": ["Walter Zenga", "Italien", "1990", "517 minuter"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 119,
-"category": "Målvakter",
-"tone": "nördigt",
-"text": "Tim Howard gjorde 16 räddningar för USA mot Belgien 2014. Det är flest räddningar i en VM-match.",
-"tags": ["Tim Howard", "USA", "Belgien", "2014", "16 räddningar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 120,
-"category": "Disciplin",
-"tone": "rekord",
-"text": "Jesús Gallardo fick VM:s snabbaste gula kort. Det kom efter 11 sekunder för Mexiko mot Sverige 2018.",
-"tags": ["Jesús Gallardo", "Mexiko", "Sverige", "2018", "gult kort"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 121,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Helmut Schön coachade flest VM-matcher. Han ledde Västtyskland i 25 matcher mellan 1966 och 1978.",
-"tags": ["Helmut Schön", "Västtyskland", "25 matcher", "1966", "1978"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 122,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Helmut Schön har också flest segrar som VM-coach. Han vann 16 matcher med Västtyskland mellan 1966 och 1978.",
-"tags": ["Helmut Schön", "Västtyskland", "16 segrar", "1966", "1978"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 123,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Vittorio Pozzo är den enda tränaren som vunnit VM två gånger. Han gjorde det med Italien 1934 och 1938.",
-"tags": ["Vittorio Pozzo", "Italien", "1934", "1938", "VM-titlar"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 124,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Carlos Alberto Parreira har coachat i sex olika VM-turneringar. Han gjorde det för Kuwait, United Arab Emirates, Brasilien, Saudiarabien och Sydafrika.",
-"tags": ["Carlos Alberto Parreira", "Brasilien", "Kuwait", "Saudiarabien", "Sydafrika"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 125,
-"category": "Tränare",
-"tone": "kuriosa",
-"text": "Bora Milutinović coachade fem olika nationer i VM. Han ledde Mexiko, Costa Rica, USA, Nigeria och Kina mellan 1986 och 2002.",
-"tags": ["Bora Milutinović", "Mexiko", "Costa Rica", "USA", "Nigeria", "Kina"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 126,
-"category": "Tränare",
-"tone": "nördigt",
-"text": "Carlos Alberto Parreira har också coachat fem olika nationer i VM. Han ledde Kuwait, United Arab Emirates, Brasilien, Saudiarabien och Sydafrika.",
-"tags": ["Carlos Alberto Parreira", "Kuwait", "United Arab Emirates", "Brasilien", "Saudiarabien", "Sydafrika"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 127,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Bora Milutinović coachade i fem raka VM-turneringar. Sviten sträckte sig från 1986 till 2002.",
-"tags": ["Bora Milutinović", "1986", "2002", "fem turneringar", "tränare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 128,
-"category": "Tränare",
-"tone": "historik",
-"text": "Walter Winterbottom ledde England i fyra raka VM-turneringar mellan 1950 och 1962. Det är en av noteringarna för flest raka VM med samma lag.",
-"tags": ["Walter Winterbottom", "England", "1950", "1962", "tränare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 129,
-"category": "Tränare",
-"tone": "historik",
-"text": "Helmut Schön ledde Västtyskland i fyra raka VM-turneringar mellan 1966 och 1978. Samma period gav honom flest matcher och flest segrar som coach.",
-"tags": ["Helmut Schön", "Västtyskland", "1966", "1978", "tränare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 130,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Juan José Tramutola är den yngsta VM-coachen i listan. Han var 27 år och 267 dagar när han ledde Argentina 1930.",
-"tags": ["Juan José Tramutola", "Argentina", "1930", "yngsta coach"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 131,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Alberto Suppici är den yngsta tränaren som vunnit VM. Han var 31 år och 252 dagar när Uruguay vann 1930.",
-"tags": ["Alberto Suppici", "Uruguay", "1930", "yngsta vinnande coach"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 132,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Otto Rehhagel är den äldsta VM-coachen i listan. Han var 71 år och 317 dagar när han ledde Grekland 2010.",
-"tags": ["Otto Rehhagel", "Grekland", "2010", "äldsta coach"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 133,
-"category": "Tränare",
-"tone": "rekord",
-"text": "Vicente del Bosque är den äldsta tränaren som vunnit VM. Han var 59 år och 200 dagar när Spanien vann 2010.",
-"tags": ["Vicente del Bosque", "Spanien", "2010", "äldsta vinnande coach"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 134,
-"category": "Domare",
-"tone": "rekord",
-"text": "Alireza Faghani står noterad för flest VM-turneringar som domare. Han dömde i fyra turneringar mellan 2014 och 2026.",
-"tags": ["Alireza Faghani", "Iran", "2014", "2026", "domare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 135,
-"category": "Domare",
-"tone": "rekord",
-"text": "Juan Gardeazábal är den yngsta domaren i VM-listan. Han var 24 år och 193 dagar under VM 1958.",
-"tags": ["Juan Gardeazábal", "Spanien", "1958", "yngsta domare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 136,
-"category": "Domare",
-"tone": "rekord",
-"text": "George Reader är den äldsta domaren i VM-listan. Han var 53 år och 236 dagar under VM 1950.",
-"tags": ["George Reader", "England", "1950", "äldsta domare"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 137,
-"category": "Publik",
-"tone": "rekord",
-"text": "Den högsta publiksiffran i VM-historien är 173,850. Matchen spelades mellan Uruguay och Brasilien på Maracanã Stadium den 16 July 1950.",
-"tags": ["Uruguay", "Brasilien", "1950", "Maracanã", "173,850"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 138,
-"category": "Publik",
-"tone": "historik",
-"text": "Maracanã Stadium dominerar listan över de största VM-publikerna. De fyra högsta publiksiffrorna kommer alla från matcher där 1950.",
-"tags": ["Maracanã", "1950", "Rio de Janeiro", "publikrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 139,
-"category": "Publik",
-"tone": "klassiker",
-"text": "Brasilien mot Spanien den 13 July 1950 sågs av 152,772 personer på Maracanã Stadium. Det är den näst högsta publiksiffran i listan.",
-"tags": ["Brasilien", "Spanien", "1950", "Maracanã", "152,772"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 140,
-"category": "Sverige",
-"tone": "historik",
-"text": "Brasilien mot Sverige den 9 July 1950 lockade 138,886 åskådare på Maracanã Stadium. Det är en av de fem högsta publiksiffrorna i VM-listan.",
-"tags": ["Brasilien", "Sverige", "1950", "Maracanã", "138,886"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 141,
-"category": "Publik",
-"tone": "kuriosa",
-"text": "Den lägsta publiksiffran i listan är 300 personer. Det var Rumänien mot Peru den 14 July 1930 på Estadio Pocitos i Montevideo.",
-"tags": ["Rumänien", "Peru", "1930", "Estadio Pocitos", "300"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 142,
-"category": "Publik",
-"tone": "rekord",
-"text": "VM 1994 hade det högsta publiksnittet. Turneringen i United States landade på 68,991 åskådare per match.",
-"tags": ["1994", "United States", "68,991", "publiksnitt"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 143,
-"category": "Publik",
-"tone": "rekord",
-"text": "VM 1994 hade också den högsta totala publiken. Sammanlagt noterades 3,587,538 åskådare.",
-"tags": ["1994", "United States", "3,587,538", "publikrekord"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 144,
-"category": "Publik",
-"tone": "historik",
-"text": "VM 1934 hade det lägsta publiksnittet. Turneringen i Italien landade på 21,059 åskådare per match.",
-"tags": ["1934", "Italien", "21,059", "publiksnitt"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 145,
-"category": "Publik",
-"tone": "historik",
-"text": "VM 1934 hade den lägsta totala publiken i sammanställningen. Totalt kom 358,000 åskådare till turneringen.",
-"tags": ["1934", "Italien", "358,000", "publik"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 146,
-"category": "Publik",
-"tone": "nördigt",
-"text": "VM 1950 hade bara 22 matcher men ändå över en miljon åskådare totalt. Turneringen i Brasilien noterades för 1,043,500 besökare.",
-"tags": ["1950", "Brasilien", "1,043,500", "22 matcher"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 147,
-"category": "Sverige",
-"tone": "historik",
-"text": "VM 1958 i Sverige hade 919,580 åskådare totalt. Publiksnittet var 26,274 per match.",
-"tags": ["Sverige", "1958", "919,580", "26,274", "publik"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 148,
-"category": "Sverige",
-"tone": "kuriosa",
-"text": "Den största publiken under VM 1958 kom på Ullevi Stadium i Gothenburg. Brasilien mot Soviet Union i gruppspelet sågs av 50,928 åskådare.",
-"tags": ["Sverige", "1958", "Ullevi", "Brasilien", "Soviet Union"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 149,
-"category": "Publik",
-"tone": "klassiker",
-"text": "VM 1986 hade två matcher med 114,600 åskådare på Estadio Azteca. Den ena var finalen mellan Argentina och Västtyskland.",
-"tags": ["1986", "Estadio Azteca", "Argentina", "Västtyskland", "114,600"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 150,
-"category": "Publik",
-"tone": "klassiker",
-"text": "VM-finalen 1994 mellan Brasilien och Italien spelades inför 94,194 åskådare på Rose Bowl i Pasadena.",
-"tags": ["1994", "Brasilien", "Italien", "Rose Bowl", "94,194"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 151,
-"category": "Publik",
-"tone": "nördigt",
-"text": "VM 2002 spelades på 20 arenor i 20 städer i South Korea och Japan. Totalt kom 2,705,197 åskådare till turneringen.",
-"tags": ["2002", "South Korea", "Japan", "20 arenor", "2,705,197"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 152,
-"category": "Publik",
-"tone": "historik",
-"text": "VM 2006 i Tyskland lockade 3,359,439 åskådare. Publiksnittet var 52,491 per match.",
-"tags": ["2006", "Tyskland", "3,359,439", "52,491"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 153,
-"category": "Publik",
-"tone": "klassiker",
-"text": "VM-finalen 2014 mellan Tyskland och Argentina spelades på Maracanã Stadium. Publiksiffran var 74,738.",
-"tags": ["2014", "Tyskland", "Argentina", "Maracanã", "74,738"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 154,
-"category": "Publik",
-"tone": "nördigt",
-"text": "VM 2022 i Qatar hade 3,404,252 åskådare totalt. Publiksnittet var 53,191 per match.",
-"tags": ["2022", "Qatar", "3,404,252", "53,191"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-"id": 155,
-"category": "Publik",
-"tone": "kuriosa",
-"text": "Lusail Stadium hade den högsta publiksiffran under VM 2022. Tre matcher, inklusive finalen, nådde 88,966 åskådare.",
-"tags": ["2022", "Lusail Stadium", "Qatar", "88,966", "final"],
-"source": "Wikipedia: FIFA World Cup records and statistics"
-},
-{
-  "id": 156,
-  "category": "Publik",
-  "tone": "rekord",
-  "text": "Totalt redovisas 43,936,730 åskådare i VM-historikens publiksammanställning. Snittet över 964 matcher är 45,577 per match.",
-  "tags": ["publik", "43,936,730", "964 matcher", "45,577"],
-  "source": "Wikipedia: FIFA World Cup records and statistics"
-}
+  {
+    "id": 1,
+    "category": "Historik",
+    "tone": "historik",
+    "text": "Uruguay blev världsmästare på hemmaplan 1930. Alberto Suppici ledde laget till titeln i det första VM:et.",
+    "tags": [
+      "Uruguay",
+      "1930",
+      "Alberto Suppici",
+      "värdland"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 2,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Vittorio Pozzo tränade Italien till VM-guld både 1934 och 1938. Han är den enda tränaren som vunnit två raka VM-turneringar.",
+    "tags": [
+      "Vittorio Pozzo",
+      "Italien",
+      "1934",
+      "1938",
+      "tränare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 3,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Just Fontaine gjorde 13 mål för Frankrike i VM 1958. Det är den högsta noteringen för en skyttekung i VM-historien.",
+    "tags": [
+      "Just Fontaine",
+      "Frankrike",
+      "1958",
+      "målrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 4,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "Sándor Kocsis gjorde 11 mål för Ungern i VM 1954. Det är en av de mest extrema målnoteringarna i turneringens historia.",
+    "tags": [
+      "Sándor Kocsis",
+      "Ungern",
+      "1954",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 5,
+    "category": "Lagrekord",
+    "tone": "klassiker",
+    "text": "Brasilien vann VM 1958 i Sverige. Vicente Feola var tränaren bakom guldet.",
+    "tags": [
+      "Brasilien",
+      "Sverige",
+      "1958",
+      "Vicente Feola"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 6,
+    "category": "Lagrekord",
+    "tone": "klassiker",
+    "text": "Brasilien försvarade sin VM-titel 1962 i Chile. Aymoré Moreira stod som vinnande coach.",
+    "tags": [
+      "Brasilien",
+      "Chile",
+      "1962",
+      "Aymoré Moreira"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 7,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "VM 1962 fick en ovanligt delad skytteligavinnare. Sex spelare slutade på 4 mål.",
+    "tags": [
+      "1962",
+      "Chile",
+      "skytteliga",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 8,
+    "category": "Historik",
+    "tone": "historik",
+    "text": "England vann VM på hemmaplan 1966. Alf Ramsey var tränaren och Eusébio blev turneringens bäste målskytt med 9 mål.",
+    "tags": [
+      "England",
+      "1966",
+      "Alf Ramsey",
+      "Eusébio"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 9,
+    "category": "Målrekord",
+    "tone": "klassiker",
+    "text": "Gerd Müller gjorde 10 mål för Västtyskland i VM 1970. Samma turnering vanns av Brasilien med Mário Zagallo som tränare.",
+    "tags": [
+      "Gerd Müller",
+      "Västtyskland",
+      "1970",
+      "Brasilien"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 10,
+    "category": "Finaler",
+    "tone": "historik",
+    "text": "Västtyskland vann VM 1974 på hemmaplan. Helmut Schön ledde laget till titeln.",
+    "tags": [
+      "Västtyskland",
+      "1974",
+      "Helmut Schön",
+      "värdland"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 11,
+    "category": "Spelare",
+    "tone": "klassiker",
+    "text": "Mario Kempes var både bäste målskytt och utsedd till bästa spelare i VM 1978. Argentina vann dessutom turneringen på hemmaplan.",
+    "tags": [
+      "Mario Kempes",
+      "Argentina",
+      "1978",
+      "bästa spelare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 12,
+    "category": "Spelare",
+    "tone": "klassiker",
+    "text": "Paolo Rossi gjorde 6 mål i VM 1982 och utsågs även till turneringens bästa spelare. Italien vann hela mästerskapet.",
+    "tags": [
+      "Paolo Rossi",
+      "Italien",
+      "1982",
+      "bästa spelare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 13,
+    "category": "Spelare",
+    "tone": "klassiker",
+    "text": "Diego Maradona utsågs till bästa spelare i VM 1986. Argentina vann turneringen med Carlos Bilardo som tränare.",
+    "tags": [
+      "Diego Maradona",
+      "Argentina",
+      "1986",
+      "Carlos Bilardo"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 14,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "Gary Lineker blev skyttekung i VM 1986 med 6 mål. Trots det var det Argentina som gick hela vägen och vann turneringen.",
+    "tags": [
+      "Gary Lineker",
+      "England",
+      "1986",
+      "Argentina"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 15,
+    "category": "Spelare",
+    "tone": "kuriosa",
+    "text": "Salvatore Schillaci gjorde 6 mål i VM 1990 och utsågs också till turneringens bästa spelare. Västtyskland vann mästerskapet.",
+    "tags": [
+      "Salvatore Schillaci",
+      "Italien",
+      "1990",
+      "Västtyskland"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 16,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "VM 1994 fick två skytteligavinnare. Hristo Stoichkov och Oleg Salenko gjorde båda 6 mål.",
+    "tags": [
+      "Hristo Stoichkov",
+      "Oleg Salenko",
+      "1994",
+      "skytteliga"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 17,
+    "category": "Spelare",
+    "tone": "klassiker",
+    "text": "Romário utsågs till bästa spelare i VM 1994. Brasilien vann turneringen med Carlos Alberto Parreira som tränare.",
+    "tags": [
+      "Romário",
+      "Brasilien",
+      "1994",
+      "Carlos Alberto Parreira"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 18,
+    "category": "Finaler",
+    "tone": "historik",
+    "text": "Frankrike vann VM 1998 på hemmaplan. Aimé Jacquet var tränaren bakom titeln.",
+    "tags": [
+      "Frankrike",
+      "1998",
+      "Aimé Jacquet",
+      "värdland"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 19,
+    "category": "Spelare",
+    "tone": "kuriosa",
+    "text": "Oliver Kahn utsågs till bästa spelare i VM 2002. Samma turnering vann Brasilien, medan Ronaldo blev bäste målskytt med 8 mål.",
+    "tags": [
+      "Oliver Kahn",
+      "Tyskland",
+      "2002",
+      "Ronaldo",
+      "Brasilien"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 20,
+    "category": "Spelare",
+    "tone": "klassiker",
+    "text": "Lionel Messi utsågs till bästa spelare i VM 2014 och igen 2022. I den senare turneringen vann Argentina guldet.",
+    "tags": [
+      "Lionel Messi",
+      "Argentina",
+      "2014",
+      "2022"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 21,
+    "category": "Lagrekord",
+    "tone": "rekord",
+    "text": "Brasilien toppar den totala VM-tabellen efter 2022. Laget står på 247 poäng efter 22 deltaganden och 114 spelade matcher.",
+    "tags": [
+      "Brasilien",
+      "2022",
+      "total tabell",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 22,
+    "category": "Lagrekord",
+    "tone": "rekord",
+    "text": "Brasilien har spelat flest VM-turneringar i tabellen. Efter VM 2022 står landet på 22 deltaganden.",
+    "tags": [
+      "Brasilien",
+      "2022",
+      "deltaganden",
+      "lagrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 23,
+    "category": "Lagrekord",
+    "tone": "rekord",
+    "text": "Brasilien har vunnit flest matcher i VM:s totala tabell. Efter VM 2022 står laget på 76 segrar.",
+    "tags": [
+      "Brasilien",
+      "2022",
+      "segrar",
+      "lagrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 24,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Brasilien har gjort flest mål i VM:s totala tabell. Efter VM 2022 står laget på 237 gjorda mål.",
+    "tags": [
+      "Brasilien",
+      "2022",
+      "mål",
+      "lagrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 25,
+    "category": "Lagrekord",
+    "tone": "rekord",
+    "text": "Tyskland ligger tvåa i den totala VM-tabellen efter 2022. Laget står på 225 poäng efter 20 deltaganden.",
+    "tags": [
+      "Tyskland",
+      "2022",
+      "total tabell",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 26,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "Tyskland har gjort 232 mål i VM:s totala tabell. Det är näst flest genom tiderna efter Brasilien.",
+    "tags": [
+      "Tyskland",
+      "Brasilien",
+      "2022",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 27,
+    "category": "Lagrekord",
+    "tone": "historik",
+    "text": "Argentina ligger trea i den totala VM-tabellen efter 2022. Laget står på 158 poäng efter 18 deltaganden.",
+    "tags": [
+      "Argentina",
+      "2022",
+      "total tabell",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 28,
+    "category": "Lagrekord",
+    "tone": "nördigt",
+    "text": "Italien har 156 poäng i den totala VM-tabellen efter 2022. Det är bara två poäng bakom Argentina.",
+    "tags": [
+      "Italien",
+      "Argentina",
+      "2022",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 29,
+    "category": "Lagrekord",
+    "tone": "nördigt",
+    "text": "Frankrike, Argentina och Italien står alla på +51 i målskillnad efter VM 2022. Trots samma målskillnad skiljer det 27 poäng mellan Frankrike och Argentina.",
+    "tags": [
+      "Frankrike",
+      "Argentina",
+      "Italien",
+      "2022",
+      "målskillnad"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 30,
+    "category": "Sverige",
+    "tone": "historik",
+    "text": "Sverige ligger på elfte plats i den totala VM-tabellen efter 2022. Sverige står på 70 poäng efter 12 deltaganden.",
+    "tags": [
+      "Sverige",
+      "2022",
+      "total tabell",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 31,
+    "category": "Sverige",
+    "tone": "nördigt",
+    "text": "Sverige har nästan perfekt balans i VM:s totala tabell. Efter 51 matcher står Sverige på 19 vinster, 13 oavgjorda och 19 förluster.",
+    "tags": [
+      "Sverige",
+      "2022",
+      "vinster",
+      "förluster",
+      "oavgjort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 32,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "Ungern har gjort 87 mål på bara 32 VM-matcher. Det är fler mål än flera lag ovanför dem i den totala tabellen.",
+    "tags": [
+      "Ungern",
+      "mål",
+      "VM-matcher",
+      "lagrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 33,
+    "category": "Lagrekord",
+    "tone": "kuriosa",
+    "text": "Nederländerna ligger åtta i den totala VM-tabellen efter 2022. Laget har bara 11 deltaganden men ändå 104 poäng.",
+    "tags": [
+      "Nederländerna",
+      "2022",
+      "poäng",
+      "deltaganden"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 34,
+    "category": "Lagrekord",
+    "tone": "kuriosa",
+    "text": "Kroatien ligger på plats 19 i den totala VM-tabellen efter 2022. Landet har 47 poäng trots bara 6 deltaganden.",
+    "tags": [
+      "Kroatien",
+      "2022",
+      "poäng",
+      "deltaganden"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 35,
+    "category": "Lagrekord",
+    "tone": "nördigt",
+    "text": "Mexiko har spelat 60 VM-matcher efter 2022. Trots 17 deltaganden har laget negativ målskillnad: −39.",
+    "tags": [
+      "Mexiko",
+      "2022",
+      "målskillnad",
+      "deltaganden"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 36,
+    "category": "Kuriosa",
+    "tone": "kuriosa",
+    "text": "Serbien står på exakt 0 i målskillnad i den totala VM-tabellen. Efter 49 matcher är målskillnaden 71–71.",
+    "tags": [
+      "Serbien",
+      "målskillnad",
+      "71–71",
+      "kuriosa"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 37,
+    "category": "Kuriosa",
+    "tone": "kuriosa",
+    "text": "Irland har också exakt 0 i målskillnad i VM:s totala tabell. Efter 13 matcher står målskillnaden på 10–10.",
+    "tags": [
+      "Irland",
+      "målskillnad",
+      "10–10",
+      "kuriosa"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 38,
+    "category": "Lagrekord",
+    "tone": "kuriosa",
+    "text": "Turkiet har bara deltagit i 2 VM-turneringar men står ändå på 16 poäng. Laget har 5 segrar på 10 matcher.",
+    "tags": [
+      "Turkiet",
+      "deltaganden",
+      "segrar",
+      "poäng"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 39,
+    "category": "Lagrekord",
+    "tone": "kuriosa",
+    "text": "Qatar står på 0 poäng i den totala VM-tabellen efter sitt första deltagande. Laget spelade 3 matcher och förlorade alla.",
+    "tags": [
+      "Qatar",
+      "2022",
+      "poäng",
+      "förluster"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 40,
+    "category": "Världsmästerskap",
+    "tone": "historik",
+    "text": "Kap Verde, Curaçao, Jordanien och Uzbekistan står som nya VM-lag utan spelade matcher i den här tabellen. Alla fyra står på 0 deltaganden, 0 matcher och 0 poäng.",
+    "tags": [
+      "Kap Verde",
+      "Curaçao",
+      "Jordanien",
+      "Uzbekistan",
+      "nya lag"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 41,
+    "category": "Medaljer",
+    "tone": "rekord",
+    "text": "Brasilien har flest VM-guld i medaljtabellen. Landet står på 5 guld, 2 silver och 2 brons.",
+    "tags": [
+      "Brasilien",
+      "medaljtabell",
+      "guld",
+      "rekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 42,
+    "category": "Medaljer",
+    "tone": "nördigt",
+    "text": "Tyskland har flest medaljer totalt i VM-historien. Medaljtabellen ger dem 12 medaljer: 4 guld, 4 silver och 4 brons.",
+    "tags": [
+      "Tyskland",
+      "medaljtabell",
+      "12 medaljer",
+      "VM-historia"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 43,
+    "category": "Medaljer",
+    "tone": "historik",
+    "text": "Italien står på 4 VM-guld i medaljtabellen. Totalt har Italien 7 medaljer: 4 guld, 2 silver och 1 brons.",
+    "tags": [
+      "Italien",
+      "medaljtabell",
+      "4 guld",
+      "7 medaljer"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 44,
+    "category": "Medaljer",
+    "tone": "klassiker",
+    "text": "Argentina har 3 VM-guld och 3 silver i medaljtabellen. Däremot står landet på 0 brons.",
+    "tags": [
+      "Argentina",
+      "medaljtabell",
+      "3 guld",
+      "silver"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 45,
+    "category": "Medaljer",
+    "tone": "historik",
+    "text": "Frankrike har en ovanligt jämn medaljrad i tabellen. Landet står på 2 guld, 2 silver och 2 brons.",
+    "tags": [
+      "Frankrike",
+      "medaljtabell",
+      "2 guld",
+      "2 silver",
+      "2 brons"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 46,
+    "category": "Medaljer",
+    "tone": "kuriosa",
+    "text": "Uruguay har 2 VM-guld och inga andra medaljer i tabellen. När Uruguay väl står på pallen i den här sammanställningen är det alltså högst upp.",
+    "tags": [
+      "Uruguay",
+      "medaljtabell",
+      "2 guld",
+      "kuriosa"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 47,
+    "category": "Sverige",
+    "tone": "historik",
+    "text": "Sverige står på 3 VM-medaljer i medaljtabellen. Det handlar om 1 silver och 2 brons.",
+    "tags": [
+      "Sverige",
+      "medaljtabell",
+      "silver",
+      "brons"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 48,
+    "category": "Medaljer",
+    "tone": "nördigt",
+    "text": "Kroatien och Sverige har exakt samma medaljrad i tabellen. Båda står på 0 guld, 1 silver och 2 brons.",
+    "tags": [
+      "Kroatien",
+      "Sverige",
+      "medaljtabell",
+      "silver",
+      "brons"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 49,
+    "category": "Medaljer",
+    "tone": "kuriosa",
+    "text": "Nederländerna har 4 VM-medaljer men inget guld i tabellen. Landet står på 3 silver och 1 brons.",
+    "tags": [
+      "Nederländerna",
+      "medaljtabell",
+      "silver",
+      "inget guld"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 50,
+    "category": "Medaljer",
+    "tone": "kuriosa",
+    "text": "England och Spanien har identiska medaljrader i tabellen. Båda står på 1 guld, 0 silver och 0 brons.",
+    "tags": [
+      "England",
+      "Spanien",
+      "medaljtabell",
+      "guld"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 51,
+    "category": "Titlar",
+    "tone": "rekord",
+    "text": "Brasilien har flest VM-titlar med 5 guld. Gulden kom 1958, 1962, 1970, 1994 och 2002.",
+    "tags": [
+      "Brasilien",
+      "VM-titlar",
+      "1958",
+      "1962",
+      "1970",
+      "1994",
+      "2002"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 52,
+    "category": "Titlar",
+    "tone": "rekord",
+    "text": "Italien vann två raka VM-titlar 1934–1938. Det är en av noteringarna för flest raka titlar.",
+    "tags": [
+      "Italien",
+      "1934",
+      "1938",
+      "raka titlar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 53,
+    "category": "Titlar",
+    "tone": "rekord",
+    "text": "Brasilien vann två raka VM-titlar 1958–1962. Det placerar Brasilien bredvid Italien i noteringen för flest raka titlar.",
+    "tags": [
+      "Brasilien",
+      "1958",
+      "1962",
+      "raka titlar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 54,
+    "category": "Titlar",
+    "tone": "historik",
+    "text": "Italien hade ett 44 år långt glapp mellan VM-titlarna 1938 och 1982. Det motsvarar nio turneringar mellan gulden.",
+    "tags": [
+      "Italien",
+      "1938",
+      "1982",
+      "44 år",
+      "titlar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 55,
+    "category": "Lagrekord",
+    "tone": "kuriosa",
+    "text": "Flera regerande mästare har åkt ut redan i gruppspelet. Det har hänt Italien 1950, Brasilien 1966, Frankrike 2002, Italien 2010, Spanien 2014 och Tyskland 2018.",
+    "tags": [
+      "regerande mästare",
+      "gruppspel",
+      "Italien",
+      "Brasilien",
+      "Frankrike",
+      "Spanien",
+      "Tyskland"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 56,
+    "category": "Värdländer",
+    "tone": "historik",
+    "text": "Sex länder står med som VM-vinnare på hemmaplan: Uruguay, Italien, England, Västtyskland, Argentina och Frankrike.",
+    "tags": [
+      "värdland",
+      "Uruguay",
+      "Italien",
+      "England",
+      "Argentina",
+      "Frankrike"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 57,
+    "category": "Lagrekord",
+    "tone": "rekord",
+    "text": "Brasilien har flest VM-framträdanden med 23. Brasilien har varit med i varje turnering från 1930 till 2026.",
+    "tags": [
+      "Brasilien",
+      "23 framträdanden",
+      "1930",
+      "2026",
+      "lagrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 58,
+    "category": "Finaler",
+    "tone": "rekord",
+    "text": "Tyskland har flest finalframträdanden med 8. Här räknas både Västtyskland och Tyskland in i samma notering.",
+    "tags": [
+      "Tyskland",
+      "Västtyskland",
+      "finaler",
+      "8 finaler"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 59,
+    "category": "Finaler",
+    "tone": "rekord",
+    "text": "Tyskland har slutat tvåa flest gånger i VM. Landet står på 4 finalförluster.",
+    "tags": [
+      "Tyskland",
+      "finaler",
+      "silver",
+      "4 gånger"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 60,
+    "category": "Kuriosa",
+    "tone": "kuriosa",
+    "text": "Wales hade 64 år mellan två VM-framträdanden. Glappet sträckte sig från 1958 till 2022.",
+    "tags": [
+      "Wales",
+      "1958",
+      "2022",
+      "64 år",
+      "VM-framträdanden"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 61,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Den målrikaste VM-matchen spelades den 26 juni 1954 i Lausanne. Österrike slog Schweiz med 7–5 i en match med 12 mål.",
+    "tags": [
+      "Österrike",
+      "Schweiz",
+      "1954",
+      "12 mål",
+      "Lausanne"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 62,
+    "category": "Målrekord",
+    "tone": "klassiker",
+    "text": "Brasilien och Polen bjöd på 11 mål den 5 June 1938 i Strasbourg. Brasilien vann matchen med 6–5.",
+    "tags": [
+      "Brasilien",
+      "Polen",
+      "1938",
+      "11 mål",
+      "Strasbourg"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 63,
+    "category": "Målrekord",
+    "tone": "klassiker",
+    "text": "Ungern slog Västtyskland med 8–3 den 20 June 1954. Matchen spelades på St. Jakob Stadium i Basel och innehöll 11 mål.",
+    "tags": [
+      "Ungern",
+      "Västtyskland",
+      "1954",
+      "11 mål",
+      "Basel"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 64,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Ungern besegrade El Salvador med 10–1 den 15 juni 1982. Det är en av VM-historiens mest målrika matcher med 11 mål totalt.",
+    "tags": [
+      "Ungern",
+      "El Salvador",
+      "1982",
+      "10–1",
+      "11 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 65,
+    "category": "Målrekord",
+    "tone": "historik",
+    "text": "Frankrike slog Paraguay med 7–3 den 8 June 1958. Matchen spelades på Idrottsparken i Norrköping och innehöll 10 mål.",
+    "tags": [
+      "Frankrike",
+      "Paraguay",
+      "1958",
+      "Norrköping",
+      "10 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 66,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Brasilien har gjort flest VM-mål totalt. Efter perioden 1930–2022 står Brasilien på 237 mål.",
+    "tags": [
+      "Brasilien",
+      "1930",
+      "2022",
+      "237 mål",
+      "målrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 67,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Ungern gjorde 27 mål i VM 1954. Det är flest mål av ett lag i en och samma VM-turnering.",
+    "tags": [
+      "Ungern",
+      "1954",
+      "27 mål",
+      "målrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 68,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "VM 2022 hade flest mål totalt i en turnering. Turneringen landade på 172 gjorda mål.",
+    "tags": [
+      "2022",
+      "172 mål",
+      "turnering",
+      "målrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 69,
+    "category": "Målrekord",
+    "tone": "historik",
+    "text": "VM 1930 och VM 1934 står för de lägsta målnoteringarna i turneringens historia. Båda turneringarna hade 70 gjorda mål.",
+    "tags": [
+      "1930",
+      "1934",
+      "70 mål",
+      "turnering"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 70,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "VM 1954 hade det högsta målsnittet i VM-historien. Turneringen landade på 5.38 mål per match.",
+    "tags": [
+      "1954",
+      "5.38 mål per match",
+      "målsnitt",
+      "turnering"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 71,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "VM 1990 hade det lägsta målsnittet i VM-historien. Turneringen landade på 2.21 mål per match.",
+    "tags": [
+      "1990",
+      "2.21 mål per match",
+      "målsnitt",
+      "turnering"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 72,
+    "category": "Målrekord",
+    "tone": "klassiker",
+    "text": "Ungern var turneringens målgladaste lag 1954 med 27 mål. Det är samma notering som anges som flest mål av ett lag i en VM-turnering.",
+    "tags": [
+      "Ungern",
+      "1954",
+      "27 mål",
+      "målrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 73,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "Sverige var det målgladaste laget i VM 1994. Sverige gjorde 15 mål i turneringen.",
+    "tags": [
+      "Sverige",
+      "1994",
+      "15 mål",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 74,
+    "category": "Målrekord",
+    "tone": "historik",
+    "text": "Frankrike toppade målskyttet bland lagen både 1958 och 1998. Då gjorde Frankrike 23 respektive 15 mål.",
+    "tags": [
+      "Frankrike",
+      "1958",
+      "1998",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 75,
+    "category": "Målrekord",
+    "tone": "nördigt",
+    "text": "Tyskland toppade målskyttet bland lagen tre VM i rad: 2006, 2010 och 2014. Målsiffrorna var 14, 16 och 18.",
+    "tags": [
+      "Tyskland",
+      "2006",
+      "2010",
+      "2014",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 76,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "VM 1978 hade två lag i topp för flest gjorda mål. Argentina och Nederländerna står båda noterade med 15 mål.",
+    "tags": [
+      "Argentina",
+      "Nederländerna",
+      "1978",
+      "15 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 77,
+    "category": "Målrekord",
+    "tone": "historik",
+    "text": "Brasilien var turneringens målgladaste lag 1950 med 22 mål. Samma lag toppade även målskyttet 1962, 1970 och 2002.",
+    "tags": [
+      "Brasilien",
+      "1950",
+      "1962",
+      "1970",
+      "2002"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 78,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "Belgien toppade målskyttet bland lagen i VM 2018. Laget gjorde 16 mål i turneringen.",
+    "tags": [
+      "Belgien",
+      "2018",
+      "16 mål",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 79,
+    "category": "Målrekord",
+    "tone": "klassiker",
+    "text": "Frankrike gjorde flest mål av alla lag i VM 2022. Laget stod för 16 mål i turneringen.",
+    "tags": [
+      "Frankrike",
+      "2022",
+      "16 mål",
+      "mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 80,
+    "category": "Kuriosa",
+    "tone": "nördigt",
+    "text": "Färre än hälften av alla VM-turneringar har vunnits av laget som gjort flest mål. Det är en liten påminnelse om att målglädje inte alltid räcker hela vägen.",
+    "tags": [
+      "mål",
+      "turnering",
+      "vinnare",
+      "kuriosa"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 81,
+    "category": "Matchrekord",
+    "tone": "rekord",
+    "text": "Ungern slog El Salvador med 10–1 den 15 juni 1982. Det är VM-historiens största segermarginal.",
+    "tags": [
+      "Ungern",
+      "El Salvador",
+      "1982",
+      "10–1",
+      "segermarginal"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 82,
+    "category": "Matchrekord",
+    "tone": "rekord",
+    "text": "Ungern vann med 9–0 mot Sydkorea den 17 June 1954. Matchen spelades på Hardturm Stadium i Zürich.",
+    "tags": [
+      "Ungern",
+      "Sydkorea",
+      "1954",
+      "9–0",
+      "Zürich"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 83,
+    "category": "Matchrekord",
+    "tone": "historik",
+    "text": "Jugoslavien besegrade Zaire med 9–0 den 18 June 1974. Matchen spelades på Parkstadion i Gelsenkirchen.",
+    "tags": [
+      "Jugoslavien",
+      "Zaire",
+      "1974",
+      "9–0",
+      "Gelsenkirchen"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 84,
+    "category": "Sverige",
+    "tone": "rekord",
+    "text": "Sverige slog Kuba med 8–0 den 12 juni 1938. Det är en av de största svenska segrarna i VM-historien.",
+    "tags": [
+      "Sverige",
+      "Kuba",
+      "1938",
+      "8–0",
+      "segermarginal"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 85,
+    "category": "Matchrekord",
+    "tone": "klassiker",
+    "text": "Uruguay besegrade Bolivia med 8–0 den 2 July 1950. Matchen spelades på Estádio Independência i Belo Horizonte.",
+    "tags": [
+      "Uruguay",
+      "Bolivia",
+      "1950",
+      "8–0",
+      "Belo Horizonte"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 86,
+    "category": "Matchrekord",
+    "tone": "rekord",
+    "text": "Tyskland slog Saudiarabien med 8–0 den 1 June 2002. Matchen spelades på Sapporo Dome i Sapporo.",
+    "tags": [
+      "Tyskland",
+      "Saudiarabien",
+      "2002",
+      "8–0",
+      "Sapporo"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 87,
+    "category": "Finaler",
+    "tone": "klassiker",
+    "text": "Brasilien slog Sverige med 5–2 i VM-finalen den 29 June 1958. Finalen spelades på Råsunda Stadium i Solna.",
+    "tags": [
+      "Brasilien",
+      "Sverige",
+      "1958",
+      "final",
+      "Råsunda"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 88,
+    "category": "Finaler",
+    "tone": "rekord",
+    "text": "Brasiliens 5–2 mot Sverige 1958 är listad som en av de största finalsegrarna i VM. Matchen spelades i Solna.",
+    "tags": [
+      "Brasilien",
+      "Sverige",
+      "1958",
+      "5–2",
+      "final"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 89,
+    "category": "Finaler",
+    "tone": "klassiker",
+    "text": "Brasilien slog Italien med 4–1 i VM-finalen den 21 June 1970. Finalen spelades på Estadio Azteca i Mexico City.",
+    "tags": [
+      "Brasilien",
+      "Italien",
+      "1970",
+      "4–1",
+      "Estadio Azteca"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 90,
+    "category": "Finaler",
+    "tone": "historik",
+    "text": "Frankrike vann VM-finalen 1998 med 3–0 mot Brasilien. Matchen spelades på Stade de France i Saint-Denis.",
+    "tags": [
+      "Frankrike",
+      "Brasilien",
+      "1998",
+      "3–0",
+      "Stade de France"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 91,
+    "category": "Matchrekord",
+    "tone": "nördigt",
+    "text": "Ungern står för två av VM-historiens största segrar. Det handlar om 10–1 mot El Salvador och 9–0 mot Sydkorea.",
+    "tags": [
+      "Ungern",
+      "El Salvador",
+      "Sydkorea",
+      "10–1",
+      "9–0"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 92,
+    "category": "Finaler",
+    "tone": "nördigt",
+    "text": "Brasilien står för två av VM-historiens största finalsegrar. De vann med 5–2 mot Sverige 1958 och 4–1 mot Italien 1970.",
+    "tags": [
+      "Brasilien",
+      "Sverige",
+      "Italien",
+      "1958",
+      "1970"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 93,
+    "category": "Disciplin",
+    "tone": "rekord",
+    "text": "VM 2006 hade flest röda kort i en turnering. Totalt delades 28 röda kort ut på 64 matcher.",
+    "tags": [
+      "2006",
+      "röda kort",
+      "28 röda kort",
+      "64 matcher"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 94,
+    "category": "Disciplin",
+    "tone": "rekord",
+    "text": "Brasilien har flest röda kort genom tiderna som lag. Laget står på 11 röda kort på 97 matcher.",
+    "tags": [
+      "Brasilien",
+      "röda kort",
+      "11 röda kort",
+      "97 matcher"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 95,
+    "category": "Disciplin",
+    "tone": "kuriosa",
+    "text": "Portugal och Nederländerna drog på sig 4 röda kort tillsammans i en match 2006. Båda lagen fick 2 röda kort var.",
+    "tags": [
+      "Portugal",
+      "Nederländerna",
+      "2006",
+      "röda kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 96,
+    "category": "Finaler",
+    "tone": "historik",
+    "text": "VM-finalen 1990 mellan Argentina och Västtyskland hade 2 röda kort. Det är flest röda kort i en VM-final.",
+    "tags": [
+      "Argentina",
+      "Västtyskland",
+      "1990",
+      "final",
+      "röda kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 97,
+    "category": "Disciplin",
+    "tone": "rekord",
+    "text": "VM 2006 var också turneringen med flest gula kort. Totalt delades 345 gula kort ut på 64 matcher.",
+    "tags": [
+      "2006",
+      "gula kort",
+      "345 gula kort",
+      "64 matcher"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 98,
+    "category": "Disciplin",
+    "tone": "rekord",
+    "text": "Argentina fick 10 gula kort mot Nederländerna i VM 2022. Det är flest gula kort för ett lag i en VM-match.",
+    "tags": [
+      "Argentina",
+      "Nederländerna",
+      "2022",
+      "10 gula kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 99,
+    "category": "Disciplin",
+    "tone": "nördigt",
+    "text": "Nederländerna och Argentina samlade ihop 18 gula kort i samma match 2022. Fördelningen var 8 för Nederländerna och 10 för Argentina.",
+    "tags": [
+      "Nederländerna",
+      "Argentina",
+      "2022",
+      "18 gula kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 100,
+    "category": "Finaler",
+    "tone": "kuriosa",
+    "text": "VM-finalen 2010 mellan Nederländerna och Spanien innehöll 14 gula kort. Nederländerna fick 9 och Spanien fick 5.",
+    "tags": [
+      "Nederländerna",
+      "Spanien",
+      "2010",
+      "final",
+      "14 gula kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 101,
+    "category": "Spelare",
+    "tone": "rekord",
+    "text": "Pelé vann VM tre gånger med Brasilien: 1958, 1962 och 1970. Ingen annan spelare står noterad för fler VM-titlar.",
+    "tags": [
+      "Pelé",
+      "Brasilien",
+      "1958",
+      "1962",
+      "1970"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 102,
+    "category": "Spelare",
+    "tone": "historik",
+    "text": "Cafu spelade tre VM-finaler för Brasilien mellan 1994 och 2002. Det är flest finalframträdanden för en spelare.",
+    "tags": [
+      "Cafu",
+      "Brasilien",
+      "1994",
+      "2002",
+      "finaler"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 103,
+    "category": "Spelare",
+    "tone": "rekord",
+    "text": "Lionel Messi har spelat flest VM-matcher av alla spelare. Han står noterad för 26 matcher med Argentina.",
+    "tags": [
+      "Lionel Messi",
+      "Argentina",
+      "26 matcher",
+      "spelare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 104,
+    "category": "Spelare",
+    "tone": "nördigt",
+    "text": "Sex spelare har deltagit i fem VM-turneringar: Antonio Carbajal, Lothar Matthäus, Rafael Márquez, Cristiano Ronaldo, Lionel Messi och Andrés Guardado.",
+    "tags": [
+      "Antonio Carbajal",
+      "Lothar Matthäus",
+      "Rafael Márquez",
+      "Cristiano Ronaldo",
+      "Lionel Messi",
+      "Andrés Guardado"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 105,
+    "category": "Spelare",
+    "tone": "rekord",
+    "text": "Norman Whiteside är den yngsta spelaren i VM-historien. Han var 17 år och 41 dagar när Nordirland mötte Jugoslavien den 17 June 1982.",
+    "tags": [
+      "Norman Whiteside",
+      "Nordirland",
+      "Jugoslavien",
+      "1982"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 106,
+    "category": "Spelare",
+    "tone": "rekord",
+    "text": "Essam El-Hadary är den äldsta spelaren i VM-historien. Han var 45 år och 161 dagar när Egypten mötte Saudiarabien den 25 June 2018.",
+    "tags": [
+      "Essam El-Hadary",
+      "Egypten",
+      "Saudiarabien",
+      "2018"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 107,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Miroslav Klose är VM:s meste målskytt genom tiderna. Han gjorde 16 mål för Tyskland mellan 2002 och 2014.",
+    "tags": [
+      "Miroslav Klose",
+      "Tyskland",
+      "16 mål",
+      "2002",
+      "2014"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 108,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Just Fontaine gjorde 13 mål för Frankrike i VM 1958. Det är flest mål av en spelare i en och samma VM-turnering.",
+    "tags": [
+      "Just Fontaine",
+      "Frankrike",
+      "1958",
+      "13 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 109,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Oleg Salenko gjorde 5 mål i en och samma VM-match. Det skedde för Ryssland mot Kamerun den 28 June 1994.",
+    "tags": [
+      "Oleg Salenko",
+      "Ryssland",
+      "Kamerun",
+      "1994",
+      "5 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 110,
+    "category": "Finaler",
+    "tone": "klassiker",
+    "text": "Geoff Hurst och Kylian Mbappé delar rekordet för flest mål i en VM-final. Båda gjorde 3 mål i varsin finalmatch.",
+    "tags": [
+      "Geoff Hurst",
+      "Kylian Mbappé",
+      "final",
+      "3 mål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 111,
+    "category": "Finaler",
+    "tone": "rekord",
+    "text": "Kylian Mbappé har gjort flest mål i VM-finaler totalt. Han står på 4 finalmål för Frankrike mellan 2018 och 2022.",
+    "tags": [
+      "Kylian Mbappé",
+      "Frankrike",
+      "2018",
+      "2022",
+      "finalmål"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 112,
+    "category": "Sverige",
+    "tone": "historik",
+    "text": "Nils Liedholm är den äldsta målskytten i en VM-final. Han var 35 år och 264 dagar när Sverige mötte Brasilien den 29 June 1958.",
+    "tags": [
+      "Nils Liedholm",
+      "Sverige",
+      "Brasilien",
+      "1958",
+      "final"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 113,
+    "category": "Målrekord",
+    "tone": "kuriosa",
+    "text": "Lucien Laurent gjorde VM-historiens första mål. Målet kom för Frankrike mot Mexiko den 13 July 1930.",
+    "tags": [
+      "Lucien Laurent",
+      "Frankrike",
+      "Mexiko",
+      "1930"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 114,
+    "category": "Sverige",
+    "tone": "kuriosa",
+    "text": "Marcus Allbäck gjorde VM-historiens 2,000:e mål. Det kom för Sverige mot England den 20 June 2006.",
+    "tags": [
+      "Marcus Allbäck",
+      "Sverige",
+      "England",
+      "2006"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 115,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Hakan Şükür gjorde VM:s snabbaste mål. Målet kom efter 11 sekunder för Turkiet mot Sydkorea 2002.",
+    "tags": [
+      "Hakan Şükür",
+      "Turkiet",
+      "Sydkorea",
+      "2002"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 116,
+    "category": "Målrekord",
+    "tone": "rekord",
+    "text": "Cristiano Ronaldo är den enda spelaren som gjort mål i fem olika VM-turneringar. Noteringen gäller Portugal 2006–2022.",
+    "tags": [
+      "Cristiano Ronaldo",
+      "Portugal",
+      "2006",
+      "2022",
+      "5 turneringar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 117,
+    "category": "Målvakter",
+    "tone": "rekord",
+    "text": "Peter Shilton och Fabien Barthez delar rekordet för flest hållna nollor i VM. Båda står noterade för 10.",
+    "tags": [
+      "Peter Shilton",
+      "Fabien Barthez",
+      "England",
+      "Frankrike",
+      "hållna nollor"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 118,
+    "category": "Målvakter",
+    "tone": "rekord",
+    "text": "Walter Zenga höll nollan i 517 minuter för Italien i VM 1990. Det är den längsta sviten utan insläppt mål.",
+    "tags": [
+      "Walter Zenga",
+      "Italien",
+      "1990",
+      "517 minuter"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 119,
+    "category": "Målvakter",
+    "tone": "nördigt",
+    "text": "Tim Howard gjorde 16 räddningar för USA mot Belgien 2014. Det är flest räddningar i en VM-match.",
+    "tags": [
+      "Tim Howard",
+      "USA",
+      "Belgien",
+      "2014",
+      "16 räddningar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 120,
+    "category": "Disciplin",
+    "tone": "rekord",
+    "text": "Jesús Gallardo fick VM:s snabbaste gula kort. Det kom efter 11 sekunder för Mexiko mot Sverige 2018.",
+    "tags": [
+      "Jesús Gallardo",
+      "Mexiko",
+      "Sverige",
+      "2018",
+      "gult kort"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 121,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Helmut Schön coachade flest VM-matcher. Han ledde Västtyskland i 25 matcher mellan 1966 och 1978.",
+    "tags": [
+      "Helmut Schön",
+      "Västtyskland",
+      "25 matcher",
+      "1966",
+      "1978"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 122,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Helmut Schön har också flest segrar som VM-coach. Han vann 16 matcher med Västtyskland mellan 1966 och 1978.",
+    "tags": [
+      "Helmut Schön",
+      "Västtyskland",
+      "16 segrar",
+      "1966",
+      "1978"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 123,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Vittorio Pozzo är den enda tränaren som vunnit VM två gånger. Han gjorde det med Italien 1934 och 1938.",
+    "tags": [
+      "Vittorio Pozzo",
+      "Italien",
+      "1934",
+      "1938",
+      "VM-titlar"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 124,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Carlos Alberto Parreira har coachat i sex olika VM-turneringar. Han gjorde det för Kuwait, United Arab Emirates, Brasilien, Saudiarabien och Sydafrika.",
+    "tags": [
+      "Carlos Alberto Parreira",
+      "Brasilien",
+      "Kuwait",
+      "Saudiarabien",
+      "Sydafrika"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 125,
+    "category": "Tränare",
+    "tone": "kuriosa",
+    "text": "Bora Milutinović coachade fem olika nationer i VM. Han ledde Mexiko, Costa Rica, USA, Nigeria och Kina mellan 1986 och 2002.",
+    "tags": [
+      "Bora Milutinović",
+      "Mexiko",
+      "Costa Rica",
+      "USA",
+      "Nigeria",
+      "Kina"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 126,
+    "category": "Tränare",
+    "tone": "nördigt",
+    "text": "Carlos Alberto Parreira har också coachat fem olika nationer i VM. Han ledde Kuwait, United Arab Emirates, Brasilien, Saudiarabien och Sydafrika.",
+    "tags": [
+      "Carlos Alberto Parreira",
+      "Kuwait",
+      "United Arab Emirates",
+      "Brasilien",
+      "Saudiarabien",
+      "Sydafrika"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 127,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Bora Milutinović coachade i fem raka VM-turneringar. Sviten sträckte sig från 1986 till 2002.",
+    "tags": [
+      "Bora Milutinović",
+      "1986",
+      "2002",
+      "fem turneringar",
+      "tränare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 128,
+    "category": "Tränare",
+    "tone": "historik",
+    "text": "Walter Winterbottom ledde England i fyra raka VM-turneringar mellan 1950 och 1962. Det är en av noteringarna för flest raka VM med samma lag.",
+    "tags": [
+      "Walter Winterbottom",
+      "England",
+      "1950",
+      "1962",
+      "tränare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 129,
+    "category": "Tränare",
+    "tone": "historik",
+    "text": "Helmut Schön ledde Västtyskland i fyra raka VM-turneringar mellan 1966 och 1978. Samma period gav honom flest matcher och flest segrar som coach.",
+    "tags": [
+      "Helmut Schön",
+      "Västtyskland",
+      "1966",
+      "1978",
+      "tränare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 130,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Juan José Tramutola är den yngsta VM-coachen genom tiderna. Han var 27 år och 267 dagar när han ledde Argentina 1930.",
+    "tags": [
+      "Juan José Tramutola",
+      "Argentina",
+      "1930",
+      "yngsta coach"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 131,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Alberto Suppici är den yngsta tränaren som vunnit VM. Han var 31 år och 252 dagar när Uruguay vann 1930.",
+    "tags": [
+      "Alberto Suppici",
+      "Uruguay",
+      "1930",
+      "yngsta vinnande coach"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 132,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Otto Rehhagel är den äldsta VM-coachen genom tiderna. Han var 71 år och 317 dagar när han ledde Grekland 2010.",
+    "tags": [
+      "Otto Rehhagel",
+      "Grekland",
+      "2010",
+      "äldsta coach"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 133,
+    "category": "Tränare",
+    "tone": "rekord",
+    "text": "Vicente del Bosque är den äldsta tränaren som vunnit VM. Han var 59 år och 200 dagar när Spanien vann 2010.",
+    "tags": [
+      "Vicente del Bosque",
+      "Spanien",
+      "2010",
+      "äldsta vinnande coach"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 134,
+    "category": "Domare",
+    "tone": "rekord",
+    "text": "Alireza Faghani står noterad för flest VM-turneringar som domare. Han dömde i fyra turneringar mellan 2014 och 2026.",
+    "tags": [
+      "Alireza Faghani",
+      "Iran",
+      "2014",
+      "2026",
+      "domare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 135,
+    "category": "Domare",
+    "tone": "rekord",
+    "text": "Juan Gardeazábal är den yngsta domaren i VM-historien. Han var 24 år och 193 dagar under VM 1958.",
+    "tags": [
+      "Juan Gardeazábal",
+      "Spanien",
+      "1958",
+      "yngsta domare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 136,
+    "category": "Domare",
+    "tone": "rekord",
+    "text": "George Reader är den äldsta domaren i VM-historien. Han var 53 år och 236 dagar under VM 1950.",
+    "tags": [
+      "George Reader",
+      "England",
+      "1950",
+      "äldsta domare"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 137,
+    "category": "Publik",
+    "tone": "rekord",
+    "text": "Den högsta publiksiffran i VM-historien är 173,850. Matchen spelades mellan Uruguay och Brasilien på Maracanã Stadium den 16 July 1950.",
+    "tags": [
+      "Uruguay",
+      "Brasilien",
+      "1950",
+      "Maracanã",
+      "173,850"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 138,
+    "category": "Publik",
+    "tone": "historik",
+    "text": "Maracanã Stadium dominerar bland de största VM-publikerna. De fyra högsta publiksiffrorna kommer alla från matcher där 1950.",
+    "tags": [
+      "Maracanã",
+      "1950",
+      "Rio de Janeiro",
+      "publikrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 139,
+    "category": "Publik",
+    "tone": "klassiker",
+    "text": "Brasilien mot Spanien den 13 juli 1950 sågs av 152,772 personer på Maracanã Stadium. Det är den näst högsta publiksiffran i VM-historien.",
+    "tags": [
+      "Brasilien",
+      "Spanien",
+      "1950",
+      "Maracanã",
+      "152,772"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 140,
+    "category": "Sverige",
+    "tone": "historik",
+    "text": "Brasilien mot Sverige den 9 juli 1950 lockade 138,886 åskådare på Maracanã Stadium. Det är en av de fem högsta publiksiffrorna i VM-historien.",
+    "tags": [
+      "Brasilien",
+      "Sverige",
+      "1950",
+      "Maracanã",
+      "138,886"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 141,
+    "category": "Publik",
+    "tone": "kuriosa",
+    "text": "Den lägsta publiksiffran i VM-historien är 300 personer. Det var Rumänien mot Peru den 14 juli 1930 på Estadio Pocitos i Montevideo.",
+    "tags": [
+      "Rumänien",
+      "Peru",
+      "1930",
+      "Estadio Pocitos",
+      "300"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 142,
+    "category": "Publik",
+    "tone": "rekord",
+    "text": "VM 1994 hade det högsta publiksnittet. Turneringen i United States landade på 68,991 åskådare per match.",
+    "tags": [
+      "1994",
+      "United States",
+      "68,991",
+      "publiksnitt"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 143,
+    "category": "Publik",
+    "tone": "rekord",
+    "text": "VM 1994 hade också den högsta totala publiken. Sammanlagt noterades 3,587,538 åskådare.",
+    "tags": [
+      "1994",
+      "United States",
+      "3,587,538",
+      "publikrekord"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 144,
+    "category": "Publik",
+    "tone": "historik",
+    "text": "VM 1934 hade det lägsta publiksnittet. Turneringen i Italien landade på 21,059 åskådare per match.",
+    "tags": [
+      "1934",
+      "Italien",
+      "21,059",
+      "publiksnitt"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 145,
+    "category": "Publik",
+    "tone": "historik",
+    "text": "VM 1934 hade den lägsta totala publiken i sammanställningen. Totalt kom 358,000 åskådare till turneringen.",
+    "tags": [
+      "1934",
+      "Italien",
+      "358,000",
+      "publik"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 146,
+    "category": "Publik",
+    "tone": "nördigt",
+    "text": "VM 1950 hade bara 22 matcher men ändå över en miljon åskådare totalt. Turneringen i Brasilien noterades för 1,043,500 besökare.",
+    "tags": [
+      "1950",
+      "Brasilien",
+      "1,043,500",
+      "22 matcher"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 147,
+    "category": "Sverige",
+    "tone": "historik",
+    "text": "VM 1958 i Sverige hade 919,580 åskådare totalt. Publiksnittet var 26,274 per match.",
+    "tags": [
+      "Sverige",
+      "1958",
+      "919,580",
+      "26,274",
+      "publik"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 148,
+    "category": "Sverige",
+    "tone": "kuriosa",
+    "text": "Den största publiken under VM 1958 kom på Ullevi Stadium i Gothenburg. Brasilien mot Soviet Union i gruppspelet sågs av 50,928 åskådare.",
+    "tags": [
+      "Sverige",
+      "1958",
+      "Ullevi",
+      "Brasilien",
+      "Soviet Union"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 149,
+    "category": "Publik",
+    "tone": "klassiker",
+    "text": "VM 1986 hade två matcher med 114,600 åskådare på Estadio Azteca. Den ena var finalen mellan Argentina och Västtyskland.",
+    "tags": [
+      "1986",
+      "Estadio Azteca",
+      "Argentina",
+      "Västtyskland",
+      "114,600"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 150,
+    "category": "Publik",
+    "tone": "klassiker",
+    "text": "VM-finalen 1994 mellan Brasilien och Italien spelades inför 94,194 åskådare på Rose Bowl i Pasadena.",
+    "tags": [
+      "1994",
+      "Brasilien",
+      "Italien",
+      "Rose Bowl",
+      "94,194"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 151,
+    "category": "Publik",
+    "tone": "nördigt",
+    "text": "VM 2002 spelades på 20 arenor i 20 städer i South Korea och Japan. Totalt kom 2,705,197 åskådare till turneringen.",
+    "tags": [
+      "2002",
+      "South Korea",
+      "Japan",
+      "20 arenor",
+      "2,705,197"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 152,
+    "category": "Publik",
+    "tone": "historik",
+    "text": "VM 2006 i Tyskland lockade 3,359,439 åskådare. Publiksnittet var 52,491 per match.",
+    "tags": [
+      "2006",
+      "Tyskland",
+      "3,359,439",
+      "52,491"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 153,
+    "category": "Publik",
+    "tone": "klassiker",
+    "text": "VM-finalen 2014 mellan Tyskland och Argentina spelades på Maracanã Stadium. Publiksiffran var 74,738.",
+    "tags": [
+      "2014",
+      "Tyskland",
+      "Argentina",
+      "Maracanã",
+      "74,738"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 154,
+    "category": "Publik",
+    "tone": "nördigt",
+    "text": "VM 2022 i Qatar hade 3,404,252 åskådare totalt. Publiksnittet var 53,191 per match.",
+    "tags": [
+      "2022",
+      "Qatar",
+      "3,404,252",
+      "53,191"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 155,
+    "category": "Publik",
+    "tone": "kuriosa",
+    "text": "Lusail Stadium hade den högsta publiksiffran under VM 2022. Tre matcher, inklusive finalen, nådde 88,966 åskådare.",
+    "tags": [
+      "2022",
+      "Lusail Stadium",
+      "Qatar",
+      "88,966",
+      "final"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  },
+  {
+    "id": 156,
+    "category": "Publik",
+    "tone": "rekord",
+    "text": "Totalt redovisas 43,936,730 åskådare i VM-historikens publiksammanställning. Snittet över 964 matcher är 45,577 per match.",
+    "tags": [
+      "publik",
+      "43,936,730",
+      "964 matcher",
+      "45,577"
+    ],
+    "source": "Wikipedia: FIFA World Cup records and statistics"
+  }
 ]
-
-
