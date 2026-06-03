@@ -385,6 +385,75 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .share-toast.show {
   opacity:1; transform:translateY(0);
 }
+
+/* FACT BOX */
+.fact-box {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:4px solid var(--gold);
+  margin:10px 0 2px;
+  overflow:hidden;
+}
+.fact-box-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:7px 14px 5px;
+  border-bottom:1px solid var(--border);
+}
+.fact-cat {
+  font-family:var(--sport);
+  font-size:.6rem; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold);
+}
+.fact-tone {
+  font-family:var(--body);
+  font-size:.56rem; font-weight:400;
+  color:var(--t3);
+  letter-spacing:.04em; text-transform:uppercase;
+}
+.fact-body {
+  padding:10px 14px 8px;
+  font-family:var(--body);
+  font-size:.82rem; font-weight:400;
+  line-height:1.6; color:var(--text);
+}
+.fact-body.relevant {
+  background-color:rgba(255,215,0,0.08);
+}
+.fact-foot {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:6px 14px 8px;
+  border-top:1px solid var(--border);
+}
+.fact-source {
+  font-family:var(--body);
+  font-size:.56rem; font-weight:300;
+  color:var(--t3); font-style:italic;
+}
+.fact-btn {
+  background:none; border:none;
+  font-family:var(--sport);
+  font-size:.62rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--t2); cursor:pointer;
+  padding:0;
+  transition:color .15s;
+  min-height:28px;
+}
+.fact-btn:hover { color:var(--text); }
+.fact-tag {
+  font-family:var(--body);
+  font-size:.55rem; font-weight:500;
+  letter-spacing:.06em; text-transform:uppercase;
+  color:var(--gold);
+  background:rgba(168,120,0,.08);
+  padding:1px 5px; border-radius:1px;
+  margin-left:4px;
+}
 </style>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="d243837c-4f1f-4c02-82f3-a48b8b6660d3"></script>
 </head>
@@ -963,12 +1032,16 @@ function renderFeed() {
     // Check if this is a group stage date
     const gsMatches = M.filter(m=>m.d===currentDay);
     let h = `<div style="padding:14px 0 8px"><div style="font-family:var(--sport);font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--text);text-transform:capitalize">${fmtFull(currentDay)}</div></div>`;
+    h += `<div id="fact-box-day"></div>`;
     if (gsMatches.length > 0) {
       gsMatches.forEach(m => { h += cardHtml(m, mDT(m)<now && m.score!==null); });
     } else {
       h += `<div style="padding:20px 0;text-align:center;font-family:var(--sport);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga gruppspelsmatcher denna dag</div>`;
     }
-    el.innerHTML = h; return;
+    el.innerHTML = h;
+    // Fact box for day filter
+    setTimeout(() => renderFactBox(currentDay, 'fact-box-day'), 50);
+    return;
   }
 
   const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
@@ -1021,6 +1094,12 @@ function renderFeed() {
     </div>`;
   }
 
+  // Fact box – placed after next-hero
+  const factDay = nxt ? nxt.d : (lastMs.length > 0 ? lastMs[0].d : null);
+  if (factDay) {
+    h += `<div id="fact-box-container"></div>`;
+  }
+
   // Upcoming matches
   if (upcoming.length > 0) {
     const SHOW=2, BLUR=3;
@@ -1058,6 +1137,18 @@ function renderFeed() {
 }
 
 function expandFeed() { feedExpanded=true; renderFeed(); }
+
+function renderFeedAndFact() {
+  renderFeed();
+  // Trigger fact box after feed renders
+  const now = new Date();
+  const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
+  const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
+  const nxt = nextIdx !== -1 ? sorted[nextIdx] : null;
+  const lastD = (nextIdx > 0) ? sorted[nextIdx-1].d : null;
+  const factDay = nxt ? nxt.d : (lastD || null);
+  if (factDay) setTimeout(() => renderFactBox(factDay, 'fact-box-container'), 50);
+}
 
 /* ─────────────────────────────────────────────── */
 /* GROUPS                                          */
@@ -1216,7 +1307,7 @@ if ('serviceWorker' in navigator) {
 /* INIT                                            */
 /* ─────────────────────────────────────────────── */
 buildChips();
-renderFeed();
+loadFakta().then(() => renderFeedAndFact());
 renderGroups();
 renderPlayoffTabs();
 renderPlayoffRound();
@@ -1233,6 +1324,105 @@ function shareUrl() {
       setTimeout(() => t.classList.remove('show'), 2200);
     });
   }
+}
+
+/* FACT BOX */
+let vmFakta = [];
+let currentFactDay = null;
+let currentFactIdx = null;
+
+async function loadFakta() {
+  try {
+    const r = await fetch('vmfakta.json');
+    vmFakta = await r.json();
+  } catch(e) { vmFakta = []; }
+}
+
+function getFactForDay(day) {
+  if (!vmFakta.length) return null;
+  const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
+
+  // Facts where any tag matches any team playing this day
+  const relevant = vmFakta.filter(f =>
+    f.tags.some(tag =>
+      teams.some(team =>
+        tag.toLowerCase().includes(team.toLowerCase()) ||
+        team.toLowerCase().includes(tag.toLowerCase())
+      )
+    )
+  );
+
+  // 70% chance to show relevant fact if any exist
+  const pool = (relevant.length > 0 && Math.random() < 0.7) ? relevant : vmFakta;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function renderFactBox(day, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container || !vmFakta.length) return;
+
+  currentFactDay = day;
+  const fact = getFactForDay(day);
+  currentFactIdx = fact ? fact.id : null;
+
+  const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
+  const isRelevant = fact && fact.tags.some(tag =>
+    teams.some(t => tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase()))
+  );
+  const tagHtml = isRelevant ? `<span class="fact-tag">Dagens lag</span>` : '';
+
+  container.innerHTML = fact ? `
+    <div class="fact-box">
+      <div class="fact-box-head">
+        <span class="fact-cat">${fact.category}${tagHtml}</span>
+        <span class="fact-tone">${fact.tone}</span>
+      </div>
+      <div class="fact-body${isRelevant ? ' relevant' : ''}">${fact.text}</div>
+      <div class="fact-foot">
+        <button class="fact-btn" onclick="nextFact('${day}','${containerId}')">Ny fakta →</button>
+        <span class="fact-source">Källa: Wikipedia</span>
+      </div>
+    </div>
+  ` : '';
+}
+
+function nextFact(day, containerId) {
+  if (!vmFakta.length) return;
+  const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
+  const relevant = vmFakta.filter(f =>
+    f.tags.some(tag => teams.some(t =>
+      tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase())
+    ))
+  );
+  const pool = (relevant.length > 0 && Math.random() < 0.7) ? relevant : vmFakta;
+  // Avoid showing the same fact twice
+  let fact;
+  let tries = 0;
+  do {
+    fact = pool[Math.floor(Math.random() * pool.length)];
+    tries++;
+  } while (fact.id === currentFactIdx && tries < 10);
+  currentFactIdx = fact.id;
+
+  const isRelevant = fact.tags.some(tag =>
+    teams.some(t => tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase()))
+  );
+  const tagHtml = isRelevant ? `<span class="fact-tag">Dagens lag</span>` : '';
+
+  const container = document.getElementById(containerId);
+  if (container) container.innerHTML = `
+    <div class="fact-box">
+      <div class="fact-box-head">
+        <span class="fact-cat">${fact.category}${tagHtml}</span>
+        <span class="fact-tone">${fact.tone}</span>
+      </div>
+      <div class="fact-body${isRelevant ? ' relevant' : ''}">${fact.text}</div>
+      <div class="fact-foot">
+        <button class="fact-btn" onclick="nextFact('${day}','${containerId}')">Ny fakta →</button>
+        <span class="fact-source">Källa: Wikipedia</span>
+      </div>
+    </div>
+  `;
 }
 
 </script>
