@@ -825,6 +825,24 @@ const M = [
 })();
 
 /* ─────────────────────────────────────────────── */
+/* LOAD RESULTS FROM results.json (GitHub)         */
+/* ─────────────────────────────────────────────── */
+async function loadResults() {
+  try {
+    const res = await fetch('results.json?t=' + Date.now());
+    if (!res.ok) return;
+    const data = await res.json();
+    // data = { "0": [2,1], "5": [0,0], ... } — index i M-arrayen
+    Object.keys(data).forEach(idx => {
+      const i = parseInt(idx);
+      if (M[i]) M[i].score = data[idx];
+    });
+  } catch(e) {
+    // results.json saknas ännu — kör vidare utan resultat
+  }
+}
+
+/* ─────────────────────────────────────────────── */
 /* PLAYOFF DATA                                    */
 /* ─────────────────────────────────────────────── */
 // Human-readable team source descriptions
@@ -1185,15 +1203,45 @@ function renderFeedAndFact() {
 /* GROUPS                                          */
 /* ─────────────────────────────────────────────── */
 function renderGroups() {
-  let h = '<div class="groups-section-lbl">Grupptabeller</div>';
+  let h = '';
   Object.keys(GROUPS_DATA).sort().forEach(g => {
+    // Bygg statistik för varje lag
+    const stats = {};
+    GROUPS_DATA[g].forEach(t => {
+      stats[t] = { s:0, v:0, o:0, f:0, gf:0, ga:0, gm:0, p:0 };
+    });
+
+    M.filter(m => m.g === g && m.score !== null && m.score !== undefined).forEach(m => {
+      const [hg, ag] = m.score;
+      const hs = stats[m.h], as = stats[m.a];
+      if (!hs || !as) return;
+      hs.s++; as.s++;
+      hs.gf += hg; hs.ga += ag; hs.gm += (hg - ag);
+      as.gf += ag; as.ga += hg; as.gm += (ag - hg);
+      if (hg > ag)      { hs.v++; hs.p += 3; as.f++; }
+      else if (hg < ag) { as.v++; as.p += 3; hs.f++; }
+      else              { hs.o++; hs.p += 1; as.o++; as.p += 1; }
+    });
+
+    // Sortera: poäng → målskillnad → gjorda mål → namn
+    const sorted = GROUPS_DATA[g].slice().sort((a, b) => {
+      const sa = stats[a], sb = stats[b];
+      if (sb.p  !== sa.p)  return sb.p  - sa.p;
+      if (sb.gm !== sa.gm) return sb.gm - sa.gm;
+      if (sb.gf !== sa.gf) return sb.gf - sa.gf;
+      return a.localeCompare(b);
+    });
+
     h += `<div class="gc"><div class="gc-head">Grupp ${g}</div>
     <table class="gtable">
       <tr><th>Lag</th><th>S</th><th>V</th><th>O</th><th>F</th><th>GM</th><th>P</th></tr>`;
-    GROUPS_DATA[g].forEach((t,i) => {
-      h += `<tr class="${i<2?'q':''}">
+    sorted.forEach((t, i) => {
+      const s = stats[t];
+      const gmStr = s.gm > 0 ? `+${s.gm}` : `${s.gm}`;
+      h += `<tr class="${i < 2 ? 'q' : ''}">
         <td><div class="tc">${fi(t,16,11)}<span>${t}</span></div></td>
-        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="pts">0</td>
+        <td>${s.s}</td><td>${s.v}</td><td>${s.o}</td><td>${s.f}</td>
+        <td>${gmStr}</td><td class="pts">${s.p}</td>
       </tr>`;
     });
     h += '</table></div>';
@@ -1338,10 +1386,12 @@ if ('serviceWorker' in navigator) {
 /* INIT                                            */
 /* ─────────────────────────────────────────────── */
 buildChips();
-loadFakta().then(() => renderFeedAndFact());
-renderGroups();
-renderPlayoffTabs();
-renderPlayoffRound();
+loadResults().then(() => {
+  loadFakta().then(() => renderFeedAndFact());
+  renderGroups();
+  renderPlayoffTabs();
+  renderPlayoffRound();
+});
 
 /* SHARE */
 function shareUrl() {

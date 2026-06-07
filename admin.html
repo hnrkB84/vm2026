@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="sv" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#8F2F2F"/>
+<title>VM 2026 – Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:      #F5F2EA;
+  --surface: #FBFAF6;
+  --surf2:   #F1F5F3;
+  --border:  #C7CED8;
+  --text:    #06122B;
+  --t2:      #6F7890;
+  --t3:      #A8B0C0;
+  --red:     #8F2F2F;
+  --green:   #17382F;
+  --sport:   'Oswald', sans-serif;
+  --body:    'Inter', sans-serif;
+  --mono:    'DM Mono', monospace;
+}
+[data-theme="dark"] {
+  --bg:      #0E0F18;
+  --surface: #141620;
+  --surf2:   #1A1C2A;
+  --border:  #262840;
+  --text:    #E4E0D2;
+  --t2:      #828AA0;
+  --t3:      #383C52;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; -webkit-tap-highlight-color:transparent; }
+body { font-family:var(--body); background:var(--bg); color:var(--text); min-height:100svh; -webkit-font-smoothing:antialiased; }
+
+/* HEADER */
+.hdr { background:var(--red); padding:14px 16px 12px; display:flex; align-items:center; justify-content:space-between; }
+.hdr-title { font-family:var(--sport); font-size:1.1rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#fff; }
+.hdr-sub { font-family:var(--body); font-size:.6rem; font-weight:400; color:rgba(255,255,255,.65); margin-top:2px; letter-spacing:.04em; }
+.theme-btn { background:none; border:none; color:rgba(255,255,255,.7); font-size:1.1rem; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
+
+/* LOGIN */
+#login-screen { max-width:480px; margin:40px auto; padding:0 16px; }
+.login-card { background:var(--surface); border:1px solid var(--border); padding:28px 24px; }
+.login-title { font-family:var(--sport); font-size:1rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text); margin-bottom:6px; }
+.login-desc { font-family:var(--body); font-size:.78rem; color:var(--t2); line-height:1.55; margin-bottom:20px; }
+.login-desc a { color:var(--red); }
+.field-label { font-family:var(--sport); font-size:.62rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--t2); margin-bottom:5px; display:block; }
+.field-input { width:100%; background:var(--bg); border:1px solid var(--border); color:var(--text); font-family:var(--mono); font-size:.82rem; padding:11px 12px; outline:none; transition:border-color .15s; -webkit-appearance:none; border-radius:0; }
+.field-input:focus { border-color:var(--red); }
+.field-group { margin-bottom:16px; }
+.help-text { font-family:var(--body); font-size:.65rem; color:var(--t3); margin-top:5px; line-height:1.45; }
+.btn-primary { width:100%; background:var(--red); color:#fff; border:none; font-family:var(--sport); font-size:.8rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:14px; cursor:pointer; min-height:50px; margin-top:4px; transition:opacity .15s; }
+.btn-primary:active { opacity:.85; }
+.btn-primary:disabled { opacity:.5; cursor:not-allowed; }
+.error-msg { background:rgba(143,47,47,.1); border:1px solid rgba(143,47,47,.3); color:var(--red); font-family:var(--body); font-size:.76rem; padding:10px 12px; margin-top:12px; line-height:1.5; display:none; }
+.error-msg.show { display:block; }
+
+/* MAIN APP */
+#app { display:none; }
+.app-bar { background:var(--surface); border-bottom:2px solid var(--border); padding:0 16px; max-width:600px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:46px; }
+.app-bar-title { font-family:var(--sport); font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--t2); }
+.logout-btn { background:none; border:1px solid var(--border); color:var(--t2); font-family:var(--sport); font-size:.6rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:6px 12px; cursor:pointer; transition:color .15s, border-color .15s; }
+.logout-btn:hover { color:var(--text); border-color:var(--t2); }
+
+.section-header { max-width:600px; margin:0 auto; padding:14px 16px 6px; }
+.section-label { font-family:var(--sport); font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--t3); }
+
+/* FILTER TABS */
+.filter-bar { max-width:600px; margin:0 auto; display:flex; overflow-x:auto; scrollbar-width:none; border-bottom:1px solid var(--border); background:var(--bg); }
+.filter-bar::-webkit-scrollbar { display:none; }
+.ftab { background:none; border:none; min-height:38px; padding:0 12px; font-family:var(--sport); font-size:.66rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--t3); white-space:nowrap; border-bottom:2px solid transparent; margin-bottom:-1px; transition:color .15s, border-color .15s; }
+.ftab.active { color:var(--red); border-bottom-color:var(--red); }
+
+/* MATCH LIST */
+.match-list { max-width:600px; margin:0 auto; padding:0 0 80px; }
+.day-header { padding:8px 16px 4px; background:var(--surf2); border-bottom:1px solid var(--border); font-family:var(--sport); font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--t2); }
+.match-row { background:var(--surface); border-bottom:1px solid var(--border); padding:12px 16px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:background .1s; -webkit-tap-highlight-color:rgba(0,0,0,.05); }
+.match-row:active { background:var(--surf2); }
+.match-row.has-score { opacity:.6; }
+.match-row.has-score .score-badge { background:var(--green); color:#fff; }
+.mr-left { flex:1; min-width:0; }
+.mr-teams { font-family:var(--sport); font-size:.88rem; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mr-meta { font-family:var(--body); font-size:.6rem; color:var(--t3); margin-top:2px; }
+.score-badge { font-family:var(--mono); font-size:.78rem; font-weight:500; background:var(--surf2); border:1px solid var(--border); color:var(--t2); padding:4px 10px; white-space:nowrap; border-radius:2px; flex-shrink:0; }
+.score-badge.pending { color:var(--t3); font-style:italic; font-size:.65rem; }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; z-index:500; background:rgba(0,0,0,.5); display:none; align-items:flex-end; justify-content:center; }
+.modal-overlay.open { display:flex; }
+.modal { background:var(--surface); width:100%; max-width:560px; padding:24px 20px 40px; border-radius:12px 12px 0 0; animation:slideUp .25s cubic-bezier(.22,1,.36,1) both; }
+@keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+.modal-match { font-family:var(--sport); font-size:1.05rem; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--text); text-align:center; margin-bottom:4px; }
+.modal-meta { font-family:var(--body); font-size:.65rem; color:var(--t3); text-align:center; margin-bottom:20px; }
+.score-inputs { display:grid; grid-template-columns:1fr 32px 1fr; align-items:center; gap:8px; margin-bottom:20px; }
+.score-team-label { font-family:var(--sport); font-size:.68rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--t2); text-align:center; margin-bottom:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.score-num-input { width:100%; background:var(--bg); border:2px solid var(--border); color:var(--text); font-family:var(--mono); font-size:2.2rem; font-weight:500; padding:12px 8px; text-align:center; outline:none; -webkit-appearance:none; border-radius:4px; transition:border-color .15s; }
+.score-num-input:focus { border-color:var(--red); }
+.score-divider { font-family:var(--mono); font-size:1.3rem; color:var(--t3); text-align:center; }
+.modal-actions { display:flex; gap:10px; }
+.btn-save { flex:1; background:var(--green); color:#fff; border:none; font-family:var(--sport); font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:15px; cursor:pointer; min-height:52px; transition:opacity .15s; }
+.btn-save:active { opacity:.85; }
+.btn-save:disabled { opacity:.5; cursor:not-allowed; }
+.btn-clear { background:none; border:1px solid var(--border); color:var(--t2); font-family:var(--sport); font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:15px 16px; cursor:pointer; transition:color .15s, border-color .15s; }
+.btn-clear:hover { color:var(--red); border-color:var(--red); }
+.btn-cancel { background:none; border:1px solid var(--border); color:var(--t2); font-family:var(--sport); font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:15px 16px; cursor:pointer; }
+
+/* TOAST */
+.toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(8px); z-index:600; background:var(--text); color:var(--bg); font-family:var(--sport); font-size:.7rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; padding:10px 18px; border-radius:2px; white-space:nowrap; opacity:0; transition:opacity .2s, transform .2s; pointer-events:none; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+.toast.error { background:var(--red); color:#fff; }
+
+/* SAVE BAR */
+.save-bar { position:fixed; bottom:0; left:0; right:0; z-index:400; background:var(--surface); border-top:2px solid var(--border); padding:12px 16px; display:none; }
+.save-bar.visible { display:block; }
+.save-bar-inner { max-width:600px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.save-bar-info { font-family:var(--body); font-size:.72rem; color:var(--t2); }
+.save-bar-info strong { color:var(--text); font-weight:600; }
+.btn-publish { background:var(--red); color:#fff; border:none; font-family:var(--sport); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:12px 20px; cursor:pointer; min-height:46px; flex-shrink:0; transition:opacity .15s; }
+.btn-publish:active { opacity:.85; }
+.btn-publish:disabled { opacity:.5; cursor:not-allowed; }
+.spinner { display:inline-block; width:14px; height:14px; border:2px solid rgba(255,255,255,.3); border-top-color:#fff; border-radius:50%; animation:spin .6s linear infinite; vertical-align:middle; margin-right:6px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+
+/* STATS */
+.stats-bar { max-width:600px; margin:0 auto; padding:10px 16px; display:flex; gap:16px; border-bottom:1px solid var(--border); }
+.stat { font-family:var(--body); font-size:.7rem; color:var(--t2); }
+.stat strong { font-family:var(--mono); font-size:.8rem; color:var(--text); font-weight:500; }
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div>
+    <div class="hdr-title">⚙ VM 2026 Admin</div>
+    <div class="hdr-sub">Resultatinmatning</div>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()">◐</button>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div style="height:24px"></div>
+  <div class="login-card">
+    <div class="login-title">🔑 Logga in</div>
+    <p class="login-desc">
+      Admin-panelen använder ditt GitHub Personal Access Token som lösenord.
+      Token sparas i webbläsaren på den här enheten.<br><br>
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=VM2026+Admin" target="_blank">→ Skapa ett token på GitHub (repo-scope räcker)</a>
+    </p>
+    <div class="field-group">
+      <label class="field-label">GitHub användarnamn</label>
+      <input type="text" class="field-input" id="inp-user" placeholder="hnrkb84" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Repository</label>
+      <input type="text" class="field-input" id="inp-repo" placeholder="vm2026" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    </div>
+    <div class="field-group">
+      <label class="field-label">GitHub Token (ghp_...)</label>
+      <input type="password" class="field-input" id="inp-token" placeholder="ghp_xxxxxxxxxxxx" autocomplete="current-password"/>
+      <p class="help-text">Tokenet skickas bara till api.github.com – aldrig till någon annan server. Det sparas lokalt i din webbläsare.</p>
+    </div>
+    <button class="btn-primary" id="login-btn" onclick="doLogin()">Logga in och hämta data</button>
+    <div class="error-msg" id="login-error"></div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <div class="app-bar">
+    <span class="app-bar-title" id="app-bar-title">VM 2026 – Resultat</span>
+    <button class="logout-btn" onclick="doLogout()">Logga ut</button>
+  </div>
+
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+
+  <div class="match-list" id="match-list"></div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-match" id="modal-match"></div>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div class="score-inputs">
+      <div>
+        <div class="score-team-label" id="modal-home-label"></div>
+        <input type="number" class="score-num-input" id="inp-home" min="0" max="99" inputmode="numeric" pattern="[0-9]*"/>
+      </div>
+      <div class="score-divider">–</div>
+      <div>
+        <div class="score-team-label" id="modal-away-label"></div>
+        <input type="number" class="score-num-input" id="inp-away" min="0" max="99" inputmode="numeric" pattern="[0-9]*"/>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Avbryt</button>
+      <button class="btn-clear" onclick="clearScore()">Rensa</button>
+      <button class="btn-save" id="modal-save-btn" onclick="saveScore()">Spara →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAVE BAR -->
+<div class="save-bar" id="save-bar">
+  <div class="save-bar-inner">
+    <div class="save-bar-info" id="save-bar-info"></div>
+    <button class="btn-publish" id="publish-btn" onclick="publishResults()">🚀 Publicera</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── MATCH DATA (same as index.html) ── */
+const V = {
+  AZT:'Estadio Azteca · Mexico City',
+  AKR:'Estadio Akron · Guadalajara',
+  BMO:'BMO Field · Toronto',
+  SOF:'SoFi Stadium · Los Angeles',
+  LEV:"Levi's Stadium · San Francisco",
+  MET:'MetLife Stadium · New York/NJ',
+  GIL:'Gillette Stadium · Boston',
+  BCP:'BC Place · Vancouver',
+  NRG:'NRG Stadium · Houston',
+  ATT:'AT&T Stadium · Dallas',
+  LIN:'Lincoln Financial · Philadelphia',
+  BBV:'Estadio BBVA · Monterrey',
+  MBZ:'Mercedes-Benz Stadium · Atlanta',
+  LUM:'Lumen Field · Seattle',
+  HRD:'Hard Rock Stadium · Miami',
+  ARH:'Arrowhead Stadium · Kansas City',
+};
+
+const M = [
+  {d:'2026-06-11',t:'21:00',g:'A',h:'Mexiko',a:'Sydafrika',tv:'TV4',venue:V.AZT},
+  {d:'2026-06-12',t:'00:00',g:'B',h:'Kanada',a:'Bosnien och Hercegovina',tv:'SVT1',venue:V.BMO},
+  {d:'2026-06-12',t:'19:00',g:'B',h:'Qatar',a:'Schweiz',tv:'TV4',venue:V.LEV},
+  {d:'2026-06-12',t:'22:00',g:'C',h:'Brasilien',a:'Marocko',tv:'SVT1',venue:V.SOF},
+  {d:'2026-06-13',t:'01:00',g:'C',h:'Haiti',a:'Skottland',tv:'TV4',venue:V.GIL},
+  {d:'2026-06-13',t:'19:00',g:'D',h:'USA',a:'Paraguay',tv:'TV4',venue:V.MET},
+  {d:'2026-06-13',t:'22:00',g:'A',h:'Sydkorea',a:'Tjeckien',tv:'SVT1',venue:V.NRG},
+  {d:'2026-06-14',t:'01:00',g:'D',h:'Australien',a:'Turkiet',tv:'SVT2',venue:V.ATT},
+  {d:'2026-06-14',t:'19:00',g:'E',h:'Tyskland',a:'Curaçao',tv:'TV4',venue:V.LIN},
+  {d:'2026-06-14',t:'22:00',g:'F',h:'Nederländerna',a:'Tunisien',tv:'TV4',venue:V.ARH},
+  {d:'2026-06-15',t:'01:00',g:'F',h:'Japan',a:'Sverige',tv:'SVT1',venue:V.HRD},
+  {d:'2026-06-15',t:'19:00',g:'E',h:'Elfenbenskusten',a:'Ecuador',tv:'TV4',venue:V.MBZ},
+  {d:'2026-06-15',t:'22:00',g:'G',h:'Belgien',a:'Nya Zeeland',tv:'TV4',venue:V.LUM},
+  {d:'2026-06-16',t:'01:00',g:'G',h:'Iran',a:'Egypten',tv:'TV4',venue:V.BCP},
+  {d:'2026-06-16',t:'19:00',g:'H',h:'Spanien',a:'Uruguay',tv:'SVT1',venue:V.AKR},
+  {d:'2026-06-16',t:'22:00',g:'H',h:'Saudiarabien',a:'Kap Verde',tv:'TV4',venue:V.BBV},
+  {d:'2026-06-17',t:'01:00',g:'I',h:'Frankrike',a:'Senegal',tv:'SVT1',venue:V.ATT},
+  {d:'2026-06-17',t:'19:00',g:'I',h:'Norge',a:'Irak',tv:'TV4',venue:V.SOF},
+  {d:'2026-06-17',t:'22:00',g:'J',h:'Argentina',a:'Jordanien',tv:'SVT1',venue:V.LIN},
+  {d:'2026-06-18',t:'01:00',g:'J',h:'Algeriet',a:'Österrike',tv:'SVT2',venue:V.MET},
+  {d:'2026-06-18',t:'19:00',g:'K',h:'Portugal',a:'DR Kongo',tv:'KAN',venue:V.NRG},
+  {d:'2026-06-18',t:'22:00',g:'K',h:'Uzbekistan',a:'Colombia',tv:'TV4',venue:V.GIL},
+  {d:'2026-06-19',t:'01:00',g:'L',h:'England',a:'Kroatien',tv:'SVT1',venue:V.ARH},
+  {d:'2026-06-19',t:'19:00',g:'L',h:'Ghana',a:'Panama',tv:'TV4',venue:V.HRD},
+  {d:'2026-06-19',t:'22:00',g:'A',h:'Mexiko',a:'Sydkorea',tv:'TV4',venue:V.AZT},
+  {d:'2026-06-20',t:'01:00',g:'B',h:'Schweiz',a:'Bosnien och Hercegovina',tv:'TV4',venue:V.BCP},
+  {d:'2026-06-20',t:'04:00',g:'C',h:'Brasilien',a:'Haiti',tv:'TV4',venue:V.MBZ},
+  {d:'2026-06-20',t:'06:00',g:'D',h:'Turkiet',a:'Paraguay',tv:'TV4',venue:V.LEV},
+  {d:'2026-06-20',t:'19:00',g:'F',h:'Nederländerna',a:'Sverige',tv:'TV4',venue:V.NRG},
+  {d:'2026-06-20',t:'22:00',g:'E',h:'Tyskland',a:'Elfenbenskusten',tv:'TV4',venue:V.BMO},
+  {d:'2026-06-21',t:'02:00',g:'E',h:'Ecuador',a:'Curaçao',tv:'TV4',venue:V.ARH},
+  {d:'2026-06-21',t:'06:00',g:'F',h:'Tunisien',a:'Japan',tv:'SVT1',venue:V.BBV},
+  {d:'2026-06-21',t:'18:00',g:'H',h:'Spanien',a:'Saudiarabien',tv:'TV4',venue:V.MBZ},
+  {d:'2026-06-21',t:'21:00',g:'G',h:'Belgien',a:'Iran',tv:'TV4',venue:V.SOF},
+  {d:'2026-06-22',t:'00:00',g:'H',h:'Uruguay',a:'Kap Verde',tv:'TV4',venue:V.HRD},
+  {d:'2026-06-22',t:'03:00',g:'G',h:'Nya Zeeland',a:'Egypten',tv:'TV4',venue:V.BCP},
+  {d:'2026-06-22',t:'19:00',g:'J',h:'Argentina',a:'Österrike',tv:'SVT2',venue:V.ATT},
+  {d:'2026-06-22',t:'23:00',g:'I',h:'Frankrike',a:'Irak',tv:'SVT1',venue:V.LIN},
+  {d:'2026-06-23',t:'02:00',g:'I',h:'Norge',a:'Senegal',tv:'SVT1',venue:V.MET},
+  {d:'2026-06-23',t:'05:00',g:'J',h:'Jordanien',a:'Algeriet',tv:'TV4',venue:V.LEV},
+  {d:'2026-06-23',t:'19:00',g:'K',h:'Portugal',a:'Uzbekistan',tv:'KAN',venue:V.NRG},
+  {d:'2026-06-23',t:'22:00',g:'L',h:'England',a:'Ghana',tv:'SVT1',venue:V.GIL},
+  {d:'2026-06-24',t:'01:00',g:'L',h:'Panama',a:'Kroatien',tv:'TV4',venue:V.BMO},
+  {d:'2026-06-24',t:'04:00',g:'K',h:'Colombia',a:'DR Kongo',tv:'TV4',venue:V.AKR},
+  {d:'2026-06-24',t:'21:00',g:'B',h:'Schweiz',a:'Kanada',tv:'TV4',venue:V.BCP},
+  {d:'2026-06-24',t:'21:00',g:'B',h:'Bosnien och Hercegovina',a:'Qatar',tv:'TV4',venue:V.LUM},
+  {d:'2026-06-25',t:'00:00',g:'C',h:'Skottland',a:'Brasilien',tv:'TV4',venue:V.HRD},
+  {d:'2026-06-25',t:'00:00',g:'C',h:'Marocko',a:'Haiti',tv:'TV4',venue:V.MBZ},
+  {d:'2026-06-25',t:'03:00',g:'A',h:'Tjeckien',a:'Mexiko',tv:'SVT1',venue:V.AZT},
+  {d:'2026-06-25',t:'03:00',g:'A',h:'Sydafrika',a:'Sydkorea',tv:'SVT2',venue:V.BBV},
+  {d:'2026-06-25',t:'22:00',g:'E',h:'Curaçao',a:'Elfenbenskusten',tv:'SVT1',venue:V.LIN},
+  {d:'2026-06-25',t:'22:00',g:'E',h:'Ecuador',a:'Tyskland',tv:'SVT1',venue:V.MET},
+  {d:'2026-06-26',t:'01:00',g:'F',h:'Japan',a:'Sverige',tv:'SVT1',venue:V.ATT},
+  {d:'2026-06-26',t:'01:00',g:'F',h:'Tunisien',a:'Nederländerna',tv:'SVT2',venue:V.ARH},
+  {d:'2026-06-26',t:'04:00',g:'D',h:'Turkiet',a:'USA',tv:'TV4',venue:V.SOF},
+  {d:'2026-06-26',t:'04:00',g:'D',h:'Paraguay',a:'Australien',tv:'TV4',venue:V.LEV},
+  {d:'2026-06-26',t:'21:00',g:'I',h:'Norge',a:'Frankrike',tv:'TV4',venue:V.GIL},
+  {d:'2026-06-26',t:'21:00',g:'I',h:'Senegal',a:'Irak',tv:'TV4',venue:V.BMO},
+  {d:'2026-06-27',t:'02:00',g:'H',h:'Kap Verde',a:'Saudiarabien',tv:'TV4',venue:V.NRG},
+  {d:'2026-06-27',t:'02:00',g:'H',h:'Uruguay',a:'Spanien',tv:'TV4',venue:V.AKR},
+  {d:'2026-06-27',t:'05:00',g:'G',h:'Egypten',a:'Iran',tv:'TV4',venue:V.LUM},
+  {d:'2026-06-27',t:'05:00',g:'G',h:'Nya Zeeland',a:'Belgien',tv:'TV4',venue:V.BCP},
+  {d:'2026-06-27',t:'23:00',g:'L',h:'Panama',a:'England',tv:'SVT1',venue:V.MET},
+  {d:'2026-06-27',t:'23:00',g:'L',h:'Kroatien',a:'Ghana',tv:'SVT2',venue:V.LIN},
+  {d:'2026-06-28',t:'01:30',g:'K',h:'Colombia',a:'Portugal',tv:'TV4',venue:V.HRD},
+  {d:'2026-06-28',t:'01:30',g:'K',h:'DR Kongo',a:'Uzbekistan',tv:'TV4',venue:V.MBZ},
+  {d:'2026-06-28',t:'04:00',g:'J',h:'Algeriet',a:'Österrike',tv:'TV4',venue:V.ARH},
+  {d:'2026-06-28',t:'04:00',g:'J',h:'Jordanien',a:'Argentina',tv:'TV4',venue:V.ATT},
+];
+
+/* ── STATE ── */
+let cfg = { user:'', repo:'', token:'' };
+let results = {};       // { "0": [2,1], "5": [0,0], ... }
+let pendingChanges = 0;
+let fileSha = null;
+let activeFilter = 'all';
+let editingIdx = null;
+
+/* ── THEME ── */
+function toggleTheme() {
+  const h = document.documentElement;
+  h.setAttribute('data-theme', h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+}
+
+/* ── HELPERS ── */
+function fmtDate(d) {
+  return new Date(d+'T12:00:00').toLocaleDateString('sv-SE', {weekday:'short', day:'numeric', month:'short'});
+}
+
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2800);
+}
+
+/* ── LOGIN ── */
+function doLogin() {
+  const user  = document.getElementById('inp-user').value.trim();
+  const repo  = document.getElementById('inp-repo').value.trim();
+  const token = document.getElementById('inp-token').value.trim();
+  const err   = document.getElementById('login-error');
+
+  if (!user || !repo || !token) {
+    err.textContent = 'Fyll i alla fält.';
+    err.classList.add('show');
+    return;
+  }
+  err.classList.remove('show');
+
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true;
+  btn.textContent = 'Ansluter...';
+
+  cfg = { user, repo, token };
+  localStorage.setItem('vm_admin_cfg', JSON.stringify(cfg));
+
+  fetchResults().then(ok => {
+    if (ok) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderApp();
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Logga in och hämta data';
+    }
+  });
+}
+
+function doLogout() {
+  localStorage.removeItem('vm_admin_cfg');
+  cfg = { user:'', repo:'', token:'' };
+  results = {};
+  pendingChanges = 0;
+  document.getElementById('login-screen').style.display = 'block';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('inp-token').value = '';
+}
+
+/* ── GITHUB API ── */
+async function fetchResults() {
+  try {
+    const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/results.json`;
+    const res = await fetch(url, {
+      headers: { 'Authorization': `token ${cfg.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) {
+      // File doesn't exist yet — start fresh
+      results = {};
+      fileSha = null;
+      return true;
+    }
+    if (!res.ok) {
+      const j = await res.json();
+      showError(j.message || `GitHub API-fel (${res.status})`);
+      return false;
+    }
+    const data = await res.json();
+    fileSha = data.sha;
+    results = JSON.parse(atob(data.content.replace(/\n/g,'')));
+    return true;
+  } catch(e) {
+    showError('Nätverksfel: ' + e.message);
+    return false;
+  }
+}
+
+async function publishResults() {
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Publicerar...';
+
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(results, null, 2))));
+    const body = {
+      message: `Uppdatera resultat (${new Date().toLocaleString('sv-SE')})`,
+      content,
+      ...(fileSha ? { sha: fileSha } : {})
+    };
+    const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/results.json`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${cfg.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const j = await res.json();
+      showToast('Fel: ' + (j.message || res.status), true);
+      return;
+    }
+    const data = await res.json();
+    fileSha = data.content.sha;
+    pendingChanges = 0;
+    renderSaveBar();
+    showToast('✓ Publicerat på GitHub!');
+  } catch(e) {
+    showToast('Nätverksfel: ' + e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '🚀 Publicera';
+  }
+}
+
+function showError(msg) {
+  const err = document.getElementById('login-error');
+  err.textContent = msg;
+  err.classList.add('show');
+}
+
+/* ── RENDER ── */
+function renderApp() {
+  document.getElementById('app-bar-title').textContent = `${cfg.user}/${cfg.repo}`;
+  renderFilters();
+  renderStats();
+  renderList();
+  renderSaveBar();
+}
+
+function renderStats() {
+  const total = M.length;
+  const played = Object.keys(results).length;
+  document.getElementById('stats-bar').innerHTML = `
+    <div class="stat"><strong>${played}</strong> spelade</div>
+    <div class="stat"><strong>${total - played}</strong> återstår</div>
+    <div class="stat"><strong>${total}</strong> totalt</div>
+  `;
+}
+
+function renderFilters() {
+  // Get unique groups + "Alla" + "Ej inmatade"
+  const groups = [...new Set(M.map(m => m.g))].sort();
+  let h = `<button class="ftab${activeFilter==='all'?' active':''}" onclick="setFilter('all')">Alla</button>`;
+  h += `<button class="ftab${activeFilter==='pending'?' active':''}" onclick="setFilter('pending')">Ej inmatade</button>`;
+  groups.forEach(g => {
+    h += `<button class="ftab${activeFilter===g?' active':''}" onclick="setFilter('${g}')">Grupp ${g}</button>`;
+  });
+  document.getElementById('filter-bar').innerHTML = h;
+}
+
+function setFilter(f) {
+  activeFilter = f;
+  renderFilters();
+  renderList();
+}
+
+function renderList() {
+  let matches = M.map((m, i) => ({...m, idx: i}));
+
+  if (activeFilter === 'pending') {
+    matches = matches.filter(m => results[m.idx] === undefined);
+  } else if (activeFilter !== 'all') {
+    matches = matches.filter(m => m.g === activeFilter);
+  }
+
+  // Group by date
+  const byDay = {};
+  matches.forEach(m => {
+    if (!byDay[m.d]) byDay[m.d] = [];
+    byDay[m.d].push(m);
+  });
+
+  let h = '';
+  Object.keys(byDay).sort().forEach(d => {
+    h += `<div class="day-header">${fmtDate(d)}</div>`;
+    byDay[d].forEach(m => {
+      const score = results[m.idx];
+      const hasScore = score !== undefined;
+      const scoreTxt = hasScore ? `${score[0]} – ${score[1]}` : null;
+      h += `
+        <div class="match-row${hasScore?' has-score':''}" onclick="openModal(${m.idx})">
+          <div class="mr-left">
+            <div class="mr-teams">${m.h} <span style="color:var(--t3);font-weight:400">vs</span> ${m.a}</div>
+            <div class="mr-meta">Grupp ${m.g} · ${m.t} · ${m.venue.split('·')[1]?.trim() || m.venue}</div>
+          </div>
+          ${hasScore
+            ? `<div class="score-badge">${scoreTxt}</div>`
+            : `<div class="score-badge pending">Ej inmatad</div>`}
+        </div>`;
+    });
+  });
+
+  if (!h) h = `<div style="padding:40px 16px;text-align:center;font-family:var(--sport);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga matcher att visa</div>`;
+
+  document.getElementById('match-list').innerHTML = h;
+}
+
+function renderSaveBar() {
+  const bar = document.getElementById('save-bar');
+  const info = document.getElementById('save-bar-info');
+  if (pendingChanges > 0) {
+    bar.classList.add('visible');
+    info.innerHTML = `<strong>${pendingChanges}</strong> osparade ändring${pendingChanges>1?'ar':''}`;
+  } else {
+    bar.classList.remove('visible');
+  }
+}
+
+/* ── MODAL ── */
+function openModal(idx) {
+  editingIdx = idx;
+  const m = M[idx];
+  const score = results[idx];
+
+  document.getElementById('modal-match').textContent = `${m.h} vs ${m.a}`;
+  document.getElementById('modal-meta').textContent = `Grupp ${m.g} · ${fmtDate(m.d)} ${m.t}`;
+  document.getElementById('modal-home-label').textContent = m.h;
+  document.getElementById('modal-away-label').textContent = m.a;
+
+  const homeInp = document.getElementById('inp-home');
+  const awayInp = document.getElementById('inp-away');
+  homeInp.value = score !== undefined ? score[0] : '';
+  awayInp.value = score !== undefined ? score[1] : '';
+
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => homeInp.focus(), 200);
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  editingIdx = null;
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function saveScore() {
+  const h = parseInt(document.getElementById('inp-home').value);
+  const a = parseInt(document.getElementById('inp-away').value);
+
+  if (isNaN(h) || isNaN(a) || h < 0 || a < 0) {
+    showToast('Ange giltiga mål (0 eller mer)', true);
+    return;
+  }
+
+  const wasSet = results[editingIdx] !== undefined;
+  results[editingIdx] = [h, a];
+  if (!wasSet) pendingChanges++;
+
+  closeModal();
+  renderStats();
+  renderList();
+  renderSaveBar();
+  showToast(`✓ ${M[editingIdx].h} ${h}–${a} ${M[editingIdx].a}`);
+}
+
+function clearScore() {
+  if (results[editingIdx] !== undefined) {
+    delete results[editingIdx];
+    pendingChanges++;
+  }
+  closeModal();
+  renderStats();
+  renderList();
+  renderSaveBar();
+  showToast('Resultat rensat');
+}
+
+/* ── KEYBOARD ── */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Enter' && document.getElementById('modal').classList.contains('open')) {
+    saveScore();
+  }
+});
+
+/* ── AUTO-LOGIN ── */
+(function() {
+  const saved = localStorage.getItem('vm_admin_cfg');
+  if (saved) {
+    try {
+      const c = JSON.parse(saved);
+      if (c.user && c.repo && c.token) {
+        document.getElementById('inp-user').value = c.user;
+        document.getElementById('inp-repo').value = c.repo;
+        document.getElementById('inp-token').value = c.token;
+        cfg = c;
+        const btn = document.getElementById('login-btn');
+        btn.disabled = true;
+        btn.textContent = 'Återansluter...';
+        fetchResults().then(ok => {
+          btn.disabled = false;
+          btn.textContent = 'Logga in och hämta data';
+          if (ok) {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            renderApp();
+          }
+        });
+      }
+    } catch(e) {}
+  }
+})();
+</script>
+</body>
+</html>
