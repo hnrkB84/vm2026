@@ -485,6 +485,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
   padding: 1px 6px;
   margin-left: 5px;
 }
+.gtable-note{font-family:var(--body);font-size:.55rem;font-weight:400;color:var(--t3);padding:5px 14px 8px;font-style:italic;}
 </style>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="d243837c-4f1f-4c02-82f3-a48b8b6660d3"></script>
 </head>
@@ -512,7 +513,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 <div id="view-schema" class="view active">
   <div class="day-jump"><div class="dj-inner" id="day-chips"></div></div>
   <div class="schema-hero">
-    <img src="vmlogo.png" alt="VM 2026" loading="lazy" onerror="this.parentElement.style.display='none'">
+    <img id="schema-logo" src="vmlogo.png" alt="VM 2026" loading="lazy" onerror="this.parentElement.style.display='none'">
     <div class="schema-title">VM 2026 &nbsp;·&nbsp; Spelschema &amp; TV-guide</div>
     <button class="schema-rules" onclick="showView('grupper',document.getElementById('bnav-grupper'))">Hur går man vidare från grupperna? <span>Läs reglerna →</span></button>
   </div>
@@ -584,7 +585,7 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 <!-- OM -->
 <div id="view-om" class="view">
   <div class="om-inner">
-    <div class="om-logo"><img src="vmlogo.png" alt="VM 2026" onerror="this.style.display='none'"></div>
+    <div class="om-logo"><img id="om-logo" src="vmlogo.png" alt="VM 2026" onerror="this.style.display='none'"></div>
     <div class="om-section">
       <div class="om-label">Om sidan</div>
       <div class="om-title">En enkel guide till fotbolls-VM 2026</div>
@@ -1049,10 +1050,11 @@ function getDayCls(d) {
 
 function cardHtml(m, played) {
   const dc  = getDayCls(m.d);
-  const sc  = played && m.score ? `${m.score[0]} – ${m.score[1]}` : '–  –';
-  const scC = played && m.score ? '' : ' pend';
+  const hasScore = m.score !== null && m.score !== undefined;
+  const sc  = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
+  const scC = hasScore ? '' : ' pend';
   return `
-  <div class="match-card ${dc}${played?' played':''}">
+  <div class="match-card ${dc}${hasScore?' played':''}">
     <div class="mc-row1">
       <div class="mc-team">${fi(m.h,22,15)}<div class="mc-ti"><span class="mc-tn">${m.h}</span></div></div>
       <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
@@ -1234,17 +1236,17 @@ function renderGroups() {
 
     h += `<div class="gc"><div class="gc-head">Grupp ${g}</div>
     <table class="gtable">
-      <tr><th>Lag</th><th>S</th><th>V</th><th>O</th><th>F</th><th>GM</th><th>P</th></tr>`;
+      <tr><th>Lag</th><th>S</th><th>V</th><th>O</th><th>F</th><th>+/−</th><th>P</th></tr>`;
     sorted.forEach((t, i) => {
       const s = stats[t];
-      const gmStr = s.gm > 0 ? `+${s.gm}` : `${s.gm}`;
+      const gmStr = s.gm > 0 ? `+${s.gm}` : s.gm === 0 ? '0' : `${s.gm}`;
       h += `<tr class="${i < 2 ? 'q' : ''}">
         <td><div class="tc">${fi(t,16,11)}<span>${t}</span></div></td>
         <td>${s.s}</td><td>${s.v}</td><td>${s.o}</td><td>${s.f}</td>
         <td>${gmStr}</td><td class="pts">${s.p}</td>
       </tr>`;
     });
-    h += '</table></div>';
+    h += '</table><div class="gtable-note">* Lika P och +/− avgörs av gjorda mål</div></div>';
   });
   document.getElementById('groups-content').innerHTML = h;
 }
@@ -1319,7 +1321,13 @@ function switchRound(i) {
 /* ─────────────────────────────────────────────── */
 function toggleTheme() {
   const h = document.documentElement;
-  h.setAttribute('data-theme', h.getAttribute('data-theme')==='dark'?'light':'dark');
+  const dark = h.getAttribute('data-theme') !== 'dark';
+  h.setAttribute('data-theme', dark ? 'dark' : 'light');
+  const logo = dark ? 'vmlogoblack.png' : 'vmlogo.png';
+  ['schema-logo','om-logo'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.src = logo;
+  });
 }
 
 /* ─────────────────────────────────────────────── */
