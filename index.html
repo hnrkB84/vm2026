@@ -830,7 +830,7 @@ const M = [
 /* ─────────────────────────────────────────────── */
 async function loadResults() {
   try {
-    const res = await fetch('results.json?t=' + Date.now());
+    const res = await fetch('results.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) return;
     const data = await res.json();
     // data = { "0": [2,1], "5": [0,0], ... } — index i M-arrayen
