@@ -1098,16 +1098,19 @@ function renderFeed() {
   const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
   const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
   const hasNext = nextIdx !== -1;
-  const nxt = hasNext ? sorted[nextIdx] : null;
+  // Om nästa tidsmässiga match redan har score → leta vidare
+  let nxtIdx = nextIdx;
+  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
+    nxtIdx++;
+  }
+  const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
 
-  // Last played day
+  // Last played day — inkludera matcher med score även om de är i framtiden
   let lastMs = [];
-  if (hasNext && nextIdx > 0) {
-    const lastD = sorted[nextIdx-1].d;
-    lastMs = sorted.filter(m=>m.d===lastD && mDT(m)<now);
-  } else if (!hasNext) {
-    const lastD = sorted[sorted.length-1].d;
-    lastMs = sorted.filter(m=>m.d===lastD);
+  const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
+  if (playedMs.length > 0) {
+    const lastD = playedMs[playedMs.length-1].d;
+    lastMs = sorted.filter(m => m.d === lastD && (mDT(m)<now || (m.score !== null && m.score !== undefined)));
   }
 
   const upcoming = hasNext ? sorted.slice(nextIdx+1) : [];
