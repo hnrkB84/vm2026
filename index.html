@@ -947,6 +947,7 @@ function fmtPlayoff(d) {
 /* ─────────────────────────────────────────────── */
 let currentDay    = null;
 let feedExpanded  = false;
+let historyExpanded = false;
 let activeRound   = 0;
 
 /* ─────────────────────────────────────────────── */
@@ -1085,7 +1086,7 @@ function renderFeed() {
     let h = `<div style="padding:14px 0 8px"><div style="font-family:var(--sport);font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--text);text-transform:capitalize">${fmtFull(currentDay)}</div></div>`;
     h += `<div id="fact-box-day"></div>`;
     if (gsMatches.length > 0) {
-      gsMatches.forEach(m => { h += cardHtml(m, mDT(m)<now && m.score!==null); });
+      gsMatches.forEach(m => { h += cardHtml(m, m.score !== null && m.score !== undefined); });
     } else {
       h += `<div style="padding:20px 0;text-align:center;font-family:var(--sport);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga gruppspelsmatcher denna dag</div>`;
     }
@@ -1097,34 +1098,49 @@ function renderFeed() {
 
   const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
   const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  const hasNext = nextIdx !== -1;
-  // Om nästa tidsmässiga match redan har score → leta vidare
+  // Om nästa tidsmässiga match redan har score → leta vidare till nästa utan score
   let nxtIdx = nextIdx;
   while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
     nxtIdx++;
   }
   const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
 
-  // Last played day — inkludera matcher med score även om de är i framtiden
-  let lastMs = [];
+  // Alla dagar med minst en spelad match (score satt), sorterat kronologiskt
   const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
-  if (playedMs.length > 0) {
-    const lastD = playedMs[playedMs.length-1].d;
-    lastMs = sorted.filter(m => m.d === lastD && (mDT(m)<now || (m.score !== null && m.score !== undefined)));
-  }
+  const playedDays = [...new Set(playedMs.map(m => m.d))].sort();
+  const lastPlayedDay = playedDays.length > 0 ? playedDays[playedDays.length-1] : null;
 
-  const upcoming = hasNext ? sorted.slice(nextIdx+1) : [];
+  // Kommande matcher = ej spelade, exklusive de som redan visas (filter görs nedan)
+  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && (!nxt || m !== nxt));
   let h = '';
 
-  // Last day results
-  if (lastMs.length > 0) {
-    h += daySep(lastMs[0].d, lastMs.length);
+  // Resultat-historik
+  if (playedDays.length > 0) {
+    const lastD = playedDays[playedDays.length-1];
+    const olderDays = playedDays.slice(0, -1);
+
+    if (olderDays.length > 0) {
+      if (!historyExpanded) {
+        h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Visa tidigare resultat (${olderDays.length} ${olderDays.length===1?'dag':'dagar'})</button></div>`;
+      } else {
+        olderDays.forEach(d => {
+          const ms = sorted.filter(m => m.d===d && m.score !== null && m.score !== undefined);
+          h += daySep(d, ms.length);
+          ms.forEach(m => { h += cardHtml(m, true); });
+        });
+        h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Dölj tidigare resultat</button></div>`;
+      }
+    }
+
+    // Senaste dagens resultat – alltid synlig
+    const lastMs = sorted.filter(m => m.d === lastD && m.score !== null && m.score !== undefined);
+    h += daySep(lastD, lastMs.length);
     lastMs.forEach(m => { h += cardHtml(m, true); });
   }
 
   // Nästa match hero
   if (nxt) {
-    const newDay = lastMs.length===0 || nxt.d!==lastMs[0].d;
+    const newDay = lastPlayedDay===null || nxt.d!==lastPlayedDay;
     // Count how many matches on that day
     const dayCount = sorted.filter(m=>m.d===nxt.d).length;
     if (newDay) h += daySep(nxt.d, dayCount);
@@ -1149,7 +1165,7 @@ function renderFeed() {
   }
 
   // Fact box – placed after next-hero
-  const factDay = nxt ? nxt.d : (lastMs.length > 0 ? lastMs[0].d : null);
+  const factDay = nxt ? nxt.d : (lastPlayedDay || null);
   if (factDay) {
     h += `<div id="fact-box-container"></div>`;
   }
@@ -1191,6 +1207,7 @@ function renderFeed() {
 }
 
 function expandFeed() { feedExpanded=true; renderFeed(); }
+function toggleHistory() { historyExpanded=!historyExpanded; renderFeed(); }
 
 function renderFeedAndFact() {
   renderFeed();
@@ -1198,8 +1215,13 @@ function renderFeedAndFact() {
   const now = new Date();
   const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
   const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  const nxt = nextIdx !== -1 ? sorted[nextIdx] : null;
-  const lastD = (nextIdx > 0) ? sorted[nextIdx-1].d : null;
+  let nxtIdx = nextIdx;
+  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
+    nxtIdx++;
+  }
+  const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
+  const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
+  const lastD = playedMs.length > 0 ? playedMs[playedMs.length-1].d : null;
   const factDay = nxt ? nxt.d : (lastD || null);
   if (factDay) setTimeout(() => renderFactBox(factDay, 'fact-box-container'), 50);
 }
