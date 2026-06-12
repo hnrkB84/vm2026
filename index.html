@@ -1455,19 +1455,15 @@ async function loadFakta() {
 function getFactForDay(day) {
   if (!vmFakta.length) return null;
   const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
+  const teamSet = new Set(teams.map(t => t.toLowerCase()));
 
-  // Facts where any tag matches any team playing this day
+  // Endast exakt matchning mellan tag och lagnamn (case-insensitive)
   const relevant = vmFakta.filter(f =>
-    f.tags.some(tag =>
-      teams.some(team =>
-        tag.toLowerCase().includes(team.toLowerCase()) ||
-        team.toLowerCase().includes(tag.toLowerCase())
-      )
-    )
+    f.tags.some(tag => teamSet.has(tag.toLowerCase()))
   );
 
-  // 70% chance to show relevant fact if any exist
-  const pool = (relevant.length > 0 && Math.random() < 0.7) ? relevant : vmFakta;
+  // 35% chans att visa relevant fakta om sådan finns, annars hela poolen
+  const pool = (relevant.length > 0 && Math.random() < 0.35) ? relevant : vmFakta;
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
@@ -1480,9 +1476,8 @@ function renderFactBox(day, containerId) {
   currentFactIdx = fact ? fact.id : null;
 
   const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
-  const isRelevant = fact && fact.tags.some(tag =>
-    teams.some(t => tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase()))
-  );
+  const teamSet = new Set(teams.map(t => t.toLowerCase()));
+  const isRelevant = fact && fact.tags.some(tag => teamSet.has(tag.toLowerCase()));
   const tagHtml = isRelevant ? `<span class="fact-tag">Dagens lag</span>` : '';
 
   container.innerHTML = fact ? `
@@ -1503,12 +1498,9 @@ function renderFactBox(day, containerId) {
 function nextFact(day, containerId) {
   if (!vmFakta.length) return;
   const teams = M.filter(m => m.d === day).flatMap(m => [m.h, m.a]);
-  const relevant = vmFakta.filter(f =>
-    f.tags.some(tag => teams.some(t =>
-      tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase())
-    ))
-  );
-  const pool = (relevant.length > 0 && Math.random() < 0.7) ? relevant : vmFakta;
+  const teamSet = new Set(teams.map(t => t.toLowerCase()));
+  const relevant = vmFakta.filter(f => f.tags.some(tag => teamSet.has(tag.toLowerCase())));
+  const pool = (relevant.length > 0 && Math.random() < 0.35) ? relevant : vmFakta;
   // Avoid showing the same fact twice
   let fact;
   let tries = 0;
@@ -1518,9 +1510,7 @@ function nextFact(day, containerId) {
   } while (fact.id === currentFactIdx && tries < 10);
   currentFactIdx = fact.id;
 
-  const isRelevant = fact.tags.some(tag =>
-    teams.some(t => tag.toLowerCase().includes(t.toLowerCase()) || t.toLowerCase().includes(tag.toLowerCase()))
-  );
+  const isRelevant = fact.tags.some(tag => teamSet.has(tag.toLowerCase()));
   const tagHtml = isRelevant ? `<span class="fact-tag">Dagens lag</span>` : '';
 
   const container = document.getElementById(containerId);
