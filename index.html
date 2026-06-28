@@ -828,25 +828,71 @@ const M = [
 /* ─────────────────────────────────────────────── */
 /* LOAD RESULTS FROM results.json (GitHub)         */
 /* ─────────────────────────────────────────────── */
+function calcStandings(gsResults) {
+  const standings = {};
+  Object.keys(GROUPS_DATA).forEach(g => {
+    const stats = {};
+    GROUPS_DATA[g].forEach(t => { stats[t] = {p:0,v:0,o:0,f:0,gf:0,ga:0,gm:0,s:0}; });
+    M.filter(m => m.g === g).forEach(m => {
+      const globalIdx = M.indexOf(m);
+      const sc = gsResults[globalIdx];
+      if (!sc) return;
+      const [hg,ag] = sc;
+      const hs = stats[m.h], as = stats[m.a];
+      if (!hs || !as) return;
+      hs.s++; as.s++;
+      hs.gf+=hg; hs.ga+=ag; hs.gm+=(hg-ag);
+      as.gf+=ag; as.ga+=hg; as.gm+=(ag-hg);
+      if (hg>ag)      { hs.v++; hs.p+=3; as.f++; }
+      else if (hg<ag) { as.v++; as.p+=3; hs.f++; }
+      else            { hs.o++; hs.p++; as.o++; as.p++; }
+    });
+    const sorted = GROUPS_DATA[g].slice().sort((a,b)=>{
+      const sa=stats[a],sb=stats[b];
+      if (sb.p!==sa.p) return sb.p-sa.p;
+      if (sb.gm!==sa.gm) return sb.gm-sa.gm;
+      if (sb.gf!==sa.gf) return sb.gf-sa.gf;
+      return a.localeCompare(b);
+    });
+    standings[g] = sorted.map(t=>({name:t,...stats[t]}));
+  });
+  return standings;
+}
+
+function calcThirdPlace(standings) {
+  const thirds = [];
+  Object.keys(standings).forEach(g => {
+    const s = standings[g];
+    if (s.length >= 3) thirds.push({group:g,...s[2]});
+  });
+  thirds.sort((a,b)=>{
+    if (b.p!==a.p) return b.p-a.p;
+    if (b.gm!==a.gm) return b.gm-a.gm;
+    if (b.gf!==a.gf) return b.gf-a.gf;
+    return a.group.localeCompare(b.group);
+  });
+  return thirds.slice(0,8).map(t=>t.name);
+}
+
 async function loadResults() {
   try {
     const res = await fetch('results.json?t=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) return;
-    const data = await res.json();
-    // data = { "0": [2,1], "5": [0,0], ... } — index i M-arrayen
-    Object.keys(data).forEach(idx => {
-      const i = parseInt(idx);
-      if (M[i]) M[i].score = data[idx];
-    });
+    if (res.ok) {
+      const data = await res.json();
+      Object.keys(data).forEach(idx => {
+        const i = parseInt(idx);
+        if (M[i]) M[i].score = data[idx];
+      });
+      // Räkna grupptabeller och bästa treor för slutspelsupplösning
+      gsStandings = calcStandings(data);
+      gsThirds = calcThirdPlace(gsStandings);
+    }
   } catch(e) {}
   try {
     const r2 = await fetch('playoff_results.json?t=' + Date.now(), { cache: 'no-store' });
     if (r2.ok) {
       const d2 = await r2.json();
-      Object.keys(d2).forEach(k => {
-        const n = parseInt(k);
-        PLAYOFF_ROUNDS.forEach(r => { const m = r.matches.find(m=>m.n===n); if(m) m.score=d2[k]; });
-      });
+      Object.keys(d2).forEach(k => { poResults[parseInt(k)] = d2[k]; });
     }
   } catch(e) {}
 }
@@ -978,286 +1024,132 @@ function showView(id, btn) {
 /* DAY CHIPS                                       */
 /* ─────────────────────────────────────────────── */
 function buildChips() {
-  // Group stage dates
-  const gsDates = [...new Set(M.map(m=>m.d))].sort();
-
-  // Playoff dates grouped by round label
-  const poDates = [];
-  PLAYOFF_ROUNDS.forEach(r => {
-    const dates = [...new Set(r.matches.map(m=>m.d))].sort();
-    dates.forEach(d => {
-      if (!poDates.find(p=>p.d===d)) poDates.push({d, label:fmtShort(d)});
-    });
-  });
-  poDates.sort((a,b)=>a.d.localeCompare(b.d));
-
+  const dates = [...new Set(PLAYOFF_ROUNDS.flatMap(r=>r.matches.map(m=>m.d)))].sort();
   let h = `<button class="day-chip${!currentDay?' active':''}" onclick="selDay(null)">Alla</button>`;
-
-  // Group stage dates
-  gsDates.forEach(d => {
+  dates.forEach(d => {
     h += `<button class="day-chip${currentDay===d?' active':''}" onclick="selDay('${d}')">${fmtShort(d)}</button>`;
   });
-
-  // Small separator
-  h += `<span style="display:flex;align-items:center;padding:0 6px;color:var(--t3);font-size:.6rem;font-family:var(--sport);letter-spacing:.08em;white-space:nowrap">SLUTSPEL</span>`;
-
-  // Playoff dates
-  poDates.forEach(p => {
-    h += `<button class="day-chip${currentDay===p.d?' active':''}" onclick="selDay('${p.d}')">${p.label}</button>`;
-  });
-
   document.getElementById('day-chips').innerHTML = h;
-  setTimeout(()=>{
-    const a = document.querySelector('.day-chip.active');
-    if (a) a.scrollIntoView({inline:'center',behavior:'smooth'});
-  }, 50);
+  setTimeout(()=>{ const a=document.querySelector('.day-chip.active'); if(a) a.scrollIntoView({inline:'center',behavior:'smooth'}); },50);
 }
 
 function selDay(d) {
-  currentDay = d; feedExpanded = false;
+  currentDay = d;
+  buildChips();
+  renderFeed();
+}
 
-  // If this date belongs to playoff, switch to slutspel view and filter that round
-  if (d) {
-    const isPlayoff = PLAYOFF_ROUNDS.some(r => r.matches.some(m=>m.d===d));
-    if (isPlayoff) {
-      // Find which round and switch to it
-      const roundIdx = PLAYOFF_ROUNDS.findIndex(r => r.matches.some(m=>m.d===d));
-      if (roundIdx >= 0) {
-        activeRound = roundIdx;
-        document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-        document.querySelectorAll('.tnav-btn').forEach(b=>b.classList.remove('active'));
-        document.getElementById('view-slutspel').classList.add('active');
-        document.getElementById('bnav-slutspel').classList.add('active');
-        renderPlayoffTabs();
-        renderPlayoffRound();
-        window.scrollTo(0,0);
+/* Resolve playoff team code → { name, sub, flag } using same logic as slutspel.html */
+let gsStandings = {};
+let gsThirds = [];
+let poResults = {};
+
+function gsResolveTeam(code) {
+  if (!code) return { name:'TBD', sub:'', flag:null };
+
+  if (code.startsWith('RU')) {
+    const n = parseInt(code.slice(2));
+    const res = poResults[n];
+    if (res) {
+      const m = PLAYOFF_ROUNDS.flatMap(r=>r.matches).find(m=>m.n===n);
+      if (m) {
+        const loserCode = res[0] > res[1] ? m.a : m.h;
+        const lt = gsResolveTeam(loserCode);
+        if (lt.name !== 'TBD') return { ...lt, sub:`Förlorare match ${n}` };
       }
-      buildChips();
-      return;
     }
+    return { name:'TBD', sub:`Förlorare match ${n}`, flag:null };
   }
 
-  buildChips(); renderFeed();
-  document.getElementById('feed-content').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-/* ─────────────────────────────────────────────── */
-/* MATCH CARD HTML                                 */
-/* ─────────────────────────────────────────────── */
-// Day index for alternating colors – computed once
-const _dayIdx = {};
-function getDayCls(d) {
-  if (Object.keys(_dayIdx).length === 0) {
-    const all = [...new Set([
-      ...M.map(m=>m.d),
-      ...PLAYOFF_ROUNDS.flatMap(r=>r.matches.map(m=>m.d))
-    ])].sort();
-    all.forEach((day,i) => { _dayIdx[day] = i; });
+  if (code.startsWith('W')) {
+    const n = parseInt(code.slice(1));
+    const res = poResults[n];
+    if (res) {
+      const m = PLAYOFF_ROUNDS.flatMap(r=>r.matches).find(m=>m.n===n);
+      if (m) {
+        const winnerCode = res[0] > res[1] ? m.h : res[1] > res[0] ? m.a : null;
+        if (winnerCode) {
+          const wt = gsResolveTeam(winnerCode);
+          if (wt.name !== 'TBD') return { ...wt, sub:`Vinnare match ${n}` };
+        }
+      }
+    }
+    return { name:'TBD', sub:`Vinnare match ${n}`, flag:null };
   }
-  return 'dc-' + (_dayIdx[d] % 4);
-}
 
-function cardHtml(m, played) {
-  const dc  = getDayCls(m.d);
-  const hasScore = m.score !== null && m.score !== undefined;
-  const sc  = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
-  const scC = hasScore ? '' : ' pend';
-  return `
-  <div class="match-card ${dc}${hasScore?' played':''}">
-    <div class="mc-row1">
-      <div class="mc-team">${fi(m.h,22,15)}<div class="mc-ti"><span class="mc-tn">${m.h}</span></div></div>
-      <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
-      <div class="mc-team away">${fi(m.a,22,15)}<div class="mc-ti"><span class="mc-tn">${m.a}</span></div></div>
-    </div>
-    <div class="mc-row2"><strong>Grupp ${m.g} · Omg. ${m.round}</strong> · ${m.venue||'–'}</div>
-    <div class="mc-row3">${chLogo(m.tv,15)}</div>
-  </div>`;
-}
+  if (/^[12][A-L]$/.test(code)) {
+    const pos = parseInt(code[0]) - 1;
+    const group = code[1];
+    const s = gsStandings[group];
+    if (s && s[pos]) {
+      const name = s[pos].name;
+      return { name, sub: pos===0 ? `Etta grupp ${group}` : `Tvåa grupp ${group}`, flag:true };
+    }
+    return { name:'TBD', sub:pd(code), flag:null };
+  }
 
-function daySep(d, count) {
-  const dc = getDayCls(d);
-  const c  = count ? `<span class="day-sep-c">${count} matcher</span>` : '';
-  return `<div class="day-sep ${dc}"><span class="day-sep-d">${fmtFull(d)}</span>${c}</div>`;
-}
+  if (code.startsWith('3')) {
+    const groups = code.slice(1).split('');
+    const match = gsThirds.find(name => {
+      const g = Object.keys(GROUPS_DATA).find(g=>GROUPS_DATA[g].includes(name));
+      return g && groups.includes(g);
+    });
+    if (match) {
+      const g = Object.keys(GROUPS_DATA).find(g=>GROUPS_DATA[g].includes(match));
+      return { name:match, sub:`Bästa 3:a (grupp ${g})`, flag:true };
+    }
+    return { name:'TBD', sub:pd(code), flag:null };
+  }
 
-/* ─────────────────────────────────────────────── */
-/* RENDER FEED                                     */
-/* ─────────────────────────────────────────────── */
+  return { name:'TBD', sub:pd(code), flag:null };
+}
 
 function poCardHtml(m) {
-  const hasScore = m.score !== null && m.score !== undefined;
-  const sc = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
-  const scC = hasScore ? '' : ' pend';
   const dc = getDayCls(m.d);
-  const ht = playoffTeam(m.h);
-  const at = playoffTeam(m.a);
-  const hN = ht.name !== 'TBD' ? ht.name : ht.sub;
-  const aN = at.name !== 'TBD' ? at.name : at.sub;
+  const res = poResults[m.n];
+  const hasScore = res !== null && res !== undefined;
+  const sc = hasScore ? `${res[0]} – ${res[1]}` : '–  –';
+  const scC = hasScore ? '' : ' pend';
+  const ht = gsResolveTeam(m.h);
+  const at = gsResolveTeam(m.a);
+  const hTbd = ht.name === 'TBD';
+  const aTbd = at.name === 'TBD';
+  const hN = hTbd ? (ht.sub || 'TBD') : ht.name;
+  const aN = aTbd ? (at.sub || 'TBD') : at.name;
+  const hFlag = (!hTbd && ht.flag) ? fi(ht.name,22,15) : '';
+  const aFlag = (!aTbd && at.flag) ? fi(at.name,22,15) : '';
   return `<div class="match-card ${dc}${hasScore?' played':''}">
     <div class="mc-row1">
-      <div class="mc-team"><div class="mc-ti"><span class="mc-tn">${hN}</span></div></div>
+      <div class="mc-team">${hFlag}<div class="mc-ti"><span class="mc-tn${hTbd?' tbd':''}">${hN}</span></div></div>
       <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
-      <div class="mc-team away"><div class="mc-ti"><span class="mc-tn">${aN}</span></div></div>
+      <div class="mc-team away">${aFlag}<div class="mc-ti"><span class="mc-tn${aTbd?' tbd':''}">${aN}</span></div></div>
     </div>
     <div class="mc-row2"><strong>${m._rl}</strong> · ${m.venue?m.venue.split('·')[0].trim():''}</div>
     <div class="mc-row3">${chLogo(m.tv,15)}</div>
   </div>`;
 }
+
 function renderFeed() {
   const el = document.getElementById('feed-content');
-  const now = new Date();
-
-  // Day filter mode
-  if (currentDay) {
-    // Check if this is a group stage date
-    const gsMatches = M.filter(m=>m.d===currentDay);
-    let h = `<div style="padding:14px 0 8px"><div style="font-family:var(--sport);font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--text);text-transform:capitalize">${fmtFull(currentDay)}</div></div>`;
-    h += `<div id="fact-box-day"></div>`;
-    if (gsMatches.length > 0) {
-      gsMatches.forEach(m => { h += cardHtml(m, m.score !== null && m.score !== undefined); });
-    } else {
-      h += `<div style="padding:20px 0;text-align:center;font-family:var(--sport);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga gruppspelsmatcher denna dag</div>`;
-    }
-    el.innerHTML = h;
-    // Fact box for day filter
-    setTimeout(() => renderFactBox(currentDay, 'fact-box-day'), 50);
-    return;
-  }
-
-  const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
-  const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  let nxtIdx = nextIdx < 0 ? 0 : nextIdx;
-  while (nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) nxtIdx++;
-  const nxt = nxtIdx < sorted.length ? sorted[nxtIdx] : null;
-
-  const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
-  const playedDays = [...new Set(playedMs.map(m => m.d))].sort();
-  const lastPlayedDay = playedDays.length > 0 ? playedDays[playedDays.length-1] : null;
-
-  // Playoff-matcher alltid synliga direkt
-  const poAll = PLAYOFF_ROUNDS.flatMap(r => r.matches.map(m => ({...m, _po:true, _rl:r.label})));
-  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && m !== nxt);
+  let all = PLAYOFF_ROUNDS.flatMap(r => r.matches.map(m => ({...m, _rl:r.full})));
+  all.sort((a,b) => (a.d+a.t).localeCompare(b.d+b.t));
+  if (currentDay) all = all.filter(m => m.d === currentDay);
   let h = '';
-
-  // Resultat-historik
-  if (playedDays.length > 0) {
-    const lastD = playedDays[playedDays.length-1];
-    const olderDays = playedDays.slice(0, -1);
-
-    if (olderDays.length > 0) {
-      if (!historyExpanded) {
-        h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Visa tidigare resultat (${olderDays.length} ${olderDays.length===1?'dag':'dagar'})</button></div>`;
-      } else {
-        olderDays.forEach(d => {
-          const ms = sorted.filter(m => m.d===d && m.score !== null && m.score !== undefined);
-          h += daySep(d, ms.length);
-          ms.forEach(m => { h += cardHtml(m, true); });
-        });
-        h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Dölj tidigare resultat</button></div>`;
-      }
+  let prevD = null;
+  all.forEach(m => {
+    if (m.d !== prevD) {
+      h += daySep(m.d, all.filter(x=>x.d===m.d).length);
+      prevD = m.d;
     }
-
-    // Senaste dagens resultat – alltid synlig
-    const lastMs = sorted.filter(m => m.d === lastD && m.score !== null && m.score !== undefined);
-    h += daySep(lastD, lastMs.length);
-    lastMs.forEach(m => { h += cardHtml(m, true); });
-  }
-
-  // Nästa match hero
-  if (nxt) {
-    const newDay = lastPlayedDay===null || nxt.d!==lastPlayedDay;
-    // Count how many matches on that day
-    const dayCount = sorted.filter(m=>m.d===nxt.d).length;
-    if (newDay) h += daySep(nxt.d, dayCount);
-    h += `<div class="next-hero anim">
-      <div class="next-lbl">▶ Nästa match</div>
-      <div class="next-teams">
-        <div class="next-team">${fi(nxt.h,50,33)}<div class="next-tn">${nxt.h}</div></div>
-        <div class="next-vs">vs</div>
-        <div class="next-team">${fi(nxt.a,50,33)}<div class="next-tn">${nxt.a}</div></div>
-      </div>
-      <div class="next-kick">
-        <span class="next-time">${nxt.t}</span>
-        <span class="next-date">${fmtLong(nxt.d)}</span>
-      </div>
-      <div class="next-meta">
-        <span class="meta-pill">Grupp ${nxt.g}</span>
-        <span class="meta-pill">Omg. ${nxt.round}</span>
-        <span class="meta-pill">${nxt.venue||'–'}</span>
-      </div>
-      <div class="next-ch">${chLogo(nxt.tv,18)}</div>
-    </div>`;
-  }
-
-  // Fact box – placed after next-hero
-  const factDay = nxt ? nxt.d : (lastPlayedDay || null);
-  if (factDay) {
-    h += `<div id="fact-box-container"></div>`;
-  }
-
-  // Gruppspelsmatcher (med blur)
-  const gsUpcoming = upcoming.filter(m => !m._po);
-  if (gsUpcoming.length > 0) {
-    const SHOW=2, BLUR=3;
-    const vis  = gsUpcoming.slice(0, SHOW);
-    const blur = gsUpcoming.slice(SHOW, SHOW+BLUR);
-    const rest = gsUpcoming.slice(SHOW+BLUR);
-    let prevD = nxt ? nxt.d : null;
-
-    h += '<div>';
-    vis.forEach(m => {
-      if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-      h += cardHtml(m, false); prevD = m.d;
-    });
-    h += '</div>';
-
-    if (!feedExpanded) {
-      if (blur.length > 0) {
-        h += '<div class="blur-zone">';
-        blur.forEach(m => {
-          if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-          h += cardHtml(m, false); prevD = m.d;
-        });
-        h += '<div class="blur-overlay"></div></div>';
-      }
-      h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="expandFeed()">Se ${gsUpcoming.length-SHOW} fler gruppspelsmatcher</button></div>`;
-    } else {
-      blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
-      rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
-    }
-  }
-
-  // Slutspelsmatcher — alltid synliga direkt
-  let prevPoD = null;
-  poAll.forEach(m => {
-    if (prevPoD !== m.d) { h += daySep(m.d, poAll.filter(x=>x.d===m.d).length); prevPoD = m.d; }
     h += poCardHtml(m);
   });
-
-
-
   el.innerHTML = h;
 }
 
-function expandFeed() { feedExpanded=true; renderFeed(); }
-function toggleHistory() { historyExpanded=!historyExpanded; renderFeed(); }
-
 function renderFeedAndFact() {
   renderFeed();
-  // Trigger fact box after feed renders
-  const now = new Date();
-  const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
-  const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  let nxtIdx = nextIdx;
-  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
-    nxtIdx++;
-  }
-  const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
-  const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
-  const lastD = playedMs.length > 0 ? playedMs[playedMs.length-1].d : null;
-  const factDay = nxt ? nxt.d : (lastD || null);
-  if (factDay) setTimeout(() => renderFactBox(factDay, 'fact-box-container'), 50);
 }
+
 
 /* ─────────────────────────────────────────────── */
 /* GROUPS                                          */
