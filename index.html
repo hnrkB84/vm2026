@@ -119,7 +119,6 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 [data-theme="dark"] .match-card.dc-3{background:#151220;}
 .match-card:active{filter:brightness(.96);}
 .match-card.played{opacity:.65;}
-.mc-tn.po-tbd{color:var(--t2);font-size:.8rem;text-transform:uppercase;font-family:var(--sport);}
 .match-card.is-next{border-left:4px solid var(--red);padding-left:12px;}
 .mc-row1{display:grid;grid-template-columns:1fr 62px 1fr;align-items:center;gap:4px;min-height:36px;}
 .mc-team{display:flex;align-items:center;gap:8px;min-width:0;}
@@ -834,28 +833,14 @@ async function loadResults() {
     const res = await fetch('results.json?t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) return;
     const data = await res.json();
+    // data = { "0": [2,1], "5": [0,0], ... } — index i M-arrayen
     Object.keys(data).forEach(idx => {
       const i = parseInt(idx);
       if (M[i]) M[i].score = data[idx];
     });
-    // Bygg grupptabeller nu när scores är satta
-    _gs = _buildStandings(data);
-    _thirds = _buildThirds(_gs);
-  } catch(e) {}
-
-  try {
-    const res2 = await fetch('playoff_results.json?t=' + Date.now(), { cache: 'no-store' });
-    if (res2.ok) {
-      const pd2 = await res2.json();
-      Object.keys(pd2).forEach(k => {
-        const n = parseInt(k);
-        PLAYOFF_ROUNDS.forEach(r => {
-          const m = r.matches.find(m => m.n === n);
-          if (m) m.score = pd2[k];
-        });
-      });
-    }
-  } catch(e) {}
+  } catch(e) {
+    // results.json saknas ännu — kör vidare utan resultat
+  }
 }
 
 /* ─────────────────────────────────────────────── */
@@ -881,116 +866,6 @@ const PD = {
   '3DEIJL':'Bästa trean, grupp D/E/I/J/L',
 };
 function pd(code) { return PD[code] || code; }
-
-/* ── Grupptabeller (beräknas från results.json) ── */
-let _gs = {};       // { A: [{name,p,...}, ...], B: [...], ... }
-let _thirds = [];   // de 8 bästa treorna i rankad ordning
-
-const GROUPS_DATA = {
-  A:['Mexiko','Sydkorea','Sydafrika','Tjeckien'],
-  B:['Kanada','Qatar','Schweiz','Bosnien och Hercegovina'],
-  C:['Brasilien','Marocko','Haiti','Skottland'],
-  D:['USA','Paraguay','Australien','Turkiet'],
-  E:['Tyskland','Curaçao','Elfenbenskusten','Ecuador'],
-  F:['Nederländerna','Japan','Tunisien','Sverige'],
-  G:['Belgien','Iran','Nya Zeeland','Egypten'],
-  H:['Spanien','Saudiarabien','Uruguay','Kap Verde'],
-  I:['Frankrike','Senegal','Norge','Irak'],
-  J:['Argentina','Algeriet','Österrike','Jordanien'],
-  K:['Portugal','Uzbekistan','Colombia','DR Kongo'],
-  L:['England','Ghana','Kroatien','Panama'],
-};
-
-function _buildStandings(data) {
-  const st = {};
-  Object.keys(GROUPS_DATA).forEach(g => {
-    const stats = {};
-    GROUPS_DATA[g].forEach(t => { stats[t]={p:0,v:0,o:0,f:0,gf:0,ga:0,gm:0}; });
-    M.filter(m => m.g === g).forEach(m => {
-      const idx = M.indexOf(m);
-      const sc = data[idx];
-      if (!sc) return;
-      const [hg,ag] = sc;
-      const hs=stats[m.h], as=stats[m.a];
-      if (!hs||!as) return;
-      hs.gf+=hg; hs.ga+=ag; hs.gm+=(hg-ag);
-      as.gf+=ag; as.ga+=hg; as.gm+=(ag-hg);
-      if (hg>ag)      {hs.v++;hs.p+=3;as.f++;}
-      else if (hg<ag) {as.v++;as.p+=3;hs.f++;}
-      else            {hs.o++;hs.p++;as.o++;as.p++;}
-    });
-    st[g] = GROUPS_DATA[g].slice().sort((a,b)=>{
-      const sa=stats[a],sb=stats[b];
-      if(sb.p!==sa.p) return sb.p-sa.p;
-      if(sb.gm!==sa.gm) return sb.gm-sa.gm;
-      if(sb.gf!==sa.gf) return sb.gf-sa.gf;
-      return a.localeCompare(b);
-    }).map(t=>({name:t,...stats[t]}));
-  });
-  return st;
-}
-
-function _buildThirds(st) {
-  const thirds = [];
-  Object.keys(st).forEach(g => { if(st[g][2]) thirds.push({group:g,...st[g][2]}); });
-  thirds.sort((a,b)=>{
-    if(b.p!==a.p) return b.p-a.p;
-    if(b.gm!==a.gm) return b.gm-a.gm;
-    if(b.gf!==a.gf) return b.gf-a.gf;
-    return a.group.localeCompare(b.group);
-  });
-  return thirds.slice(0,8).map(t=>t.name);
-}
-
-/* Löser upp lagkod → riktigt namn */
-function resolvePoTeam(code) {
-  if (!code) return {name:'TBD', sub:''};
-
-  if (code.startsWith('RU')) {
-    const n = parseInt(code.slice(2));
-    const fm = PLAYOFF_ROUNDS.flatMap(r=>r.matches).find(m=>m.n===n);
-    if (fm && fm.score) {
-      const loserCode = fm.score[0]>fm.score[1] ? fm.a : fm.h;
-      const lt = resolvePoTeam(loserCode);
-      if (lt.name!=='TBD') return {...lt, sub:`Förlorare match ${n}`};
-    }
-    return {name:'TBD', sub:`Förlorare match ${n}`};
-  }
-
-  if (code.startsWith('W')) {
-    const n = parseInt(code.slice(1));
-    const fm = PLAYOFF_ROUNDS.flatMap(r=>r.matches).find(m=>m.n===n);
-    if (fm && fm.score) {
-      const winnerCode = fm.score[0]>fm.score[1] ? fm.h : fm.a;
-      const wt = resolvePoTeam(winnerCode);
-      if (wt.name!=='TBD') return {...wt, sub:`Vinnare match ${n}`};
-    }
-    return {name:'TBD', sub:`Vinnare match ${n}`};
-  }
-
-  if (/^[12][A-L]$/.test(code)) {
-    const pos = parseInt(code[0])-1;
-    const g = code[1];
-    const s = _gs[g];
-    if (s && s[pos]) return {name:s[pos].name, sub:pos===0?`Etta grupp ${g}`:`Tvåa grupp ${g}`};
-    return {name:'TBD', sub:pd(code)};
-  }
-
-  if (code.startsWith('3')) {
-    const groups = code.slice(1).split('');
-    const match = _thirds.find(name => {
-      const g = Object.keys(GROUPS_DATA).find(g=>GROUPS_DATA[g].includes(name));
-      return g && groups.includes(g);
-    });
-    if (match) {
-      const g = Object.keys(GROUPS_DATA).find(g=>GROUPS_DATA[g].includes(match));
-      return {name:match, sub:`Bästa 3:a (grupp ${g})`};
-    }
-    return {name:'TBD', sub:pd(code)};
-  }
-
-  return {name:'TBD', sub:pd(code)};
-}
 
 const PLAYOFF_ROUNDS = [
   { label:'16-del', full:'Sextondelsfinal', matches:[
@@ -1200,30 +1075,6 @@ function daySep(d, count) {
 /* ─────────────────────────────────────────────── */
 /* RENDER FEED                                     */
 /* ─────────────────────────────────────────────── */
-
-function poCardHtml(m) {
-  const hasScore = m.score !== null && m.score !== undefined;
-  const sc  = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
-  const scC = hasScore ? '' : ' pend';
-  const dc  = getDayCls(m.d);
-  const ht  = resolvePoTeam(m.h);
-  const at  = resolvePoTeam(m.a);
-  const hName = ht.name !== 'TBD' ? ht.name : ht.sub;
-  const aName = at.name !== 'TBD' ? at.name : at.sub;
-  const hFlag = FC[ht.name] ? fi(ht.name,22,15) : '';
-  const aFlag = FC[at.name] ? fi(at.name,22,15) : '';
-  return `
-  <div class="match-card ${dc}${hasScore?' played':''}">
-    <div class="mc-row1">
-      <div class="mc-team">${hFlag}<div class="mc-ti"><span class="mc-tn">${hName}</span></div></div>
-      <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
-      <div class="mc-team away">${aFlag}<div class="mc-ti"><span class="mc-tn">${aName}</span></div></div>
-    </div>
-    <div class="mc-row2"><strong>${m._roundLabel}</strong> · ${m.venue ? m.venue.split('·')[0].trim() : ''}</div>
-    <div class="mc-row3">${chLogo(m.tv,15)}</div>
-  </div>`;
-}
-
 function renderFeed() {
   const el = document.getElementById('feed-content');
   const now = new Date();
@@ -1245,27 +1096,22 @@ function renderFeed() {
     return;
   }
 
-  // Slå ihop gruppspel och slutspel i ett flöde
-  const poMatches = PLAYOFF_ROUNDS.flatMap(r =>
-    r.matches.map(m => ({...m, _po: true, _roundLabel: r.label}))
-  );
-  const sorted = [
-    ...M.map(m => ({...m, _po: false})),
-    ...poMatches
-  ].sort((a,b) => mDT(a) - mDT(b));
-
+  const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
   const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  let nxtIdx = nextIdx < 0 ? 0 : nextIdx;
-  while (nxtIdx < sorted.length && (sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined)) {
+  // Om nästa tidsmässiga match redan har score → leta vidare till nästa utan score
+  let nxtIdx = nextIdx;
+  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
     nxtIdx++;
   }
-  const nxt = nxtIdx < sorted.length ? sorted[nxtIdx] : null;
+  const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
 
+  // Alla dagar med minst en spelad match (score satt), sorterat kronologiskt
   const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
   const playedDays = [...new Set(playedMs.map(m => m.d))].sort();
   const lastPlayedDay = playedDays.length > 0 ? playedDays[playedDays.length-1] : null;
 
-  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && m !== nxt);
+  // Kommande matcher = ej spelade, exklusive de som redan visas (filter görs nedan)
+  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && (!nxt || m !== nxt));
   let h = '';
 
   // Resultat-historik
@@ -1280,7 +1126,7 @@ function renderFeed() {
         olderDays.forEach(d => {
           const ms = sorted.filter(m => m.d===d && m.score !== null && m.score !== undefined);
           h += daySep(d, ms.length);
-          ms.forEach(m => { h += m._po ? poCardHtml(m) : cardHtml(m, true); });
+          ms.forEach(m => { h += cardHtml(m, true); });
         });
         h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Dölj tidigare resultat</button></div>`;
       }
@@ -1289,56 +1135,33 @@ function renderFeed() {
     // Senaste dagens resultat – alltid synlig
     const lastMs = sorted.filter(m => m.d === lastD && m.score !== null && m.score !== undefined);
     h += daySep(lastD, lastMs.length);
-    lastMs.forEach(m => { h += m._po ? poCardHtml(m) : cardHtml(m, true); });
+    lastMs.forEach(m => { h += cardHtml(m, true); });
   }
 
   // Nästa match hero
   if (nxt) {
     const newDay = lastPlayedDay===null || nxt.d!==lastPlayedDay;
+    // Count how many matches on that day
     const dayCount = sorted.filter(m=>m.d===nxt.d).length;
     if (newDay) h += daySep(nxt.d, dayCount);
-    if (nxt._po) {
-      const ht = resolvePoTeam(nxt.h);
-      const at = resolvePoTeam(nxt.a);
-      const hName = ht.name!=='TBD' ? ht.name : ht.sub;
-      const aName = at.name!=='TBD' ? at.name : at.sub;
-      h += `<div class="next-hero anim">
-        <div class="next-lbl">▶ Nästa match – ${nxt._roundLabel}</div>
-        <div class="next-teams">
-          <div class="next-team">${FC[ht.name]?fi(ht.name,50,33):''}<div class="next-tn">${hName}</div></div>
-          <div class="next-vs">vs</div>
-          <div class="next-team">${FC[at.name]?fi(at.name,50,33):''}<div class="next-tn">${aName}</div></div>
-        </div>
-        <div class="next-kick">
-          <span class="next-time">${nxt.t}</span>
-          <span class="next-date">${fmtLong(nxt.d)}</span>
-        </div>
-        <div class="next-meta">
-          <span class="meta-pill">${nxt._roundLabel}</span>
-          <span class="meta-pill">${nxt.venue ? nxt.venue.split('·')[0].trim() : ''}</span>
-        </div>
-        <div class="next-ch">${chLogo(nxt.tv,18)}</div>
-      </div>`;
-    } else {
-      h += `<div class="next-hero anim">
-        <div class="next-lbl">▶ Nästa match</div>
-        <div class="next-teams">
-          <div class="next-team">${fi(nxt.h,50,33)}<div class="next-tn">${nxt.h}</div></div>
-          <div class="next-vs">vs</div>
-          <div class="next-team">${fi(nxt.a,50,33)}<div class="next-tn">${nxt.a}</div></div>
-        </div>
-        <div class="next-kick">
-          <span class="next-time">${nxt.t}</span>
-          <span class="next-date">${fmtLong(nxt.d)}</span>
-        </div>
-        <div class="next-meta">
-          <span class="meta-pill">Grupp ${nxt.g}</span>
-          <span class="meta-pill">Omg. ${nxt.round}</span>
-          <span class="meta-pill">${nxt.venue||'–'}</span>
-        </div>
-        <div class="next-ch">${chLogo(nxt.tv,18)}</div>
-      </div>`;
-    }
+    h += `<div class="next-hero anim">
+      <div class="next-lbl">▶ Nästa match</div>
+      <div class="next-teams">
+        <div class="next-team">${fi(nxt.h,50,33)}<div class="next-tn">${nxt.h}</div></div>
+        <div class="next-vs">vs</div>
+        <div class="next-team">${fi(nxt.a,50,33)}<div class="next-tn">${nxt.a}</div></div>
+      </div>
+      <div class="next-kick">
+        <span class="next-time">${nxt.t}</span>
+        <span class="next-date">${fmtLong(nxt.d)}</span>
+      </div>
+      <div class="next-meta">
+        <span class="meta-pill">Grupp ${nxt.g}</span>
+        <span class="meta-pill">Omg. ${nxt.round}</span>
+        <span class="meta-pill">${nxt.venue||'–'}</span>
+      </div>
+      <div class="next-ch">${chLogo(nxt.tv,18)}</div>
+    </div>`;
   }
 
   // Fact box – placed after next-hero
@@ -1356,10 +1179,9 @@ function renderFeed() {
     let prevD = nxt ? nxt.d : null;
 
     h += '<div>';
-    const rc = m => m._po ? poCardHtml(m) : cardHtml(m, false);
     vis.forEach(m => {
       if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-      h += rc(m); prevD = m.d;
+      h += cardHtml(m, false); prevD = m.d;
     });
     h += '</div>';
 
@@ -1368,14 +1190,14 @@ function renderFeed() {
         h += '<div class="blur-zone">';
         blur.forEach(m => {
           if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-          h += rc(m); prevD = m.d;
+          h += cardHtml(m, false); prevD = m.d;
         });
         h += '<div class="blur-overlay"></div></div>';
       }
       h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="expandFeed()">Se ${upcoming.length-SHOW} fler matcher</button></div>`;
     } else {
-      blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=rc(m); prevD=m.d; });
-      rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=rc(m); prevD=m.d; });
+      blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
+      rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
     }
   }
 
