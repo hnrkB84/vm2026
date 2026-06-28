@@ -127,6 +127,23 @@ body { font-family:var(--body); background:var(--bg); color:var(--text); min-hei
 .stats-bar { max-width:600px; margin:0 auto; padding:10px 16px; display:flex; gap:16px; border-bottom:1px solid var(--border); }
 .stat { font-family:var(--body); font-size:.7rem; color:var(--t2); }
 .stat strong { font-family:var(--mono); font-size:.8rem; color:var(--text); font-weight:500; }
+
+/* MODE TABS (gruppspel / slutspel) */
+.mode-tabs { max-width:600px; margin:0 auto; display:flex; border-bottom:2px solid var(--border); background:var(--bg); }
+.mtab { flex:1; background:none; border:none; min-height:42px; font-family:var(--sport); font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--t3); border-bottom:3px solid transparent; margin-bottom:-2px; transition:color .15s,border-color .15s; cursor:pointer; }
+.mtab:hover { color:var(--t2); }
+.mtab.active { color:var(--text); border-bottom-color:var(--red); }
+
+/* PLAYOFF ADMIN */
+.po-round-hdr { max-width:600px; margin:0 auto; padding:10px 16px 5px; font-family:var(--sport); font-size:.65rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--t3); border-bottom:1px solid var(--border); background:var(--surf2); }
+.po-match-row { background:var(--surface); border-bottom:1px solid var(--border); padding:12px 16px; display:flex; align-items:center; gap:10px; cursor:pointer; transition:background .1s; max-width:600px; margin:0 auto; }
+.po-match-row:active { background:var(--surf2); }
+.po-match-row.has-score { opacity:.6; }
+.po-match-row.has-score .score-badge { background:var(--green); color:#fff; }
+.po-teams { font-family:var(--sport); font-size:.86rem; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.po-teams .tbd { color:var(--t3); font-style:italic; font-weight:400; text-transform:none; font-family:var(--body); font-size:.75rem; }
+.po-meta { font-family:var(--body); font-size:.6rem; color:var(--t3); margin-top:2px; }
+.po-n { font-family:var(--mono); font-size:.55rem; color:var(--t3); background:var(--surf2); border:1px solid var(--border); padding:1px 5px; border-radius:2px; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -176,9 +193,22 @@ body { font-family:var(--body); background:var(--bg); color:var(--text); min-hei
 
   <div class="stats-bar" id="stats-bar"></div>
 
-  <div class="filter-bar" id="filter-bar"></div>
+  <!-- MODE TABS -->
+  <div class="mode-tabs">
+    <button class="mtab active" id="mtab-gs" onclick="setMode('gs')">Gruppspel</button>
+    <button class="mtab" id="mtab-po" onclick="setMode('po')">Slutspel</button>
+  </div>
 
-  <div class="match-list" id="match-list"></div>
+  <!-- GRUPPSPEL -->
+  <div id="panel-gs">
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="match-list" id="match-list"></div>
+  </div>
+
+  <!-- SLUTSPEL -->
+  <div id="panel-po" style="display:none;">
+    <div class="match-list" id="po-match-list"></div>
+  </div>
 </div>
 
 <!-- EDIT MODAL -->
@@ -312,13 +342,115 @@ const M = [
   {d:'2026-06-28',t:'04:00',g:'J',h:'Jordanien',a:'Argentina',tv:'TV4',venue:V.ATT},
 ];
 
+/* ── PLAYOFF DATA ── */
+const PD = {
+  '1A':'Etta grupp A','1B':'Etta grupp B','1C':'Etta grupp C',
+  '1D':'Etta grupp D','1E':'Etta grupp E','1F':'Etta grupp F',
+  '1G':'Etta grupp G','1H':'Etta grupp H','1I':'Etta grupp I',
+  '1J':'Etta grupp J','1K':'Etta grupp K','1L':'Etta grupp L',
+  '2A':'Tvåa grupp A','2B':'Tvåa grupp B','2C':'Tvåa grupp C',
+  '2D':'Tvåa grupp D','2E':'Tvåa grupp E','2F':'Tvåa grupp F',
+  '2G':'Tvåa grupp G','2H':'Tvåa grupp H','2I':'Tvåa grupp I',
+  '2J':'Tvåa grupp J','2K':'Tvåa grupp K','2L':'Tvåa grupp L',
+  '3ABCDF':'Bästa 3:a A/B/C/D/F','3CDFGH':'Bästa 3:a C/D/F/G/H',
+  '3CEFHI':'Bästa 3:a C/E/F/H/I','3EHIJK':'Bästa 3:a E/H/I/J/K',
+  '3BEFIJ':'Bästa 3:a B/E/F/I/J','3AEHIJ':'Bästa 3:a A/E/H/I/J',
+  '3EFGIJ':'Bästa 3:a E/F/G/I/J','3DEIJL':'Bästa 3:a D/E/I/J/L',
+};
+function pd(code) { return PD[code] || code; }
+
+const PLAYOFF_ROUNDS = [
+  { label:'Sextondelsfinal', matches:[
+    {n:73, d:'2026-06-28',t:'21:00',h:'2A',  a:'2B',     venue:'SoFi Stadium · Los Angeles'},
+    {n:76, d:'2026-06-29',t:'19:00',h:'1C',  a:'2F',     venue:'NRG Stadium · Houston'},
+    {n:74, d:'2026-06-29',t:'22:30',h:'1E',  a:'3ABCDF', venue:'Gillette Stadium · Boston'},
+    {n:75, d:'2026-06-30',t:'03:00',h:'1F',  a:'2C',     venue:'Estadio BBVA · Monterrey'},
+    {n:78, d:'2026-06-30',t:'19:00',h:'2E',  a:'2I',     venue:'AT&T Stadium · Dallas'},
+    {n:77, d:'2026-06-30',t:'23:00',h:'1I',  a:'3CDFGH', venue:'MetLife Stadium · New York/NJ'},
+    {n:79, d:'2026-07-01',t:'03:00',h:'1A',  a:'3CEFHI', venue:'Estadio Azteca · Mexico City'},
+    {n:80, d:'2026-07-01',t:'18:00',h:'1L',  a:'3EHIJK', venue:'Mercedes-Benz Stadium · Atlanta'},
+    {n:82, d:'2026-07-01',t:'22:00',h:'1G',  a:'3AEHIJ', venue:'Lumen Field · Seattle'},
+    {n:81, d:'2026-07-02',t:'02:00',h:'1D',  a:'3BEFIJ', venue:"Levi's Stadium · San Francisco"},
+    {n:84, d:'2026-07-02',t:'21:00',h:'1H',  a:'2J',     venue:'SoFi Stadium · Los Angeles'},
+    {n:83, d:'2026-07-03',t:'01:00',h:'2K',  a:'2L',     venue:'BMO Field · Toronto'},
+    {n:85, d:'2026-07-03',t:'05:00',h:'1B',  a:'3EFGIJ', venue:'BC Place · Vancouver'},
+    {n:88, d:'2026-07-03',t:'20:00',h:'2D',  a:'2G',     venue:'AT&T Stadium · Dallas'},
+    {n:86, d:'2026-07-04',t:'00:00',h:'1J',  a:'2H',     venue:'Hard Rock Stadium · Miami'},
+    {n:87, d:'2026-07-04',t:'03:30',h:'1K',  a:'3DEIJL', venue:'Arrowhead Stadium · Kansas City'},
+  ]},
+  { label:'Åttondelsfinal', matches:[
+    {n:90, d:'2026-07-04',t:'19:00',h:'W73',a:'W75',venue:'NRG Stadium · Houston'},
+    {n:89, d:'2026-07-04',t:'23:00',h:'W74',a:'W77',venue:'Lincoln Financial · Philadelphia'},
+    {n:91, d:'2026-07-05',t:'22:00',h:'W76',a:'W78',venue:'MetLife Stadium · New York/NJ'},
+    {n:92, d:'2026-07-06',t:'02:00',h:'W79',a:'W80',venue:'Estadio Azteca · Mexico City'},
+    {n:93, d:'2026-07-06',t:'21:00',h:'W83',a:'W84',venue:'AT&T Stadium · Dallas'},
+    {n:94, d:'2026-07-07',t:'02:00',h:'W81',a:'W82',venue:'Lumen Field · Seattle'},
+    {n:95, d:'2026-07-07',t:'18:00',h:'W86',a:'W88',venue:'Mercedes-Benz Stadium · Atlanta'},
+    {n:96, d:'2026-07-07',t:'22:00',h:'W85',a:'W87',venue:'BC Place · Vancouver'},
+  ]},
+  { label:'Kvartsfinal', matches:[
+    {n:97,  d:'2026-07-09',t:'22:00',h:'W89',a:'W90', venue:'Gillette Stadium · Boston'},
+    {n:98,  d:'2026-07-10',t:'21:00',h:'W93',a:'W94', venue:'SoFi Stadium · Los Angeles'},
+    {n:99,  d:'2026-07-11',t:'23:00',h:'W91',a:'W92', venue:'Hard Rock Stadium · Miami'},
+    {n:100, d:'2026-07-12',t:'03:00',h:'W95',a:'W96', venue:'Arrowhead Stadium · Kansas City'},
+  ]},
+  { label:'Semifinal', matches:[
+    {n:101, d:'2026-07-14',t:'21:00',h:'W97',a:'W98',  venue:'AT&T Stadium · Dallas'},
+    {n:102, d:'2026-07-15',t:'21:00',h:'W99',a:'W100', venue:'Mercedes-Benz Stadium · Atlanta'},
+  ]},
+  { label:'Final & Bronsmatch', matches:[
+    {n:103, d:'2026-07-18',t:'23:00',h:'RU101',a:'RU102',venue:'Hard Rock Stadium · Miami'},
+    {n:104, d:'2026-07-19',t:'21:00',h:'W101', a:'W102', venue:'MetLife Stadium · New York/NJ'},
+  ]},
+];
+
+function poMatchByN(n) {
+  for (const r of PLAYOFF_ROUNDS) { const m = r.matches.find(m => m.n === n); if (m) return m; }
+  return null;
+}
+
+function resolvePoTeam(code) {
+  if (!code) return 'TBD';
+  if (code.startsWith('RU')) {
+    const n = parseInt(code.slice(2));
+    const res = poResults[n];
+    if (res) {
+      const m = poMatchByN(n);
+      if (m) {
+        const hR = resolvePoTeam(m.h), aR = resolvePoTeam(m.a);
+        const loser = res[0] > res[1] ? aR : hR;
+        if (loser !== 'TBD') return loser;
+      }
+    }
+    return 'TBD';
+  }
+  if (code.startsWith('W')) {
+    const n = parseInt(code.slice(1));
+    const res = poResults[n];
+    if (res) {
+      const m = poMatchByN(n);
+      if (m) {
+        const hR = resolvePoTeam(m.h), aR = resolvePoTeam(m.a);
+        const winner = res[0] > res[1] ? hR : aR;
+        if (winner !== 'TBD') return winner;
+      }
+    }
+    return 'TBD';
+  }
+  return pd(code);
+}
+
 /* ── STATE ── */
 let cfg = { user:'', repo:'', token:'' };
-let results = {};       // { "0": [2,1], "5": [0,0], ... }
+let results = {};         // gruppspel: { "0": [2,1], ... }
+let poResults = {};       // slutspel: { "73": [2,1], ... } keyed by match n
 let pendingChanges = 0;
+let poFileSha = null;
 let fileSha = null;
 let activeFilter = 'all';
 let editingIdx = null;
+let editingPoN = null;
+let activeMode = 'gs';
 
 /* ── THEME ── */
 function toggleTheme() {
@@ -410,6 +542,9 @@ async function fetchResults() {
 }
 
 async function publishResults() {
+  // Route to correct publisher based on active mode
+  if (activeMode === 'po') { await publishPoResults(); return; }
+
   const btn = document.getElementById('publish-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Publicerar...';
@@ -462,15 +597,19 @@ function renderApp() {
   renderStats();
   renderList();
   renderSaveBar();
+  // Also fetch playoff results in background
+  fetchPoResults().then(() => renderStats());
 }
 
 function renderStats() {
   const total = M.length;
   const played = Object.keys(results).length;
+  const poTotal = PLAYOFF_ROUNDS.reduce((s,r) => s + r.matches.length, 0);
+  const poPlayed = Object.keys(poResults).length;
   document.getElementById('stats-bar').innerHTML = `
-    <div class="stat"><strong>${played}</strong> spelade</div>
-    <div class="stat"><strong>${total - played}</strong> återstår</div>
-    <div class="stat"><strong>${total}</strong> totalt</div>
+    <div class="stat"><strong>${played}</strong> gs spelade</div>
+    <div class="stat"><strong>${total - played}</strong> gs återstår</div>
+    <div class="stat" style="margin-left:auto;border-left:1px solid var(--border);padding-left:16px;"><strong>${poPlayed}</strong>/<strong>${poTotal}</strong> slutspel</div>
   `;
 }
 
@@ -566,6 +705,7 @@ function openModal(idx) {
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   editingIdx = null;
+  editingPoN = null;
 }
 
 function closeModalOutside(e) {
@@ -581,27 +721,176 @@ function saveScore() {
     return;
   }
 
-  const wasSet = results[editingIdx] !== undefined;
-  results[editingIdx] = [h, a];
-  if (!wasSet) pendingChanges++;
-
-  closeModal();
-  renderStats();
-  renderList();
-  renderSaveBar();
-  showToast(`✓ ${M[editingIdx].h} ${h}–${a} ${M[editingIdx].a}`);
+  if (editingPoN !== null) {
+    // Playoff mode
+    const wasSet = poResults[editingPoN] !== undefined;
+    poResults[editingPoN] = [h, a];
+    if (!wasSet) pendingChanges++;
+    const m = poMatchByN(editingPoN);
+    const hName = m ? resolvePoTeam(m.h) : '?';
+    const aName = m ? resolvePoTeam(m.a) : '?';
+    closeModal();
+    renderStats();
+    renderPoList();
+    renderSaveBar();
+    showToast(`✓ ${hName} ${h}–${a} ${aName}`);
+  } else {
+    // Group stage mode
+    const wasSet = results[editingIdx] !== undefined;
+    results[editingIdx] = [h, a];
+    if (!wasSet) pendingChanges++;
+    closeModal();
+    renderStats();
+    renderList();
+    renderSaveBar();
+    showToast(`✓ ${M[editingIdx].h} ${h}–${a} ${M[editingIdx].a}`);
+  }
 }
 
 function clearScore() {
-  if (results[editingIdx] !== undefined) {
-    delete results[editingIdx];
-    pendingChanges++;
+  if (editingPoN !== null) {
+    if (poResults[editingPoN] !== undefined) {
+      delete poResults[editingPoN];
+      pendingChanges++;
+    }
+    closeModal();
+    renderStats();
+    renderPoList();
+    renderSaveBar();
+    showToast('Slutspelsresultat rensat');
+  } else {
+    if (results[editingIdx] !== undefined) {
+      delete results[editingIdx];
+      pendingChanges++;
+    }
+    closeModal();
+    renderStats();
+    renderList();
+    renderSaveBar();
+    showToast('Resultat rensat');
   }
-  closeModal();
-  renderStats();
-  renderList();
-  renderSaveBar();
-  showToast('Resultat rensat');
+}
+
+/* ── MODE SWITCH ── */
+function setMode(mode) {
+  activeMode = mode;
+  document.getElementById('mtab-gs').classList.toggle('active', mode === 'gs');
+  document.getElementById('mtab-po').classList.toggle('active', mode === 'po');
+  document.getElementById('panel-gs').style.display = mode === 'gs' ? 'block' : 'none';
+  document.getElementById('panel-po').style.display = mode === 'po' ? 'block' : 'none';
+  if (mode === 'po') renderPoList();
+}
+
+/* ── PLAYOFF RENDER ── */
+function renderPoList() {
+  let h = '';
+  PLAYOFF_ROUNDS.forEach(r => {
+    h += `<div class="po-round-hdr">${r.label}</div>`;
+    r.matches.forEach(m => {
+      const score = poResults[m.n];
+      const hasScore = score !== undefined;
+      const hName = resolvePoTeam(m.h);
+      const aName = resolvePoTeam(m.a);
+      const hIsTbd = hName === 'TBD';
+      const aIsTbd = aName === 'TBD';
+      const scoreTxt = hasScore ? `${score[0]} – ${score[1]}` : null;
+      const hDisp = hIsTbd ? `<span class="tbd">${pd(m.h) || 'TBD'}</span>` : hName;
+      const aDisp = aIsTbd ? `<span class="tbd">${pd(m.a) || 'TBD'}</span>` : aName;
+      h += `<div class="po-match-row${hasScore ? ' has-score' : ''}" onclick="openPoModal(${m.n})">
+        <span class="po-n">#${m.n}</span>
+        <div class="mr-left">
+          <div class="po-teams">${hDisp} <span style="color:var(--t3);font-weight:400;font-family:var(--body);font-size:.75rem;text-transform:none;">vs</span> ${aDisp}</div>
+          <div class="po-meta">${r.label} · ${fmtDate(m.d)} ${m.t}</div>
+        </div>
+        ${hasScore
+          ? `<div class="score-badge">${scoreTxt}</div>`
+          : `<div class="score-badge pending">Ej inmatad</div>`}
+      </div>`;
+    });
+  });
+  if (!h) h = '<div style="padding:40px 16px;text-align:center;color:var(--t3);font-family:var(--sport);font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;">Inga slutspelsmatcher</div>';
+  document.getElementById('po-match-list').innerHTML = h;
+}
+
+/* ── PLAYOFF MODAL ── */
+function openPoModal(n) {
+  editingPoN = n;
+  editingIdx = null;
+  const m = poMatchByN(n);
+  if (!m) return;
+  const score = poResults[n];
+  const hName = resolvePoTeam(m.h);
+  const aName = resolvePoTeam(m.a);
+
+  document.getElementById('modal-match').textContent = `Match ${n}: ${hName} vs ${aName}`;
+  document.getElementById('modal-meta').textContent = `Slutspel · ${fmtDate(m.d)} ${m.t}`;
+  document.getElementById('modal-home-label').textContent = hName !== 'TBD' ? hName : pd(m.h);
+  document.getElementById('modal-away-label').textContent = aName !== 'TBD' ? aName : pd(m.a);
+
+  const homeInp = document.getElementById('inp-home');
+  const awayInp = document.getElementById('inp-away');
+  homeInp.value = score !== undefined ? score[0] : '';
+  awayInp.value = score !== undefined ? score[1] : '';
+
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => homeInp.focus(), 200);
+}
+
+/* ── GITHUB: FETCH/PUBLISH PLAYOFF ── */
+async function fetchPoResults() {
+  try {
+    const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/playoff_results.json`;
+    const res = await fetch(url, {
+      headers: { 'Authorization': `token ${cfg.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (res.status === 404) { poResults = {}; poFileSha = null; return true; }
+    if (!res.ok) return false;
+    const data = await res.json();
+    poFileSha = data.sha;
+    const raw = JSON.parse(atob(data.content.replace(/\n/g,'')));
+    // Convert string keys to numbers
+    poResults = {};
+    Object.keys(raw).forEach(k => { poResults[parseInt(k)] = raw[k]; });
+    return true;
+  } catch(e) { return false; }
+}
+
+async function publishPoResults() {
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Publicerar...';
+  try {
+    // Convert number keys to string for JSON
+    const toSave = {};
+    Object.keys(poResults).forEach(k => { toSave[k] = poResults[k]; });
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(toSave, null, 2))));
+    const body = {
+      message: `Uppdatera slutspelsresultat (${new Date().toLocaleString('sv-SE')})`,
+      content,
+      ...(poFileSha ? { sha: poFileSha } : {})
+    };
+    const url = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/playoff_results.json`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${cfg.token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { const j = await res.json(); showToast('Fel: ' + (j.message || res.status), true); return; }
+    const data = await res.json();
+    poFileSha = data.content.sha;
+    pendingChanges = 0;
+    renderSaveBar();
+    showToast('\u2713 Slutspelsresultat publicerade!');
+  } catch(e) {
+    showToast('Nätverksfel: ' + e.message, true);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '\ud83d\ude80 Publicera';
+  }
 }
 
 /* ── KEYBOARD ── */

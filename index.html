@@ -127,6 +127,9 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .mc-team.away .mc-ti{align-items:flex-end;}
 .mc-ti{display:flex;flex-direction:column;min-width:0;}
 .mc-tn{font-family:var(--sport);font-size:1rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1;}
+.mc-tn.tbd-feed{color:var(--t3);font-weight:400;font-size:.78rem;text-transform:none;font-family:var(--body);font-style:italic;}
+.mc-tn.won{color:var(--green);font-weight:700;}
+[data-theme="dark"] .mc-tn.won{color:#4CAF82;}
 .match-card.played .mc-tn{color:var(--t2);}
 .mc-mid{text-align:center;}
 .mc-sc{font-family:var(--mono);font-size:1.1rem;font-weight:500;color:var(--text);letter-spacing:.06em;line-height:1;}
@@ -233,6 +236,10 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
 .pm-card{background:var(--surface);border-bottom:2px solid var(--border);transition:background .1s;}
 .pm-card:hover{background:var(--surf2);}
 .pm-card.final{border-top:3px solid var(--gold);}
+.pm-card.bronze{border-top:2px dashed var(--t3);}
+.pm-card.played{opacity:.7;}
+.pm-tn.won{color:var(--green);font-weight:700;}
+[data-theme="dark"] .pm-tn.won{color:#4CAF82;}
 .pm-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:12px 16px 8px;gap:6px;}
 .pm-team{display:flex;align-items:center;gap:7px;min-width:0;}
 .pm-team.away{flex-direction:row-reverse;text-align:right;}
@@ -517,12 +524,12 @@ body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:1
     <div class="schema-title">VM 2026 &nbsp;·&nbsp; Spelschema &amp; TV-guide</div>
     <button class="schema-rules" onclick="showView('grupper',document.getElementById('bnav-grupper'))">Hur går man vidare från grupperna? <span>Läs reglerna →</span></button>
   </div>
-  <a class="sim-bar" href="https://vm2026sim.onrender.com/" target="_blank" rel="noopener">
+  <a class="sim-bar" href="slutspel.html">
     <div class="sim-bar-left">
-      <span class="sim-bar-icon">⚽</span>
+      <span class="sim-bar-icon">🏆</span>
       <div class="sim-bar-text">
-        <div class="sim-bar-title">Simulera VM 2026</div>
-        <div class="sim-bar-sub">Vem vinner? Hur långt går Sverige? Kör turneringen och se resultaten</div>
+        <div class="sim-bar-title">Slutspelsträdet</div>
+        <div class="sim-bar-sub">Se hela bracket från sextondelsfinal till final</div>
       </div>
     </div>
     <span class="sim-bar-arrow">→</span>
@@ -841,6 +848,21 @@ async function loadResults() {
   } catch(e) {
     // results.json saknas ännu — kör vidare utan resultat
   }
+
+  // Hämta även slutspelsresultat
+  try {
+    const res2 = await fetch('playoff_results.json?t=' + Date.now(), { cache: 'no-store' });
+    if (res2.ok) {
+      const pd = await res2.json();
+      Object.keys(pd).forEach(k => {
+        const n = parseInt(k);
+        PLAYOFF_ROUNDS.forEach(r => {
+          const m = r.matches.find(m => m.n === n);
+          if (m) m.score = pd[k];
+        });
+      });
+    }
+  } catch(e) {}
 }
 
 /* ─────────────────────────────────────────────── */
@@ -1075,6 +1097,51 @@ function daySep(d, count) {
 /* ─────────────────────────────────────────────── */
 /* RENDER FEED                                     */
 /* ─────────────────────────────────────────────── */
+// Skapa en "flat" lista av alla playoff-matcher för feed-integrering
+function getPoMatchesFlat() {
+  const all = [];
+  PLAYOFF_ROUNDS.forEach(r => {
+    r.matches.forEach(m => {
+      // Lös upp teamnamn
+      const ht = resolvePlayoffTeam(m.h);
+      const at = resolvePlayoffTeam(m.a);
+      all.push({
+        ...m,
+        _isPlayoff: true,
+        _htName: ht.name !== 'TBD' ? ht.name : (ht.sub || 'TBD'),
+        _atName: at.name !== 'TBD' ? at.name : (at.sub || 'TBD'),
+        _htKnown: ht.name !== 'TBD',
+        _atKnown: at.name !== 'TBD',
+      });
+    });
+  });
+  return all;
+}
+
+function poCardHtml(m) {
+  const hasScore = m.score !== null && m.score !== undefined;
+  const sc  = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
+  const scC = hasScore ? '' : ' pend';
+  const isFinal = m.label === 'VM-FINAL';
+  const isBronze = m.label === 'Bronsmatch';
+  const dc  = getDayCls(m.d);
+  let winner = null;
+  if (hasScore) winner = m.score[0] > m.score[1] ? 'h' : 'a';
+  const hFlag = m._htKnown ? fi(m._htName,22,15) : '';
+  const aFlag = m._atKnown ? fi(m._atName,22,15) : '';
+  const roundLabel = PLAYOFF_ROUNDS.find(r=>r.matches.some(x=>x.n===m.n))?.label || 'Slutspel';
+  return `
+  <div class="match-card ${dc}${hasScore?' played':''}${isFinal?' is-final':''}" style="${isFinal?'border-top:3px solid var(--gold);':''}${isBronze?'border-top:2px dashed var(--t3);':''}">
+    <div class="mc-row1">
+      <div class="mc-team">${hFlag}<div class="mc-ti"><span class="mc-tn${!m._htKnown?' tbd-feed':''}${winner==='h'?' won':''}">${m._htName}</span></div></div>
+      <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
+      <div class="mc-team away">${aFlag}<div class="mc-ti"><span class="mc-tn${!m._atKnown?' tbd-feed':''}${winner==='a'?' won':''}">${m._atName}</span></div></div>
+    </div>
+    <div class="mc-row2"><strong>${roundLabel}${m.label?' · '+m.label:''}</strong> · ${m.venue ? m.venue.split('·')[0].trim() : ''}</div>
+    <div class="mc-row3">${chLogo(m.tv,15)}</div>
+  </div>`;
+}
+
 function renderFeed() {
   const el = document.getElementById('feed-content');
   const now = new Date();
@@ -1083,25 +1150,47 @@ function renderFeed() {
   if (currentDay) {
     // Check if this is a group stage date
     const gsMatches = M.filter(m=>m.d===currentDay);
+    const poMatches = getPoMatchesFlat().filter(m=>m.d===currentDay);
     let h = `<div style="padding:14px 0 8px"><div style="font-family:var(--sport);font-size:1rem;font-weight:700;letter-spacing:.02em;color:var(--text);text-transform:capitalize">${fmtFull(currentDay)}</div></div>`;
     h += `<div id="fact-box-day"></div>`;
     if (gsMatches.length > 0) {
       gsMatches.forEach(m => { h += cardHtml(m, m.score !== null && m.score !== undefined); });
-    } else {
-      h += `<div style="padding:20px 0;text-align:center;font-family:var(--sport);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga gruppspelsmatcher denna dag</div>`;
+    }
+    if (poMatches.length > 0) {
+      poMatches.forEach(m => { h += poCardHtml(m); });
+    }
+    if (gsMatches.length === 0 && poMatches.length === 0) {
+      h += `<div style="padding:20px 0;text-align:center;font-family:var(--sport);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)">Inga matcher denna dag</div>`;
     }
     el.innerHTML = h;
-    // Fact box for day filter
-    setTimeout(() => renderFactBox(currentDay, 'fact-box-day'), 50);
+    if (gsMatches.length > 0) setTimeout(() => renderFactBox(currentDay, 'fact-box-day'), 50);
     return;
   }
 
-  const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
-  const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  // Om nästa tidsmässiga match redan har score → leta vidare till nästa utan score
+  // Slå ihop gruppspel och slutspel till ett flöde
+  const poFlat = getPoMatchesFlat();
+  const allMatches = [
+    ...M.map(m => ({...m, _isPlayoff: false})),
+    ...poFlat
+  ].sort((a,b) => mDT(a) - mDT(b));
+
+  const sorted = allMatches;
+
+  // Prioritera alltid gruppspelsmatcher för "nästa match"-hjälten.
+  // Playoff-matcher dyker upp i flödet men tar inte "nästa match"-platsen
+  // så länge det finns ospelade gruppspelsmatcher kvar.
+  const gsRemaining = M.filter(m => m.score === null || m.score === undefined);
+  const gsAllDone = gsRemaining.length === 0;
+
+  const nextIdx = sorted.findIndex(m => mDT(m) >= now);
   let nxtIdx = nextIdx;
-  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
-    nxtIdx++;
+  while (nxtIdx !== -1 && nxtIdx < sorted.length) {
+    const m = sorted[nxtIdx];
+    const hasScore = m.score !== null && m.score !== undefined;
+    if (hasScore) { nxtIdx++; continue; }
+    // Om gruppspelet inte är klart, skippa playoff-matcher i "nästa match"-logiken
+    if (m._isPlayoff && !gsAllDone) { nxtIdx++; continue; }
+    break;
   }
   const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
 
@@ -1126,7 +1215,7 @@ function renderFeed() {
         olderDays.forEach(d => {
           const ms = sorted.filter(m => m.d===d && m.score !== null && m.score !== undefined);
           h += daySep(d, ms.length);
-          ms.forEach(m => { h += cardHtml(m, true); });
+          ms.forEach(m => { h += m._isPlayoff ? poCardHtml(m) : cardHtml(m, true); });
         });
         h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="toggleHistory()">Dölj tidigare resultat</button></div>`;
       }
@@ -1135,33 +1224,55 @@ function renderFeed() {
     // Senaste dagens resultat – alltid synlig
     const lastMs = sorted.filter(m => m.d === lastD && m.score !== null && m.score !== undefined);
     h += daySep(lastD, lastMs.length);
-    lastMs.forEach(m => { h += cardHtml(m, true); });
+    lastMs.forEach(m => { h += m._isPlayoff ? poCardHtml(m) : cardHtml(m, true); });
   }
 
   // Nästa match hero
   if (nxt) {
     const newDay = lastPlayedDay===null || nxt.d!==lastPlayedDay;
-    // Count how many matches on that day
     const dayCount = sorted.filter(m=>m.d===nxt.d).length;
     if (newDay) h += daySep(nxt.d, dayCount);
-    h += `<div class="next-hero anim">
-      <div class="next-lbl">▶ Nästa match</div>
-      <div class="next-teams">
-        <div class="next-team">${fi(nxt.h,50,33)}<div class="next-tn">${nxt.h}</div></div>
-        <div class="next-vs">vs</div>
-        <div class="next-team">${fi(nxt.a,50,33)}<div class="next-tn">${nxt.a}</div></div>
-      </div>
-      <div class="next-kick">
-        <span class="next-time">${nxt.t}</span>
-        <span class="next-date">${fmtLong(nxt.d)}</span>
-      </div>
-      <div class="next-meta">
-        <span class="meta-pill">Grupp ${nxt.g}</span>
-        <span class="meta-pill">Omg. ${nxt.round}</span>
-        <span class="meta-pill">${nxt.venue||'–'}</span>
-      </div>
-      <div class="next-ch">${chLogo(nxt.tv,18)}</div>
-    </div>`;
+
+    if (nxt._isPlayoff) {
+      const roundLabel = PLAYOFF_ROUNDS.find(r=>r.matches.some(x=>x.n===nxt.n))?.full || 'Slutspel';
+      h += `<div class="next-hero anim">
+        <div class="next-lbl">▶ Nästa match – ${roundLabel}</div>
+        <div class="next-teams">
+          <div class="next-team">${nxt._htKnown ? fi(nxt._htName,50,33) : '<span style="font-size:2rem">?</span>'}<div class="next-tn">${nxt._htName}</div></div>
+          <div class="next-vs">vs</div>
+          <div class="next-team">${nxt._atKnown ? fi(nxt._atName,50,33) : '<span style="font-size:2rem">?</span>'}<div class="next-tn">${nxt._atName}</div></div>
+        </div>
+        <div class="next-kick">
+          <span class="next-time">${nxt.t}</span>
+          <span class="next-date">${fmtLong(nxt.d)}</span>
+        </div>
+        <div class="next-meta">
+          <span class="meta-pill">${roundLabel}</span>
+          ${nxt.label?`<span class="meta-pill">${nxt.label}</span>`:''}
+          <span class="meta-pill">${nxt.venue ? nxt.venue.split('·')[0].trim() : '–'}</span>
+        </div>
+        <div class="next-ch">${chLogo(nxt.tv,18)}</div>
+      </div>`;
+    } else {
+      h += `<div class="next-hero anim">
+        <div class="next-lbl">▶ Nästa match</div>
+        <div class="next-teams">
+          <div class="next-team">${fi(nxt.h,50,33)}<div class="next-tn">${nxt.h}</div></div>
+          <div class="next-vs">vs</div>
+          <div class="next-team">${fi(nxt.a,50,33)}<div class="next-tn">${nxt.a}</div></div>
+        </div>
+        <div class="next-kick">
+          <span class="next-time">${nxt.t}</span>
+          <span class="next-date">${fmtLong(nxt.d)}</span>
+        </div>
+        <div class="next-meta">
+          <span class="meta-pill">Grupp ${nxt.g}</span>
+          <span class="meta-pill">Omg. ${nxt.round}</span>
+          <span class="meta-pill">${nxt.venue||'–'}</span>
+        </div>
+        <div class="next-ch">${chLogo(nxt.tv,18)}</div>
+      </div>`;
+    }
   }
 
   // Fact box – placed after next-hero
@@ -1178,10 +1289,11 @@ function renderFeed() {
     const rest = upcoming.slice(SHOW+BLUR);
     let prevD = nxt ? nxt.d : null;
 
+    const rCard = (m) => m._isPlayoff ? poCardHtml(m) : cardHtml(m, false);
     h += '<div>';
     vis.forEach(m => {
       if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-      h += cardHtml(m, false); prevD = m.d;
+      h += rCard(m); prevD = m.d;
     });
     h += '</div>';
 
@@ -1190,14 +1302,14 @@ function renderFeed() {
         h += '<div class="blur-zone">';
         blur.forEach(m => {
           if (prevD && m.d!==prevD) h += daySep(m.d, sorted.filter(x=>x.d===m.d).length);
-          h += cardHtml(m, false); prevD = m.d;
+          h += rCard(m); prevD = m.d;
         });
         h += '<div class="blur-overlay"></div></div>';
       }
       h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="expandFeed()">Se ${upcoming.length-SHOW} fler matcher</button></div>`;
     } else {
-      blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
-      rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
+      blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=rCard(m); prevD=m.d; });
+      rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=rCard(m); prevD=m.d; });
     }
   }
 
@@ -1293,43 +1405,98 @@ function renderPlayoffTabs() {
     ).join('');
 }
 
+function resolvePlayoffTeam(code) {
+  if (!code) return {name:'TBD', sub:'', known:false};
+  if (code.startsWith('W')) {
+    const n = parseInt(code.slice(1));
+    const fm = findPoMatch(n);
+    if (fm && fm.score) {
+      const winner = fm.score[0] > fm.score[1] ? fm.h : fm.a;
+      const wt = resolvePlayoffTeam(winner);
+      return {...wt, sub: `Vinnare match ${n}`};
+    }
+    return {name:'TBD', sub:`Vinnare match ${n}`, known:false};
+  }
+  if (code.startsWith('RU')) {
+    const n = parseInt(code.slice(2));
+    const fm = findPoMatch(n);
+    if (fm && fm.score) {
+      const loser = fm.score[0] > fm.score[1] ? fm.a : fm.h;
+      const lt = resolvePlayoffTeam(loser);
+      return {...lt, sub: `Förlorare match ${n}`};
+    }
+    return {name:'TBD', sub:`Förlorare match ${n}`, known:false};
+  }
+  return {name:'TBD', sub:pd(code), known:false};
+}
+
+function findPoMatch(n) {
+  for (const r of PLAYOFF_ROUNDS) {
+    const m = r.matches.find(m => m.n === n);
+    if (m) return m;
+  }
+  return null;
+}
+
 function renderPlayoffRound() {
   const r = PLAYOFF_ROUNDS[activeRound];
   let h = `<div class="round-title">${r.full}</div>`;
 
   r.matches.forEach(m => {
-    const ht = playoffTeam(m.h);
-    const at = playoffTeam(m.a);
-    const isFinal = m.label==='VM-FINAL';
+    const ht = resolvePlayoffTeam(m.h);
+    const at = resolvePlayoffTeam(m.a);
+    const isFinal = m.label === 'VM-FINAL';
+    const isBronze = m.label === 'Bronsmatch';
+    const hasScore = m.score !== null && m.score !== undefined;
+    const sc = hasScore ? `${m.score[0]} – ${m.score[1]}` : '– –';
+    const scCls = hasScore ? '' : ' pend';
+    const hKnown = ht.name !== 'TBD';
+    const aKnown = at.name !== 'TBD';
+    let winner = null;
+    if (hasScore) winner = m.score[0] > m.score[1] ? 'h' : 'a';
+
     h += `
-    <div class="pm-card${isFinal?' final':''}">
+    <div class="pm-card${isFinal?' final':''}${isBronze?' bronze':''}${hasScore?' played':''}">
       <div class="pm-teams">
         <div class="pm-team">
-          <div class="pm-tinfo">
-            <span class="pm-tname tbd">${ht.name}</span>
-            <span class="pm-tsource">${ht.sub}</span>
+          ${hKnown ? fi(ht.name,20,14) : ''}
+          <div class="pm-ti">
+            <span class="pm-tn${!hKnown?' tbd':''}${winner==='h'?' won':''}">${hKnown ? ht.name : (ht.sub||'TBD')}</span>
+            ${hKnown && ht.sub ? `<span class="pm-src">${ht.sub}</span>` : ''}
+            ${!hKnown && ht.sub && ht.sub !== ht.name ? `<span class="pm-src">${ht.sub}</span>` : ''}
           </div>
         </div>
-        <div class="pm-score-mid">
-          <div class="pm-score pend">– –</div>
-          <div class="pm-time">${m.t}</div>
+        <div class="pm-mid">
+          <div class="pm-sc${scCls}">${sc}</div>
+          <div class="pm-tm">${m.t}</div>
         </div>
         <div class="pm-team away">
-          <div class="pm-tinfo">
-            <span class="pm-tname tbd">${at.name}</span>
-            <span class="pm-tsource">${at.sub}</span>
+          ${aKnown ? fi(at.name,20,14) : ''}
+          <div class="pm-ti">
+            <span class="pm-tn${!aKnown?' tbd':''}${winner==='a'?' won':''}">${aKnown ? at.name : (at.sub||'TBD')}</span>
+            ${aKnown && at.sub ? `<span class="pm-src">${at.sub}</span>` : ''}
+            ${!aKnown && at.sub && at.sub !== at.name ? `<span class="pm-src">${at.sub}</span>` : ''}
           </div>
         </div>
       </div>
       <div class="pm-meta">
         <div>
-          <div class="pm-date">${m.label||'Match #'+m.n} · ${fmtPlayoff(m.d)}</div>
+          <div class="pm-date">${m.label ? `<strong>${m.label}</strong> · ` : ''}${fmtPlayoff(m.d)} · ${m.t}</div>
           <div class="pm-venue">${m.venue||''}</div>
         </div>
         <div class="pm-right">${chLogo(m.tv,14)}</div>
       </div>
     </div>`;
   });
+
+  // Länk till trädet
+  h += `<a href="slutspel.html" class="sim-promo" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border-top:2px solid var(--border);border-bottom:2px solid var(--border);padding:14px 16px;margin-top:8px;transition:background .15s;">
+    <div>
+      <div class="sim-title">🏆 Se hela slutspelsträdet</div>
+      <div class="sim-sub">Öppna bracket-vyn med alla kopplingar</div>
+    </div>
+    <span class="sim-arrow">→</span>
+  </a>`;
 
   document.getElementById('round-content').innerHTML =
     `<div class="round-content active">${h}</div>`;
