@@ -838,9 +838,17 @@ async function loadResults() {
       const i = parseInt(idx);
       if (M[i]) M[i].score = data[idx];
     });
-  } catch(e) {
-    // results.json saknas ännu — kör vidare utan resultat
-  }
+  } catch(e) {}
+  try {
+    const r2 = await fetch('playoff_results.json?t=' + Date.now(), { cache: 'no-store' });
+    if (r2.ok) {
+      const d2 = await r2.json();
+      Object.keys(d2).forEach(k => {
+        const n = parseInt(k);
+        PLAYOFF_ROUNDS.forEach(r => { const m = r.matches.find(m=>m.n===n); if(m) m.score=d2[k]; });
+      });
+    }
+  } catch(e) {}
 }
 
 /* ─────────────────────────────────────────────── */
@@ -1075,6 +1083,26 @@ function daySep(d, count) {
 /* ─────────────────────────────────────────────── */
 /* RENDER FEED                                     */
 /* ─────────────────────────────────────────────── */
+
+function poCardHtml(m) {
+  const hasScore = m.score !== null && m.score !== undefined;
+  const sc = hasScore ? `${m.score[0]} – ${m.score[1]}` : '–  –';
+  const scC = hasScore ? '' : ' pend';
+  const dc = getDayCls(m.d);
+  const ht = playoffTeam(m.h);
+  const at = playoffTeam(m.a);
+  const hN = ht.name !== 'TBD' ? ht.name : ht.sub;
+  const aN = at.name !== 'TBD' ? at.name : at.sub;
+  return `<div class="match-card ${dc}${hasScore?' played':''}">
+    <div class="mc-row1">
+      <div class="mc-team"><div class="mc-ti"><span class="mc-tn">${hN}</span></div></div>
+      <div class="mc-mid"><div class="mc-sc${scC}">${sc}</div><div class="mc-tm">${m.t}</div></div>
+      <div class="mc-team away"><div class="mc-ti"><span class="mc-tn">${aN}</span></div></div>
+    </div>
+    <div class="mc-row2"><strong>${m._rl}</strong> · ${m.venue?m.venue.split('·')[0].trim():''}</div>
+    <div class="mc-row3">${chLogo(m.tv,15)}</div>
+  </div>`;
+}
 function renderFeed() {
   const el = document.getElementById('feed-content');
   const now = new Date();
@@ -1098,20 +1126,17 @@ function renderFeed() {
 
   const sorted = [...M].sort((a,b)=>mDT(a)-mDT(b));
   const nextIdx = sorted.findIndex(m=>mDT(m)>=now);
-  // Om nästa tidsmässiga match redan har score → leta vidare till nästa utan score
-  let nxtIdx = nextIdx;
-  while (nxtIdx !== -1 && nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) {
-    nxtIdx++;
-  }
-  const nxt = (nxtIdx !== -1 && nxtIdx < sorted.length) ? sorted[nxtIdx] : null;
+  let nxtIdx = nextIdx < 0 ? 0 : nextIdx;
+  while (nxtIdx < sorted.length && sorted[nxtIdx].score !== null && sorted[nxtIdx].score !== undefined) nxtIdx++;
+  const nxt = nxtIdx < sorted.length ? sorted[nxtIdx] : null;
 
-  // Alla dagar med minst en spelad match (score satt), sorterat kronologiskt
   const playedMs = sorted.filter(m => m.score !== null && m.score !== undefined);
   const playedDays = [...new Set(playedMs.map(m => m.d))].sort();
   const lastPlayedDay = playedDays.length > 0 ? playedDays[playedDays.length-1] : null;
 
-  // Kommande matcher = ej spelade, exklusive de som redan visas (filter görs nedan)
-  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && (!nxt || m !== nxt));
+  // Playoff-matcher alltid synliga direkt
+  const poAll = PLAYOFF_ROUNDS.flatMap(r => r.matches.map(m => ({...m, _po:true, _rl:r.label})));
+  const upcoming = sorted.filter(m => (m.score===null || m.score===undefined) && m !== nxt);
   let h = '';
 
   // Resultat-historik
@@ -1170,12 +1195,13 @@ function renderFeed() {
     h += `<div id="fact-box-container"></div>`;
   }
 
-  // Upcoming matches
-  if (upcoming.length > 0) {
+  // Gruppspelsmatcher (med blur)
+  const gsUpcoming = upcoming.filter(m => !m._po);
+  if (gsUpcoming.length > 0) {
     const SHOW=2, BLUR=3;
-    const vis  = upcoming.slice(0, SHOW);
-    const blur = upcoming.slice(SHOW, SHOW+BLUR);
-    const rest = upcoming.slice(SHOW+BLUR);
+    const vis  = gsUpcoming.slice(0, SHOW);
+    const blur = gsUpcoming.slice(SHOW, SHOW+BLUR);
+    const rest = gsUpcoming.slice(SHOW+BLUR);
     let prevD = nxt ? nxt.d : null;
 
     h += '<div>';
@@ -1194,12 +1220,19 @@ function renderFeed() {
         });
         h += '<div class="blur-overlay"></div></div>';
       }
-      h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="expandFeed()">Se ${upcoming.length-SHOW} fler matcher</button></div>`;
+      h += `<div class="see-more-wrap"><button class="see-more-btn" onclick="expandFeed()">Se ${gsUpcoming.length-SHOW} fler gruppspelsmatcher</button></div>`;
     } else {
       blur.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
       rest.forEach(m => { if(prevD && m.d!==prevD) h+=daySep(m.d,sorted.filter(x=>x.d===m.d).length); h+=cardHtml(m,false); prevD=m.d; });
     }
   }
+
+  // Slutspelsmatcher — alltid synliga direkt
+  let prevPoD = null;
+  poAll.forEach(m => {
+    if (prevPoD !== m.d) { h += daySep(m.d, poAll.filter(x=>x.d===m.d).length); prevPoD = m.d; }
+    h += poCardHtml(m);
+  });
 
 
 
